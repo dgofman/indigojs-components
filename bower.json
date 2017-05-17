@@ -1,0 +1,18 @@
+{
+	"name": "indigojs",
+	"authors": [
+		"David Gofman <dgofman@gmail.com>"
+	],
+	"description": "IndigoJS components",
+	"directory": "web/default/",
+	"main": "",
+	"license": "MIT",
+	"homepage": "http://www.inidgojs.com",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	]
+}

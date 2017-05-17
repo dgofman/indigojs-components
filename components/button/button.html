@@ -1,0 +1,4 @@
+<button<%- $title() %><%- $attr('style') %><%- $attrs('attrs') %>><% 
+	if (opts.icon) {
+%><i class="<%- opts.icon_align || 'left' %>"<%- $get('icon', `style="background-image: url('${opts.icon}')"`) %>></i><%
+}%><%- opts.label %></button>
