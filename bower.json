@@ -1,5 +1,6 @@
 {
 	"name": "indigojs",
+	"version": "2.0.0",
 	"authors": [
 		"David Gofman <dgofman@gmail.com>"
 	],
