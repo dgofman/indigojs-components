@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function Dialog($, indigo) {
+function igoDialog($, selector, ig) {
 	'use strict';
-	indigo.debug('Init Dialog');
 
 	return {
 		register: function(el) {
@@ -24,7 +23,7 @@ function Dialog($, indigo) {
 
 			$('c[cid]', el).each(function(i, dom) {
 				var el = $(dom);
-				indigo.register(el.attr('cid'), el);
+				ig.register($, el.attr('cid'), el);
 			});
 
 			$('*[dialog_id="' + el.attr('id') + '"]').event('click.show', function() {

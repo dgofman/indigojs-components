@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function DateField($, indigo, selector) {
+function igoDatefield($, selector) {
 	'use strict';
-	indigo.debug('Init DateField');
 
 	var locales = window.indigoLocales || {},
 		datefield = locales.datefield || {

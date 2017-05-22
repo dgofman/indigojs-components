@@ -1,21 +1,24 @@
-clear: both;
-width: 100%;
+[cid=hbox] {
 
-&>.left {
-	float: left;
-	margin-right: 5px;
-}
+	clear: both;
+	width: 100%;
 
-&>.right {
-	float: right;
-	margin-left: 5px;
-}
+	&>.left {
+		float: left;
+		margin-right: 5px;
+	}
 
-&>span { 
-	overflow: hidden;
-	display: block;
+	&>.right {
+		float: right;
+		margin-left: 5px;
+	}
 
-	&> * {
-		width: 100%;
+	&>span { 
+		overflow: hidden;
+		display: block;
+
+		&> * {
+			width: 100%;
+		}
 	}
 }

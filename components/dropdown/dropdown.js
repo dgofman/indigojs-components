@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function Dropdown($, indigo, selector) {
+function igoDropdown($, selector) {
 	'use strict';
-	indigo.debug('Init Dropdown');
 
 	$(window).on('click.dropdown', function() {
 		$(selector + '>ul').removeClass('open');

@@ -1,15 +1,18 @@
 @import 'less/constant.less';
 
-&>img, &>div {
-	height: 100%;
-	width: 100%;
-	min-width: 16px;
-	min-height: 16px;
-}
+[cid=image] {
 
-&>div {
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-}
+	&>img, &>div {
+		height: 100%;
+		width: 100%;
+		min-width: 16px;
+		min-height: 16px;
+	}
 
-.error_border();
+	&>div {
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+	}
+
+	.error_border();
+}

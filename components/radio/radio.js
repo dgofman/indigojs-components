@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function Radio($, indigo) {
+function igoRadio($) {
 	'use strict';
-	indigo.debug('Init Radio');
 
 	return {
 		init: function(el, self) {

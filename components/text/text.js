@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function Text($, indigo) {
+function igoText($) {
 	'use strict';
-	indigo.debug('Init Text');
 
 	return {
 		init: function(el) {

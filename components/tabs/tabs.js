@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function Tabs($, indigo) {
+function igoTabs($) {
 	'use strict';
-	indigo.debug('Init Tabs');
 
 	return {
 		register: function(el) {

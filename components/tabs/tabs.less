@@ -2,70 +2,73 @@
 
 @header_height: 36px;
 
-width: 100%;
-min-height: 200px;
-outline: none;
+[cid=tabs] {
 
-&>section, &>div>label {
-	border: 1px solid #ccc;
-}
+	width: 100%;
+	min-height: 200px;
+	outline: none;
 
-&>section {
-	overflow: auto;
-	position: absolute;
-	top: @header_height;
-	left: 0;
-	bottom: 0;
-	right: 0;
-
-	&>div {
-		display: none;
-	}
-}
-
-&>div {
-	display: inline-block;
-	position: relative;
-	z-index: 1;
-
-	&:nth-child(1) {
-		margin-left: 7px;
+	&>section, &>div>label {
+		border: 1px solid #ccc;
 	}
 
-	&>input, &>label {
-		height: @header_height;
-	}
+	&>section {
+		overflow: auto;
+		position: absolute;
+		top: @header_height;
+		left: 0;
+		bottom: 0;
+		right: 0;
 
-	&>label {
-		width: 100%;
-		padding: .4rem;
-		font-size: 100%;
-		background-color: #f6f6f6;
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
-		border-bottom: transparent;
-
-		&>u {
-			text-decoration: none;
+		&>div {
+			display: none;
 		}
 	}
 
-	&>input {
-		position: absolute;
-		opacity: 0;
-		width: 100%;
-		left: 0;
-		top: 0;
-		margin: 0;
-		.cursor();
-	}
+	&>div {
+		display: inline-block;
+		position: relative;
+		z-index: 1;
 
-	&>input:checked + label {
-		background: #5b87ac;
-		height: @header_height + 1;
-	}
+		&:nth-child(1) {
+			margin-left: 7px;
+		}
 
-	&>input:checked + label>u {
-		color: #fff;
+		&>input, &>label {
+			height: @header_height;
+		}
+
+		&>label {
+			width: 100%;
+			padding: .4rem;
+			font-size: 100%;
+			background-color: #f6f6f6;
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+			border-bottom: transparent;
+
+			&>u {
+				text-decoration: none;
+			}
+		}
+
+		&>input {
+			position: absolute;
+			opacity: 0;
+			width: 100%;
+			left: 0;
+			top: 0;
+			margin: 0;
+			.cursor();
+		}
+
+		&>input:checked + label {
+			background: #5b87ac;
+			height: @header_height + 1;
+		}
+
+		&>input:checked + label>u {
+			color: #fff;
+		}
 	}
 }

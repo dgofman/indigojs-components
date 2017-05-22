@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function RadioGroup($, indigo) {
+function igoRadiogroup($) {
 	'use strict';
-	indigo.debug('Init RadioGroup');
 
 	return {
 		register: function(el) {

@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function Accordion($, indigo) {
+function igoAccordion($) {
 	'use strict';
-	indigo.debug('Init Accordion');
 
 	return {
 		register: function(el) {

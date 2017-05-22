@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function ToggleBox($, indigo) {
+function igoTogglebox($) {
 	'use strict';
-	indigo.debug('Init ToggleBox');
 
 	return {
 		register: function(el) {

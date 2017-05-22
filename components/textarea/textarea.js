@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function TextArea($, indigo) {
+function igoTextarea($) {
 	'use strict';
-	indigo.debug('Init TextArea');
 
 	return {
 		register: function(el) {

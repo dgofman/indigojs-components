@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function Tooltip($, indigo) {
+function igoTooltip($) {
 	'use strict';
-	indigo.debug('Init Tooltip');
 
 	var arrow_gap = 7;
 

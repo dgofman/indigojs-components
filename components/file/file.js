@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function File($, indigo) {
+function igoFile($) {
 	'use strict';
-	indigo.debug('Init File');
 
 	return {
 		fieldName: 'file',

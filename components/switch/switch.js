@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function Switch($, indigo) {
+function igoSwitch($) {
 	'use strict';
-	indigo.debug('Init Switch');
 
 	return {
 		init: function(el, self) {

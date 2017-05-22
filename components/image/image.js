@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function Image($, indigo) {
+function igoImage($) {
 	'use strict';
-	indigo.debug('Init Image');
 
 	return {
 		init: function(el) {

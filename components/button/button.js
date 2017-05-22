@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function Button($, indigo) {
+function igoButton($) {
 	'use strict';
-	indigo.debug('Init Button');
 
 	return {
 		init: function(el) {

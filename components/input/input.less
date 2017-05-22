@@ -1,19 +1,22 @@
 @import 'less/constant.less';
 
-border: 1px #ddd solid;
+[cid=input] {
 
-input {
-	height: 100%;
-	width: 100%;
-	min-height: 25px;
-	text-indent: 3px;
-	border: none;
-	outline: none;
-	color: inherit;
+	border: 1px #ddd solid;
+
+	input {
+		height: 100%;
+		width: 100%;
+		min-height: 25px;
+		text-indent: 3px;
+		border: none;
+		outline: none;
+		color: inherit;
+	}
+
+	&[disabled]>div>input {
+		.disabledColor();
+	}
+
+	.error();
 }
-
-&[disabled]>div>input {
-	.disabledColor();
-}
-
-.error();

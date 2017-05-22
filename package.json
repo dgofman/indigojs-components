@@ -1,0 +1,16 @@
+{
+	"name": "indigojs-components",
+	"main": "server.js",
+	"scripts": {
+		"start": "node .",
+		"jshint": "./node_modules/.bin/jshint . --config .jshintrc",
+		"postinstall": "grunt"
+	},
+	"dependencies": {
+		"opn": "latest",
+		"jshint": "latest",
+		"grunt": "latest",
+		"grunt-contrib-uglify": "latest",
+		"grunt-contrib-less": "latest"
+	}
+}

@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function Input($, indigo) {
+function igoInput($) {
 	'use strict';
-	indigo.debug('Init Input');
 
 	return {
 		register: function(el) {

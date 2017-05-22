@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function Menu($, indigo) {
+function igoMenu($) {
 	'use strict';
-	indigo.debug('Init Menu');
 
 	return {
 		register: function(el) {

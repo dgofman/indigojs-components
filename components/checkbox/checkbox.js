@@ -1,7 +1,6 @@
 /*jshint unused:false*/
-function Checkbox($, indigo) {
+function igoCheckbox($) {
 	'use strict';
-	indigo.debug('Init Checkbox');
 
 	return {
 		init: function(el, self) {
