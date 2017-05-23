@@ -35,6 +35,11 @@
 			.easyIn();
 		}
 
+		&:not(:checked) ~ * .toggle-content {
+			padding: 0;
+			transition: 0.4s padding ease-out;
+		}
+
 		&:checked ~ label:before {
 			content: '\25BC';
 		}
