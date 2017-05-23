@@ -6,7 +6,7 @@
 	(opts.labels || []).forEach(function(label, index) {
 		var content = opts.contents[index],
 			template = opts.templates[index];
-		content = content ? (typeof content === 'function' ? content(req, opts) : content) : '';
+		content = content ? (typeof content === 'function' ? content(opts) : content) : '';
 %>
 	<div>
 		<input type="<%- opts.multiple ? 'checkbox': 'radio' %>" name="<%- uid %>"<%- index == selectedIndex ? ' checked' : '' %>/>

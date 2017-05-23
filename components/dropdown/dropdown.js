@@ -1,5 +1,5 @@
 /*jshint unused:false*/
-function igoDropdown($, selector) {
+function igoDropdown($, selector, ig) {
 	'use strict';
 
 	$(window).on('click.dropdown', function() {
@@ -165,7 +165,7 @@ function igoDropdown($, selector) {
 			},
 			set: function(value) {
 				this.$popup.removeClass('open');
-				indigo.attr(this.$el, 'disabled', value);
+				ig.attr(this.$el, 'disabled', value);
 			}
 		},
 
@@ -174,7 +174,7 @@ function igoDropdown($, selector) {
 				return this.$popup.hasClass('open');
 			},
 			set: function(value) {
-				indigo.class(this.$popup, 'open', value);
+				ig.class(this.$popup, 'open', value);
 			}
 		}
 	};

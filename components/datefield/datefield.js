@@ -1,5 +1,5 @@
 /*jshint unused:false*/
-function igoDatefield($, selector) {
+function igoDatefield($, selector, ig) {
 	'use strict';
 
 	var locales = window.indigoLocales || {},
@@ -169,7 +169,7 @@ function igoDatefield($, selector) {
 			},
 			set: function(value) {
 				this.$calendar.removeClass('open');
-				indigo.attr(this.$el, 'disabled', value);
+				ig.attr(this.$el, 'disabled', value);
 			}
 		},
 
@@ -187,7 +187,7 @@ function igoDatefield($, selector) {
 				return this.$calendar.hasClass('open');
 			},
 			set: function(value) {
-				indigo.class(this.$calendar, 'open', value);
+				ig.class(this.$calendar, 'open', value);
 			}
 		}
 	};

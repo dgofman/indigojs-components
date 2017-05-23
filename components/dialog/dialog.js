@@ -45,10 +45,6 @@ function igoDialog($, selector, ig) {
 			this.defaultContent = this.$section.find('.content').html();
 		},
 
-		create: function(type, selector) {
-			return indigo.create(type, selector, this.$el);
-		},
-
 		title: {
 			get: function() {
 				return this.$header.find('.title').html();

@@ -3,142 +3,49 @@
 <head>
 <title>IndigpJS Components</title>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge;" />
+
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta name="author" content="David Gofman">
 
-<link rel="stylesheet" type="text/css" href="build/css/common.css">
 <link rel="stylesheet" type="text/css" href="build/css/index.css">
 
 <script type="text/javascript" src="js/ejs/ejs.js"></script>
 
 <script type="text/javascript">
 	var indigoGlobal = {
-		DEBUG: true,
+		DEBUG: false,
 		INFO: false,
 		contextPath: '',
 		staticPath: '/static',
 
 		cssPath: function(uri, type) {
-			return 'build/css/' + type + '/' + type + '.css';
+			if (indigoGlobal.DEBUG) {
+				return 'build/css/components/' + type + '/' + type + '.css';
+			} else {
+				return 'build/css/components.css';
+			}
 		},
 		jsPath: function(uri, type) {
-			return 'components/' + type + '/' + type + '.js';
-			//return 'build/js/' + type + '/' + type + '.min.js';
+			if (indigoGlobal.DEBUG) {
+				return 'components/' + type + '/' + type + '.js';
+			} else {
+				return 'build/js/components.min.js';
+			}
 		},
 		jqPath: function() {
-			return 'js/jquery/jquery-3.1.1.min.js';
+			if (indigoGlobal.DEBUG) {
+				return 'js/jquery/jquery-3.1.1.js';
+			} else {
+				return 'js/jquery/jquery-3.1.1.min.js';
+			}
 		}
 	};
 </script>
 </head>
 
 <body>
-	<section class="igo-content"></section>
-
-	<script src="js/loader.js" rel="igcore" uri="build/css" libs="accordion,button,checkbox,datefield,dialog,dropdown,file,!hbox,image,input,menu,radio,radiogroup,switch,tabs,text,textarea,togglebox,tooltip"></script>
-
-	<script type="text/javascript">
-		var core = document.querySelector('script[rel=igcore]'),
-			libs = core.getAttribute('libs').split(','),
-			index = 0, componentIndex = 0, components = {}, model = {},
-			register = function(model, opts) {
-				model.baseStaticPath = indigoGlobal.staticPath,
-				model.req = {},
-				model.opts = opts,
-				model.$ = function(type, opts) {
-					opts = opts || {};
-					model.opts = opts || {};
-					model.componentIndex = componentIndex++;
-					var html = '', 
-						begin = '<c cid="' + type + '" tabindex="-1" class="init' + model.$get('class') + '"' + model.$get('disabled', 'disabled') + model.$attr('id');
-					html = ejs.render(components[type], model);
-					if (opts.show === false) {
-						opts.parentStyle = 'display: none; ' + opts.parentStyle || '';
-					}
-					html = begin + model.$attr('parentStyle', 'style') + '>' + html + '</c>';
-					return html;
-				};
-				model.$get = function(name, val) {
-					if (model.opts[name] !== undefined) {
-						if (val === undefined) {
-							return ' ' + model.opts[name];
-						} else {
-							return ' ' + val;
-						}
-					}
-					return '';
-				};
-				model.$attr = function(name, tagName) {
-					if (model.opts[name] !== undefined) {
-						if (tagName === undefined) {
-							return ' ' + name + '="' + model.opts[name] + '"';
-						} else {
-							return ' '  + tagName + '="' + model.opts[name] + '"';
-						}
-					}
-					return '';
-				};
-				model.$attrs = function(name) {
-					var attrs = [],
-						obj = model.opts[name];
-					for (var key in obj) {
-						attrs.push(key + '="' + obj[key] + '"');
-					}
-					return attrs.length ? ' ' + attrs.join(' ') : '';
-				};
-				model.$css = function(name, tagName) {
-					if (model.opts[name] !== undefined) {
-						if (tagName === undefined) {
-							return ' ' + name + ': ' + model.opts[name] + ';';
-						} else {
-							return ' ' + tagName + ': ' + model.opts[name] + ';';
-						}
-					}
-					return '';
-				};
-				model.$title = function(title) {
-					title = title || model.opts.title;
-					return ' ' + (title ? ' title="' + title + '"' : '');
-				};
-				model.$label = function(title) {
-					title = title || model.opts.title;
-					return ' ' + (title ? ' aria-label="' + title + '"' : '');
-				};
-				model.$assign = function(req, opts, self) {
-					self = self || opts;
-					return register(self, opts);
-				};
-				model.$finalize = function() {
-					return '';
-				};
-			};
-			register(model, {});
-
-		libs.forEach(function(lib) {
-			var type = lib.replace('!', ''),
-				xhr = new XMLHttpRequest();
-			xhr.open('GET', './components/' + type + '/' + type + '.html');
-			xhr.onreadystatechange = function() {
-				if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-					index++;
-					components[type] = xhr.responseText;
-					if (index >= libs.length) {
-						xhr = new XMLHttpRequest();
-						xhr.open('GET', './content.html');
-						xhr.onreadystatechange = function() {
-							if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-								var html = ejs.render(xhr.responseText, model);
-								document.querySelector('.igo-content').innerHTML = html;
-							}
-						}
-						xhr.send();
-					}
-				}
-			}
-			xhr.send();
-		});
-	</script>
+	<section class="igo-content" indigo-builder="./content.html"></section>
+	<script type="text/javascript" src="js/builder.js"></script>
 </body>
 
 </html>

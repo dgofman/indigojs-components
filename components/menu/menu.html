@@ -26,7 +26,7 @@
 	}
 
 	opts.menus.forEach(function(menu, index) {
-		$assign(req, menu);
+		$assign(menu);
 
 		if (itemRenderer) {
 %><%- itemRenderer(menu, null, opts, index).replace('%LABEL%', labelRenderer(menu)) %><%
@@ -50,7 +50,7 @@
 %>
 		<ol style="list-style: none"><%
 			menu.sub.forEach(function(sub, index) {
-				$assign(req, sub);
+				$assign(sub);
 
 				if (itemRenderer) {
 %><%- itemRenderer(menu, sub, opts, index).replace('%LABEL%', labelRenderer(sub)) %><%

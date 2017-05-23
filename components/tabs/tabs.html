@@ -18,7 +18,7 @@
 	labels.forEach(function(label, index) {
 		var content = opts.contents[index],
 			template = opts.templates[index];
-		content = content ? (typeof content === 'function' ? content(req, opts) : content) : '';
+		content = content ? (typeof content === 'function' ? content(opts) : content) : '';
 %>
 	<div<%- template ? ` template="${template}"` : '' %>><%- content %></div>
 <%

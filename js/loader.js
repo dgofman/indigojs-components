@@ -1,10 +1,8 @@
 'use strict';
 
 (function(parent) {
-	var ig = parent.indigoGlobal || {};
-	ig.libs = ig.libs || {
-		indigo: {w:[], i: 0, t: 1}
-	};
+	var ig = parent.indigoGlobal = parent.indigoGlobal || {};
+	ig.wins = ig.wins || [];
 	ig.cssPath = ig.cssPath || function(uri, type) {
 		return uri + '/' + type + '.css';
 	};
@@ -14,21 +12,28 @@
 	ig.jqPath = ig.jqPath || function() {
 		return '/indigojs/jquery/jquery-3.1.1' + (ig.DEBUG ? '' : '.min') + '.js';
 	};
+	ig.attr = function(el, type, val) {
+		return val ? el.attr(type, type) : el.removeAttr(type);
+	},
+	ig.class = function(el, name, isAdd) {
+		return isAdd ? el.addClass(name) : el.removeClass(name);
+	},
 	ig.register = function($, type, el) {
-		var item = ig.libs[type];
-		if (item && item.class) {
-			var apis = item.class($, '[cid=' + type + ']', ig);
+		var cls = loadedJs[type];
+		if (cls) {
+			var apis = cls($, '[cid=' + type + ']', ig);
 			if (apis.register) {
 				apis.register(el);
 			}
 		}
 	};
-	parent.indigoGlobal = ig;
 
 	var core = document.querySelector('script[rel=igcore]'),
 		libs = core.getAttribute('libs').split(','),
 		uri = core.getAttribute('uri'),
 		head = parent.document.head,
+		loadedCss = ig.loadedCss = ig.loadedCss || {},
+		loadedJs = ig.loadedJs = ig.loadedJs || {},
 		addAsset = function(tag, attrs, onload) {
 			var el, selector = tag + (tag === 'link' ? '[href="' + attrs.href + '"]' : '[src="' + attrs.src + '"]');
 			if (!head.querySelector(selector)) {
@@ -36,46 +41,62 @@
 				for (var key in attrs) {
 					el[key] = attrs[key];
 				}
-				el.onload = onload;
-				if (onload) {
-					head.appendChild(el);
-				}
+				el.onload = function() {
+					(onload || init)(selector);
+				};
+				head.appendChild(el);
 			}
 			return el;
 		},
 		init = function() {
-			var types = [],
-				igo = ig.libs.indigo;
-			for (var i = 0; i < libs.length; i++) {
-				var type = libs[i].replace('!', ''),
-					item = ig.libs[type];
-				if (item.i < item.t || igo.i < igo.t) { //verify loaded libraries
-					return;
-				}
-				types.push(type);
+			if (!window._jQueryFactory) {
+				return;
 			}
-			types.forEach(function(type) {
-				var selector = '[cid=' + type + ']';
-				ig.libs.indigo.w.forEach(function(win) {
+			for (var i = 0; i < libs.length; i++) {
+				var type = libs[i].replace('!', '');
+				if (loadedJs[type] === false) {
+					var cls = window['igo' + type.charAt(0).toUpperCase() + type.slice(1)];
+					if (cls) {
+						loadedJs[type] = cls;
+					} else {
+						return;
+					}
+				}
+				if (loadedCss[type] === false) {
+					var css = parent.document.styleSheets,
+						selector = '[cid="' + type + '"]';
+					loop1:
+					for (var j = 0; j < 1; j++) {
+						for (var k = 0; k < css.length; k++) {
+							var rules = css[k].rules || css[k].cssRules;
+							for (var l = 0; l < rules.length; l++) {
+								var text = rules[l].selectorText || '';
+								if (text.indexOf(selector) !== -1) {
+									loadedCss[type] = true;
+									break loop1;
+								}
+							}
+						}
+						return;
+					}
+				}
+			}
+			for (type in loadedJs) {
+				selector = '[cid="' + type + '"]';
+				ig.wins.forEach(function(win) {
 					win.$.each(win.$(selector), function(i, el) {
 						ig.register(win.$, type, win.$(el));
 					});
 					win.$(selector).removeClass('init');
 				});
-			});
+			}
 		};
 
-	if (ig.libs.indigo.w.indexOf(window) === -1) {
-		ig.libs.indigo.w.push(window);
+	if (ig.wins.indexOf(window) === -1) {
+		ig.wins.push(window);
 	}
-	var path = ig.jqPath(uri),
-		link = addAsset('link', {rel: 'stylesheet', type: 'text/css', href: uri + '/common.css'});
-	if (link) {
-		head.insertAdjacentElement('afterbegin', link);
-	}
-	addAsset('script', {type: 'text/javascript', src: path}, function() {
-		var item = ig.libs.indigo;
-		item.w.forEach(function(win) {
+	addAsset('script', {type: 'text/javascript', src: ig.jqPath(uri)}, function(selector) {
+		ig.wins.forEach(function(win) {
 			window._jQueryFactory(win);
 			win.$.fn.extend({
 				event: function(type, callback) {
@@ -85,37 +106,21 @@
 				}
 			});
 		});
-		init(path, ++item.i);
+		init(selector);
 		if (ig.jqueryReady) {
 			ig.jqueryReady(window.$);
 		}
 	});
 
 	libs.forEach(function(lib) {
-		var begin = 0, end = lib.length, path, total = 2;
-		if (lib.charAt(0) === '!') { //exclude script
-			total--;
-			begin++;
+		var type = lib.replace('!', '');
+		if (lib.charAt(lib.length - 1) !== '!') { //exclude link
+			loadedCss[type] = false;
+			addAsset('link', {rel: 'stylesheet', type: 'text/css', href: ig.cssPath(uri, type)});
 		}
-		if (lib.charAt(end - 1) === '!') { //exclude link
-			total--;
-			end--;
-		}
-		var type = lib.substring(begin, end),
-			item = ig.libs[type] = ig.libs[type] || {i: 0, t: total};
-
-		if (end === lib.length) {
-			path = ig.cssPath(uri, type);
-			addAsset('link', {rel: 'stylesheet', type: 'text/css', href: path}, function() {
-				init(path, ++item.i);
-			});
-		}
-		if (begin === 0) {
-			path = ig.jsPath(uri, type);
-			addAsset('script', {type: 'text/javascript', src: path}, function() {
-				item.class = window['igo' + type[0].toUpperCase() + type.slice(1)];
-				init(path, ++item.i);
-			});
+		if (lib.charAt(0) !== '!') { //exclude script
+			loadedJs[type] = false;
+			addAsset('script', {type: 'text/javascript', src: ig.jsPath(uri, type)});
 		}
 	});
 	init();
