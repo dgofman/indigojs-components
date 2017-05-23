@@ -26,44 +26,47 @@ module.exports = function(grunt) {
 					compress: true
 				},
 				files: {
-					'./build/css/components.css': ['./components/**/*.less'],
+					'./build/css/igoComponents.css': ['./components/igo/**/*.less'],
 					'./build/css/index.css': ['./less/common.less', './less/indigo.less', './less/index.less'],
 				}
 			}
 		},
 
 		uglify: {
-			production: {
+			igo: {
 				options: {
 					expand: true,
 					sourceMap: true,
-					sourceMapName : './build/js/components.map',
+					sourceMapName : './build/js/igoComponents.map',
 					quoteStyle: 3
 				},
-				src: ['./components/**/*.js', '!jquery/**'],
-				dest: './build/js/components.min.js'
+				src: ['./components/igo/**/*.js', '!jquery/**'],
+				dest: './build/js/igoComponents.min.js'
 			}
 		}
 	});
 
 	grunt.registerTask('html', function () {
-		const dir = path.resolve(__dirname, 'components'),
-			contents = [];
-		fs.readdirSync(dir).forEach(function(file) {
-			let type = file,
-				absPath = path.resolve(dir, file, file + '.html');
-			if (fs.existsSync(absPath)) {
-				if (!fs.existsSync(path.resolve(dir, file, file + '.js'))) {
-					type = '!' + type;
+		let dir = path.resolve(__dirname, 'components');
+		fs.readdirSync(dir).forEach(function(pkg) { //class package
+			let contents = [];
+			dir = path.resolve(dir, pkg);
+			fs.readdirSync(dir).forEach(function(file) {
+				let type = pkg + file.charAt(0).toUpperCase() + file.substring(1),
+					absPath = path.resolve(dir, file, file + '.ejs');
+				if (fs.existsSync(absPath)) {
+					if (!fs.existsSync(path.resolve(dir, file, file + '.js'))) {
+						type = '!' + type;
+					}
+					if (!fs.existsSync(path.resolve(dir, file, file + '.less'))) {
+						type += '!';
+					}
+					contents.push('<<[[' + type + ']]>>');
+					contents.push(fs.readFileSync(absPath, 'utf8'));
 				}
-				if (!fs.existsSync(path.resolve(dir, file, file + '.less'))) {
-					type += '!';
-				}
-				contents.push('<<[[' + type + ']]>>');
-				contents.push(fs.readFileSync(absPath, 'utf8'));
-			}
+			});
+			fs.writeFileSync(path.resolve(__dirname, `build/${pkg}Components.html`), contents.join('\n'));
 		});
-		fs.writeFileSync(path.resolve(__dirname, 'build/components.html'), contents.join('\n'));
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-less');

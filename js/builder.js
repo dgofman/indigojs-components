@@ -1,7 +1,6 @@
 'use strict';
 
 (function(ig) {
-
 	var staticPath = ig.staticPath || '/static',
 		templates = {},
 		libs = [],
@@ -16,7 +15,8 @@
 		xhr.send();
 	};
 
-	loader('./build/components.html', function(data) {
+	var pkgName = 'igo';
+	loader('./build/' + pkgName + 'Components.html', function(data) {
 		var componentIndex = 0,
 			arr = data.split(/<<\[\[(.*)\]\]>>/);
 		for (var i = 1; i < arr.length; i += 2) {
@@ -34,7 +34,7 @@
 					opts = opts || {};
 					model.opts = opts || {};
 					model.componentIndex = componentIndex++;
-					begin = '<c cid="' + type + '" tabindex="-1" class="init' + model.$get('class') + '"' + model.$get('disabled', 'disabled') + model.$attr('id');
+					begin = '<c ' + type + ' tabindex="-1" class="init' + model.$get('class') + '"' + model.$get('disabled', 'disabled') + model.$attr('id');
 					html = window.ejs.render(templates[type], model);
 					if (opts.show === false) {
 						opts.parentStyle = 'display: none; ' + opts.parentStyle || '';
@@ -125,4 +125,4 @@
 			ig.builder(all[j].getAttribute('indigo-builder'), all[j]);
 		}
 	});
-})(window.top.indigoGlobal = window.top.indigoGlobal || {});
+})(window.top.indigoJS = (window.top.indigoJS || {}));

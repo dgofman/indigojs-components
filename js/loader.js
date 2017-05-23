@@ -1,16 +1,16 @@
 'use strict';
 
 (function(parent) {
-	var ig = parent.indigoGlobal = parent.indigoGlobal || {};
+	var ig = parent.indigoJS = parent.indigoJS || {};
 	ig.wins = ig.wins || [];
-	ig.cssPath = ig.cssPath || function(uri, type) {
-		return uri + '/' + type + '.css';
+	ig.cssPath = ig.cssPath || function(uri, type, pkg, cls) {
+		return uri + '/' + pkg + '/' + cls + '.css';
 	};
-	ig.jsPath = ig.jsPath || function(uri, type) {
-		return uri + '/' + type + '.js';
+	ig.jsPath = ig.jsPath || function(uri, type, pkg, cls) {
+		return uri + '/' + pkg + '/' + cls + '.js';
 	};
 	ig.jqPath = ig.jqPath || function() {
-		return '/indigojs/jquery/jquery-3.1.1' + (ig.DEBUG ? '' : '.min') + '.js';
+		return uri + '/jquery/jquery-3.1.1' + (ig.DEBUG ? '' : '.min') + '.js';
 	};
 	ig.attr = function(el, type, val) {
 		return val ? el.attr(type, type) : el.removeAttr(type);
@@ -21,7 +21,7 @@
 	ig.register = function($, type, el) {
 		var cls = loadedJs[type];
 		if (cls) {
-			var apis = cls($, '[cid=' + type + ']', ig);
+			var apis = cls($, '[' + type + ']', ig);
 			if (apis.register) {
 				apis.register(el);
 			}
@@ -55,16 +55,15 @@
 			for (var i = 0; i < libs.length; i++) {
 				var type = libs[i].replace('!', '');
 				if (loadedJs[type] === false) {
-					var cls = window['igo' + type.charAt(0).toUpperCase() + type.slice(1)];
-					if (cls) {
-						loadedJs[type] = cls;
+					if (window[type]) {
+						loadedJs[type] = window[type];
 					} else {
 						return;
 					}
 				}
 				if (loadedCss[type] === false) {
 					var css = parent.document.styleSheets,
-						selector = '[cid="' + type + '"]';
+						selector = '[' + type.toLowerCase() + ']';
 					loop1:
 					for (var j = 0; j < 1; j++) {
 						for (var k = 0; k < css.length; k++) {
@@ -82,7 +81,7 @@
 				}
 			}
 			for (type in loadedJs) {
-				selector = '[cid="' + type + '"]';
+				selector = '[' + type + ']';
 				ig.wins.forEach(function(win) {
 					win.$.each(win.$(selector), function(i, el) {
 						ig.register(win.$, type, win.$(el));
@@ -113,14 +112,17 @@
 	});
 
 	libs.forEach(function(lib) {
-		var type = lib.replace('!', '');
+		var type = lib.replace('!', ''),
+			pair = type.split(/(?=[A-Z])/);
+			var pkg = pair[0],
+			cls = pair[1].toLowerCase();
 		if (lib.charAt(lib.length - 1) !== '!') { //exclude link
 			loadedCss[type] = false;
-			addAsset('link', {rel: 'stylesheet', type: 'text/css', href: ig.cssPath(uri, type)});
+			addAsset('link', {rel: 'stylesheet', type: 'text/css', href: ig.cssPath(uri, type, pkg, cls)});
 		}
 		if (lib.charAt(0) !== '!') { //exclude script
 			loadedJs[type] = false;
-			addAsset('script', {type: 'text/javascript', src: ig.jsPath(uri, type)});
+			addAsset('script', {type: 'text/javascript', src: ig.jsPath(uri, type, pkg, cls)});
 		}
 	});
 	init();
