@@ -1428,7 +1428,7 @@ module.exports={
     "engine",
     "ejs"
   ],
-  "version": "2.5.5",
+  "version": "2.5.6",
   "author": "Matthew Eernisse <mde@fleegix.org> (http://fleegix.org)",
   "contributors": [
     "Timothy Gu <timothygu99@gmail.com> (https://timothygu.github.io)"

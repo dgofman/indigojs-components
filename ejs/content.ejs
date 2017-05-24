@@ -129,7 +129,9 @@
 		&emsp;&lt;h6&gt;<span class="val">HEADER 6</span>&lt;/h6&gt;<br/>
 	<b>&lt;/script&gt;</b><br/><br/>`;
 
-	function code(cid, params, before = '', after = '') {
+	function code(cid, params, before, after) {
+		before = before || '';
+		after = after || '';
 		var opts = [];
 		for (var key in params) {
 			opts.push(`<span class="key">${key}</span>: <span class="val">${params[key]}</span>`);

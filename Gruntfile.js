@@ -1,7 +1,9 @@
 'use strict';
 
 const fs = require('fs'),
-	path = require('path');
+	path = require('path'),
+	babel = require('babel-core'),
+	babelPlugins = ['transform-es2015-template-literals'];
 
 module.exports = function(grunt) {
 
@@ -46,31 +48,54 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.registerTask('html', function () {
+	grunt.registerTask('ejs', function () {
+		console.log('Compiling components...');
 		let dir = path.resolve(__dirname, 'components');
 		fs.readdirSync(dir).forEach(function(pkg) { //class package
 			let contents = [];
 			dir = path.resolve(dir, pkg);
 			fs.readdirSync(dir).forEach(function(file) {
-				let type = pkg + file.charAt(0).toUpperCase() + file.substring(1),
+				let cls = pkg + file.charAt(0).toUpperCase() + file.substring(1),
 					absPath = path.resolve(dir, file, file + '.ejs');
 				if (fs.existsSync(absPath)) {
 					if (!fs.existsSync(path.resolve(dir, file, file + '.js'))) {
-						type = '!' + type;
+						cls = '!' + cls;
 					}
 					if (!fs.existsSync(path.resolve(dir, file, file + '.less'))) {
-						type += '!';
+						cls += '!';
 					}
-					contents.push('<<[[' + type + ']]>>');
-					contents.push(fs.readFileSync(absPath, 'utf8'));
+					contents.push(`<<[[${cls}]]>>`);
+					contents.push(babelCode(fs.readFileSync(absPath, 'utf8')));
 				}
 			});
 			fs.writeFileSync(path.resolve(__dirname, `build/${pkg}Components.html`), contents.join('\n'));
+		});
+
+		console.log('Compiling ejs contents...');
+		let outDir = path.resolve(__dirname, 'build/ejs');
+		if (!fs.existsSync(outDir)) {
+			fs.mkdirSync(outDir);
+		}
+		dir = path.resolve(__dirname, 'ejs');
+		fs.readdirSync(dir).forEach(function(file) {
+			let index = file.lastIndexOf('.ejs');
+			if (index === file.length - 4) {
+				fs.writeFileSync(path.resolve(outDir, file.substring(0, index) + '.html'), babelCode(fs.readFileSync(path.resolve(dir, file), 'utf8')));
+			}
 		});
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 
-	grunt.registerTask('default', ['less', 'uglify', 'html']);
+	grunt.registerTask('default', ['less', 'uglify', 'ejs']);
 };
+
+function babelCode(src) {
+	return src.replace(/`(.*?(\s)*?)*?`/g, function(match) {
+		let out = babel.transform(match, {
+			plugins: babelPlugins
+		}).code;
+		return out.substring(0, out.length - 1); //remove ';' on end
+	});
+}

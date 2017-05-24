@@ -7,7 +7,8 @@ const http = require('http'),
 	mimeTypes = {
 		html: 'text/html; charset=utf-8',
 		js: 'text/javascript',
-		css: 'text/css'
+		css: 'text/css',
+		less: 'text/css'
 	};
 
 const requestHandler = (req, res) => {

@@ -20,7 +20,7 @@
 
 		cssPath: function(uri, type, pkg, cls) {
 			if (indigoJS.DEBUG) {
-				return 'build/css/components/' + pkg + '/' + cls + '/' + cls + '.css';
+				return 'components/' + pkg + '/' + cls + '/' + cls + '.less';
 			} else {
 				return 'build/css/' + pkg + 'Components.css';
 			}
@@ -44,7 +44,7 @@
 </head>
 
 <body>
-	<section class="igo-content" indigo-builder="./content.ejs"></section>
+	<section class="igo-content" indigo-builder="build/ejs/content.html"></section>
 	<script type="text/javascript" src="js/builder.js"></script>
 </body>
 
