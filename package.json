@@ -1,20 +1,19 @@
 {
-  "name": "indigojs-components",
-  "version": "3.0.0",
-  "main": "server.js",
-  "scripts": {
-    "start": "node .",
-    "jshint": "./node_modules/.bin/jshint . --config .jshintrc",
-    "postinstall": "grunt"
-  },
-  "dependencies": {
-    "opn": "latest",
-    "jshint": "latest",
-    "grunt": "latest",
-    "grunt-contrib-uglify": "latest",
-    "grunt-contrib-less": "latest"
-  },
-  "devDependencies": {
-    "babel-plugin-transform-es2015-template-literals": "^6.22.0"
-  }
+	"name": "indigojs-components",
+	"version": "3.0.1",
+	"main": "server.js",
+	"scripts": {
+		"start": "node .",
+		"jshint": "./node_modules/.bin/jshint . --config .jshintrc",
+		"postinstall": "grunt"
+	},
+	"dependencies": {
+		"opn": "latest",
+		"jshint": "latest",
+		"grunt": "latest",
+		"grunt-contrib-uglify": "latest",
+		"grunt-contrib-less": "latest",
+		"babel-core": "~6.24.1",
+		"babel-plugin-transform-es2015-template-literals": "latest"
+	}
 }
