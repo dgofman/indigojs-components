@@ -72,6 +72,9 @@
 								var text = rules[l].selectorText || '';
 								if (text.indexOf(selector) !== -1) {
 									loadedCss[type] = true;
+									ig.wins.forEach(function(win) {
+										win.$(selector).removeClass('init');
+									});
 									break loop1;
 								}
 							}
@@ -81,12 +84,10 @@
 				}
 			}
 			for (type in loadedJs) {
-				selector = '[' + type + ']';
 				ig.wins.forEach(function(win) {
-					win.$.each(win.$(selector), function(i, el) {
+					win.$.each(win.$('[' + type + ']').removeClass('init'), function(i, el) {
 						ig.register(win.$, type, win.$(el));
 					});
-					win.$(selector).removeClass('init');
 				});
 			}
 		};

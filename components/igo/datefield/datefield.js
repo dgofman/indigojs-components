@@ -82,8 +82,8 @@ function igoDatefield($, selector, ig) {
 				daysInMonth = 32 - new Date(y, m, 32).getDate(),
 				firstDate = new Date(y, m, 1).getDay(),
 				tds = [], trs = [], date = '',
-				days = window[ref.$box.attr('d')] || datefield.days,
-				months = window[ref.$box.attr('m')] || datefield.months;
+				days = ref.$box.attr('d') ? ref.$box.attr('d').split(',') : datefield.days,
+				months = ref.$box.attr('m') ? ref.$box.attr('m').split(',') : datefield.months;
 
 			d.setHours(0, 0, 0, 0);
 			for (var c = 0; c < 7; c++) {

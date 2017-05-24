@@ -116,7 +116,8 @@
 <%
 	var icon = baseStaticPath + '/images/indigo.png';
 
-	var customDay = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+	var customDay = [1,2,3,4,5,6,7],
+		customMonth = ['J1','F2','M3','A4','M5', 'J6', 'J7', 'A8', 'S9', 'O10', 'N11', 'D12'];
 
 	var loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
@@ -328,10 +329,8 @@
 			<b>Example:</b>
 			Customizing days of week
 		</p>
-		<%- code('igoDatefield', {days: `<i>${JSON.stringify(customDay)}</i>`}) %>
-		or
-		<%- code('igoDatefield', {days: `<i>'customDay'</i>`}, `<b>&lt;script&gt;</b><span class="cid">var</span> <i>customDay</i> = <span class="val">${JSON.stringify(customDay)}</span>;<b>&lt;/script&gt;</b><br/><br/>`) %>
-		<%- $('igoDatefield', {days: customDay}) %><hr/>
+		<%- code('igoDatefield', {days: `<i>${JSON.stringify(customDay)}</i>`, months: `<i>${JSON.stringify(customMonth)}</i>`}) %>
+		<%- $('igoDatefield', {days: customDay, months: customMonth}) %><hr/>
 
 		<p>
 			<b>Example:</b>
@@ -978,12 +977,12 @@
 				<b>Example:</b>
 				Defining text in tooltip, multiple target selectors and auto position
 			</p>
-			<%- code('igoTooltip', {value: `<i>'Both targets should display the same tooltip'</i>`, target: `<i>'#mulSel1, .mulSel2'</i>`, style: `<i>'color: green; font-weight: bold'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">igoText</span>', {<b>value</b>: <i>'Text 1'</i>, <b>id</b>: <i>'mulSel1</i>}<b>) %&gt;</b><br><b>&lt;%- $(</b>'<span class="cid">igoText</span>', {<b>value</b>: <i>'Text 2'</i>, <b>class</b>: <i>'mulSel2</i>}<b>) %&gt;</b><br>`) %>
+			<%- code('igoTooltip', {value: `<i>'targets should display the same tooltip'</i>`, target: `<i>'#mulSel1, .mulSel2'</i>`, style: `<i>'color: green; font-weight: bold'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">igoText</span>', {<b>value</b>: <i>'Text 1'</i>, <b>id</b>: <i>'mulSel1</i>}<b>) %&gt;</b><br><b>&lt;%- $(</b>'<span class="cid">igoText</span>', {<b>value</b>: <i>'Text 2'</i>, <b>class</b>: <i>'mulSel2</i>}<b>) %&gt;</b><br>`) %>
 			<%- $('igoText', {value: 'Text 3', class: 'mulSel3 border', parentStyle: 'float: right'}) %>
 			<%- $('igoText', {value: 'Text 1', id: 'mulSel1', class: 'border', parentStyle: 'float: left'}) %>
 			<center><%- $('igoText', {value: 'Text 2', class: 'mulSel2 border'}) %></center>
 			<br/>
-			<%- $('igoTooltip', {value: 'Both targets should display the same tooltip', target: '#mulSel1, .mulSel2, .mulSel3', style: 'color: green; font-weight: bold'}) %><hr/>
+			<%- $('igoTooltip', {value: 'targets should display the same tooltip', target: '#mulSel1, .mulSel2, .mulSel3', style: 'color: green; font-weight: bold'}) %><hr/>
 
 			<p>
 				<b>Example:</b>
