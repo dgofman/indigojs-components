@@ -1,7 +1,7 @@
 # [Indigo JS](http://indigojs.com/) Components
 
 This client-side framework is based on [EJS templates](https://github.com/mde/ejs/releases/latest) and [JQuery](http://jquery.com/). The IndigoJS-components library allows for the creation of UI components on HTML pages at runtime.
-Javascript and EJS templates are created on the **browser ** using ES5 standards, however [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) are also supported. To ensure [cross-platform compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Browser_compatibility), run the grunt command to compile EJS files.
+Javascript and EJS templates are created on the **browser** using ES5 standards, however [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) are also supported. To ensure [cross-platform compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Browser_compatibility), run the grunt command to compile EJS files.
 
 For improved performance and CPU usage, use [IndigoJS NodeJs framework](https://github.com/dgofman/indigojs) to render EJS templates and compile LESS/CSS  on the **server side** .
 
