@@ -21,12 +21,12 @@ For improved performance and CPU usage, use [IndigoJS NodeJs framework](https://
 npm install -g bower
 ```
 
-#####3. Install IndigoJS Components
+###### 3. Install IndigoJS Components
 
 ```
 bower install indigojs-components
 ```
-###Additional Tips
+###### Additional Tips
 
 Execute the grunt command after making changes to EJS or LESS files. This allows for the conversion of LESS to CSS and EJS to HTML.
 ```
