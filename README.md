@@ -39,13 +39,14 @@ To render IndigoJS components on the client side, include Embedded JavaScript Te
 In order to load dynamic content at run-time, add the **indigo-builder** attribute to existing container(s) (*div, article, section, header, footer, nav etc.*) and point it to the desired content file.
 ```<section indigo-builder="build/ejs/content.html"></section> ```
 
-Before closing a body tag add run the **builder.js** parser.
+Before closing a body tag add the **builder.js** parser.
  ```<script type="text/javascript" src="js/builder.js" indigo-pkgs="igo,jui"></script>```
 
 The **indigo-pkgs**  attribute force preloads component libraries prior to the content pages being rendered.
 Embedded packages:
-igo - IndigoJS components
-jui - JQuery UI components
+
+ - igo - IndigoJS components
+ - jui - jQuery UI widgets
 
 **Hint:**
 You can replace or attach the content file by using JavaScript:
