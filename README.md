@@ -58,7 +58,7 @@ You can replace or attach the content file by using JavaScript:
 
 **loaded**
 
-###### Loaded is a static function that executes after a class has been loaded on the browser for the first time. Implementation of this function can contain global variables and functions within the **window** or **jQuery** scope.  
+###### Loaded is a static function that executes after a class has been loaded on the browser for the first time. Implementation of this function can contain global variables and functions within the ```window``` or ```jQuery``` scope.  
 
 **register**
 
