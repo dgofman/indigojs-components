@@ -1,6 +1,7 @@
+'use strict';
+
 /*jshint unused:false*/
 function igoTogglebox($) {
-	'use strict';
 
 	return {
 		preinit: function(el) {

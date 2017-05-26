@@ -96,9 +96,12 @@
 			if (preinitialize) {
 				for (type in loadedJs) {
 					ig.wins.forEach(function(win) {
-						var selector = '[_=' + type + ']';
-						parent[type].register(win.$, selector, win);
-						win.$(selector).removeClass('init').each(function(i, el) {
+						parent[type].register(win.$, '[_=' + type + ']', win);
+					});
+				}
+				for (type in loadedJs) {
+					ig.wins.forEach(function(win) {
+						win.$('[_=' + type + ']').removeClass('init').each(function(i, el) {
 							ig.preinit(win.$, type, win.$(el));
 						});
 					});

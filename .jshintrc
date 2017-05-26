@@ -100,7 +100,7 @@
     // Whether variables must be declared before used.
     "undef": true,
     // Whether `this` inside a non-constructor function should be allowed.
-    "validthis": false,
+    "validthis": true,
     // Whether smarttabs should be allowed
     // (http://www.emacswiki.org/emacs/SmartTabs).
     "smarttabs": true,

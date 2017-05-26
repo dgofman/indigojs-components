@@ -1,6 +1,7 @@
+'use strict';
+
 /*jshint unused:false*/
 function igoTabs($) {
-	'use strict';
 
 	return {
 		preinit: function(el) {

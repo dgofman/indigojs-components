@@ -1,6 +1,7 @@
+'use strict';
+
 /*jshint unused:false*/
 function igoTooltip($) {
-	'use strict';
 
 	var arrow_gap = 7;
 

@@ -1,6 +1,7 @@
+'use strict';
+
 /*jshint unused:false*/
 function igoDropdown($, selector, ig) {
-	'use strict';
 
 	return {
 		preinit: function(el) {

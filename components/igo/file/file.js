@@ -1,6 +1,7 @@
+'use strict';
+
 /*jshint unused:false*/
 function igoFile($) {
-	'use strict';
 
 	return {
 		fieldName: 'file',

@@ -1,6 +1,7 @@
+'use strict';
+
 /*jshint unused:false*/
 function igoDialog($, selector, ig) {
-	'use strict';
 
 	return {
 		preinit: function(el) {

@@ -1,6 +1,7 @@
+'use strict';
+
 /*jshint unused:false*/
 function igoDatefield($, selector, ig) {
-	'use strict';
 
 	var locales = window.indigoLocales || {},
 		datefield = locales.datefield || {

@@ -1,6 +1,7 @@
+'use strict';
+
 /*jshint unused:false*/
 function igoSwitch($) {
-	'use strict';
 
 	return {
 		init: function(el, self) {

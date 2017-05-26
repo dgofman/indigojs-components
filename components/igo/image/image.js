@@ -1,6 +1,7 @@
+'use strict';
+
 /*jshint unused:false*/
 function igoImage($) {
-	'use strict';
 
 	return {
 		init: function(el) {

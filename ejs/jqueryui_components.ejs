@@ -130,6 +130,31 @@
 		&emsp;&lt;h6&gt;<span class="val">HEADER 6</span>&lt;/h6&gt;<br/>
 	<b>&lt;/script&gt;</b><br/><br/>`;
 
+	var availableTags = [
+		"ActionScript",
+		"AppleScript",
+		"Asp",
+		"BASIC",
+		"C",
+		"C++",
+		"Clojure",
+		"COBOL",
+		"ColdFusion",
+		"Erlang",
+		"Fortran",
+		"Groovy",
+		"Haskell",
+		"Java",
+		"JavaScript",
+		"Lisp",
+		"Perl",
+		"PHP",
+		"Python",
+		"Ruby",
+		"Scala",
+		"Scheme"
+	];
+
 	function code(cid, params, before, after) {
 		before = before || '';
 		after = after || '';
@@ -147,6 +172,7 @@
 <div class="left">
 	<ul>
 		<li><a href="#accordion">Accordion</a></li>
+		<li><a href="#autocomplete">Autocomplete</a></li>
 		<li><a href="#button">Button</a></li>
 		<li><a href="#checkbox">Checkbox</a></li>
 		<li><a href="#datefield">DateField</a></li>
@@ -167,10 +193,12 @@
 	</ul>
 </div>
 <div class="right">
-	<h1>Indigo Components</h1>
+	<h1>jQuery UI Widgets</h1>
 	<h1 id="accordion">Accordion:</h1>
 	<p>
-		The Accordion is a navigator made up of child containers declared as an array. Each child uses the parent container’s navigator button. This button, when triggered by the user, uses animation to expand the corresponding child container and collapse whichever one was currently being displayed. By default, only one child container is expanded at a time, however this can be altered such that multiple containers are simultaneously displayed by setting <code>multiple</code> = true.
+		Click headers to expand/collapse content that is broken into logical sections, much like tabs. Optionally, toggle sections open/closed on mouseover.
+
+		The underlying HTML markup is a series of headers (H3 tags) and content divs so the content is usable without JavaScript.
 	</p>
 	<div ig-ns="accordion">
 		<p>
@@ -193,6 +221,20 @@
 		</p>
 		<%- code('juiAccordion', {labels: `['Label1', 'Label2', 'Label3']`, contents: `['View1', 'View2', 'View3']`, templates: `[<i>'#templ'</i>, null, <i>'#templ'</i>]`}, templ) %>
 		<%- $('juiAccordion', {labels: ['Label1', 'Label2', 'Label3'], contents: ['View1', 'View2', 'View3'], templates: ['#templ', null, '#templ']}) %><hr/>
+	</div>
+
+	<h1 id="autocomplete">Autocomplete:</h1>
+	<p>
+		The Autocomplete widgets provides suggestions while you type into the field. Here the suggestions are tags for programming languages, give "ja" (for Java or JavaScript) a try.
+
+		The datasource is a simple JavaScript array, provided to the widget using the source-option.
+	</p>
+	<div ig-ns="autocomplete">
+		<p>
+			<b>Example:</b>
+		</p>
+		<%- code('juiAutocomplete', {availableTags: `[<i>'${availableTags.join('\', \'')}'</i>]`}) %>
+		<%- $('juiAutocomplete', {availableTags: availableTags.join(',')}) %><hr/>
 	</div>
 
 	<h1 id="button">Button:</h1>

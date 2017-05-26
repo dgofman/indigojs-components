@@ -1,6 +1,7 @@
+'use strict';
+
 /*jshint unused:false*/
 function juiAccordion($) {
-	'use strict';
 
 	return {
 		preinit: function(el) {
@@ -13,7 +14,6 @@ function juiAccordion($) {
 				var div = divs.eq(i),
 					template = div.attr('template');
 				if (template) {
-					console.log(template, $('script' + template).html())
 					div.html($('script' + template).html() || '');
 				}
 			}
@@ -23,9 +23,9 @@ function juiAccordion($) {
 	};
 }
 
-juiAccordion.register = function() {
+juiAccordion.register = function($) {
 	$.widget( "ui.accordion", {
-		version: "1.12.1",
+		version: "@VERSION",
 		options: {
 			active: 0,
 			animate: {},
@@ -597,4 +597,4 @@ juiAccordion.register = function() {
 			this._trigger( "activate", null, data );
 		}
 	});
-}
+};

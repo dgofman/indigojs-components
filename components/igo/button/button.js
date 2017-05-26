@@ -1,6 +1,7 @@
+'use strict';
+
 /*jshint unused:false*/
 function igoButton($) {
-	'use strict';
 
 	return {
 		init: function(el) {
