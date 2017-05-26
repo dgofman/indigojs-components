@@ -3,7 +3,7 @@ function igoInput($) {
 	'use strict';
 
 	return {
-		register: function(el) {
+		preinit: function(el) {
 			$('>div', el).event('focus.input', function(e) {
 				setTimeout(function() {
 					$('>input', e.currentTarget).focus();

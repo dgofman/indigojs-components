@@ -13,6 +13,7 @@
 		"grunt": "latest",
 		"grunt-contrib-uglify": "latest",
 		"grunt-contrib-less": "latest",
+		"grunt-contrib-copy": "latest",
 		"babel-core": "~6.24.1",
 		"babel-plugin-transform-es2015-template-literals": "latest"
 	}

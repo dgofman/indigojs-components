@@ -3,7 +3,7 @@ function igoRadiogroup($) {
 	'use strict';
 
 	return {
-		register: function(el) {
+		preinit: function(el) {
 			this.getRadios(el).filter('[value=' + el.text() + ']').prop('checked', true);
 		},
 

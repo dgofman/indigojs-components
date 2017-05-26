@@ -3,7 +3,7 @@ function igoDialog($, selector, ig) {
 	'use strict';
 
 	return {
-		register: function(el) {
+		preinit: function(el) {
 			var ref = this.initForms(el, {});
 
 			if (ref.$header.attr('uid')) {
@@ -21,9 +21,9 @@ function igoDialog($, selector, ig) {
 				el.trigger('close');
 			});
 
-			$('c[cid]', el).each(function(i, dom) {
+			$('[_]', el).each(function(i, dom) {
 				var el = $(dom);
-				ig.register($, el.attr('cid'), el);
+				ig.preinit($, el.attr('_'), el);
 			});
 
 			$('*[dialog_id="' + el.attr('id') + '"]').event('click.show', function() {

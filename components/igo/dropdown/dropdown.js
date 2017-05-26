@@ -2,12 +2,8 @@
 function igoDropdown($, selector, ig) {
 	'use strict';
 
-	$(window).on('click.dropdown', function() {
-		$(selector + '>ul').removeClass('open');
-	});
-
 	return {
-		register: function(el) {
+		preinit: function(el) {
 			var menu = $('>ul', el);
 			var div = $('>div', el).event('click.open', function(e) {
 				e.stopPropagation();
@@ -179,3 +175,9 @@ function igoDropdown($, selector, ig) {
 		}
 	};
 }
+
+igoDropdown.register = function($, selector, win) {
+	$(win).on('click.dropdown', function() {
+		$(selector + '>ul').removeClass('open');
+	});
+};

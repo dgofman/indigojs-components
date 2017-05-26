@@ -22,16 +22,12 @@ function igoDatefield($, selector, ig) {
 			]
 		};
 
-	$(window).on('click.dropdown', function() {
-		$(selector + '>.calendar').removeClass('open');
-	});
-
 	var getSelectedDate = function(ts) {
-			return ts ? new Date(ts) : null;
-		};
+		return ts ? new Date(ts) : null;
+	};
 
 	return {
-		register: function(el) {
+		preinit: function(el) {
 			var ref = {
 				formatDate: this.formatDate
 			};
@@ -45,16 +41,16 @@ function igoDatefield($, selector, ig) {
 			ref.$calendar.event('click.prevent', function(e) {
 				e.stopPropagation();
 			});
-			el.event('change.register', function(e, ts) {
+			el.event('change.init', function(e, ts) {
 				ref.$box.attr('ts', ts);
 				ref.$prompt.html(ref.formatDate(ts) || ref.$box.attr('prompt'));
-			}).trigger('change.register', ref.timeStamp);
+			}).trigger('change.init', ref.timeStamp);
 		},
 
 		init: function(el, self) {
 			this.onEvent('change', el);
 			this.initComponents(el, this);
-			el.event('change.register', function(e, ts) {
+			el.event('change.init', function(e, ts) {
 				self.value = ts;
 			});
 		},
@@ -192,3 +188,9 @@ function igoDatefield($, selector, ig) {
 		}
 	};
 }
+
+igoDatefield.register = function($, selector, win) {
+	$(win).on('click.dropdown', function() {
+		$(selector + '>.calendar').removeClass('open');
+	});
+};

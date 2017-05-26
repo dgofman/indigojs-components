@@ -3,7 +3,7 @@ function igoMenu($) {
 	'use strict';
 
 	return {
-		register: function(el) {
+		preinit: function(el) {
 			var lis = $('>ul>li', el).event('click.select', function(e) {
 				lis.removeClass('selected');
 				$(e.currentTarget).addClass('selected');

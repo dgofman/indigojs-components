@@ -3,7 +3,7 @@ function igoTabs($) {
 	'use strict';
 
 	return {
-		register: function(el) {
+		preinit: function(el) {
 			var section = $('>section', el),
 				divs = section.find('>div'),
 				inputs = $('>div>input', el).event('change.tabs', function() {

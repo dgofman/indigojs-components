@@ -13,7 +13,7 @@
 
 <script type="text/javascript">
 	var indigoJS = {
-		DEBUG: false,
+		DEBUG: true,
 		INFO: false,
 		contextPath: '',
 		staticPath: '/static',
@@ -44,8 +44,8 @@
 </head>
 
 <body>
-	<section class="igo-content" indigo-builder="build/ejs/content.html"></section>
-	<script type="text/javascript" src="js/builder.js"></script>
+	<section class="igo-content" indigo-builder="build/ejs/indigo_components.html"></section>
+	<script type="text/javascript" src="js/builder.js" indigo-pkgs="igo,jui"></script>
 </body>
 
 </html>

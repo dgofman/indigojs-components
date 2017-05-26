@@ -5,7 +5,7 @@ function igoTooltip($) {
 	var arrow_gap = 7;
 
 	return {
-		register: function(el) {
+		preinit: function(el) {
 			var div = $('>div', el);
 			if (div.attr('target')) {
 				var targets = div.attr('target').split(','),

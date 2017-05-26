@@ -2,29 +2,32 @@
 
 (function(ig) {
 	var staticPath = ig.staticPath || '/static',
+		targets = document.querySelectorAll('[indigo-builder]'),
+		componentIndex = 0,
+		packages = {},
 		templates = {},
 		libs = [],
 		loader = function(url, callback) {
-		var xhr = new window.XMLHttpRequest();
-		xhr.open('GET', url);
-		xhr.onreadystatechange = function() {
-			if(xhr.readyState === window.XMLHttpRequest.DONE && xhr.status === 200) {
-				callback(xhr.responseText);
+			var xhr = new window.XMLHttpRequest();
+			xhr.open('GET', url);
+			xhr.onreadystatechange = function() {
+				if(xhr.readyState === window.XMLHttpRequest.DONE && xhr.status === 200) {
+					callback(xhr.responseText);
+				}
+			};
+			xhr.send();
+		},
+		init = function(pkgs) {
+			for (var i = 0; i < pkgs.length; i++) {
+				if (!packages[pkgs[i]]) {
+					return;
+				}
 			}
-		};
-		xhr.send();
-	};
-
-	var pkgName = 'igo';
-	loader('./build/' + pkgName + 'Components.html', function(data) {
-		var componentIndex = 0,
-			arr = data.split(/<<\[\[(.*)\]\]>>/);
-		for (var i = 1; i < arr.length; i += 2) {
-			libs.push(arr[i]);
-			templates[arr[i].replace('!', '')] = arr[i + 1];
-		}
-
-		var createModel = function(model, opts) {
+			for (i = 0; i < targets.length; i++) {
+				ig.builder(targets[i].getAttribute('indigo-builder'), targets[i]);
+			}
+		},
+		createModel = function(model, opts) {
 			model = model || {};
 			model.baseStaticPath = staticPath,
 			model.opts = opts || {},
@@ -34,7 +37,7 @@
 					opts = opts || {};
 					model.opts = opts || {};
 					model.componentIndex = componentIndex++;
-					begin = '<c ' + type + ' tabindex="-1" class="init' + model.$get('class') + '"' + model.$get('disabled', 'disabled') + model.$attr('id');
+					begin = '<c _=' + type + ' tabindex="-1" class="init' + model.$get('class') + '"' + model.$get('disabled', 'disabled') + model.$attr('id');
 					html = window.ejs.render(templates[type], model);
 					if (opts.show === false) {
 						opts.parentStyle = 'display: none; ' + opts.parentStyle || '';
@@ -99,30 +102,42 @@
 			return model;
 		};
 
-		ig.builder = function(contentPath, parent) {
-			var model = createModel();
-			loader(contentPath, function(data) {
-				var html = window.ejs.render(data, model),
-					scripts = parent.querySelectorAll('script');
-				parent.innerHTML = html;
-				for (var i = 0; i < scripts.length; i++) {
-					try {
-						/*jshint evil:true */
-						eval(scripts[i].innerHTML);
-					} catch (e) {}
-				}
-				var script = document.createElement('script');
-				script.src = 'js/loader.js';
-				script.setAttribute('rel', 'igcore');
-				script.setAttribute('uri', 'build/css');
-				script.setAttribute('libs', libs.join(','));
-				parent.appendChild(script);
-			});
-		};
+	ig.builder = function(contentPath, parent) {
+		var model = createModel();
+		loader(contentPath, function(data) {
+			var html = window.ejs.render(data, model),
+				scripts = parent.querySelectorAll('script');
+			parent.innerHTML = html;
+			for (var i = 0; i < scripts.length; i++) { //execute embedded scripts
+				try {
+					/*jshint evil:true */
+					eval(scripts[i].innerHTML);
+				} catch (e) {}
+			}
+			var script = document.createElement('script');
+			script.src = 'js/loader.js';
+			script.setAttribute('rel', 'igocore');
+			script.setAttribute('uri', 'build/css');
+			script.setAttribute('libs', libs.join(','));
+			parent.appendChild(script);
+		});
+	};
 
-		var all = document.querySelectorAll('[indigo-builder]');
-		for (var j = 0; j < all.length; j++) {
-			ig.builder(all[j].getAttribute('indigo-builder'), all[j]);
+	var script = document.querySelector('[indigo-pkgs]'),
+		pkgs = script ? script.getAttribute('indigo-pkgs').split(',') : [];
+	pkgs.forEach(function(pkg) {
+		if (!templates[pkg]) {
+			loader('./build/' + pkg + 'Components.html', function(data) {
+				var arr = data.split(/<<\[\[(.*)\]\]>>/);
+				for (var i = 1; i < arr.length; i += 2) {
+					libs.push(arr[i]);
+					templates[arr[i].replace('!', '')] = arr[i + 1];
+				}
+				packages[pkg] = true;
+				init(pkgs);
+			});
+		} else {
+			init(pkgs);
 		}
 	});
 })(window.top.indigoJS = (window.top.indigoJS || {}));

@@ -3,7 +3,7 @@ function igoTextarea($) {
 	'use strict';
 
 	return {
-		register: function(el) {
+		preinit: function(el) {
 			$('>div', el).event('focus.input', function(e) {
 				setTimeout(function() {
 					$('>textarea', e.currentTarget).focus();

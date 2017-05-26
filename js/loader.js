@@ -18,17 +18,16 @@
 	ig.class = function(el, name, isAdd) {
 		return isAdd ? el.addClass(name) : el.removeClass(name);
 	},
-	ig.register = function($, type, el) {
-		var cls = loadedJs[type];
-		if (cls) {
-			var apis = cls($, '[' + type + ']', ig);
-			if (apis.register) {
-				apis.register(el);
+	ig.preinit = function($, type, el) {
+		var apis = loadedJs[type]($, type, ig);
+		if (apis) {
+			if (apis.preinit) {
+				apis.preinit(el);
 			}
 		}
 	};
 
-	var core = document.querySelector('script[rel=igcore]'),
+	var core = document.querySelector('script[rel=igocore]'),
 		libs = core.getAttribute('libs').split(','),
 		uri = core.getAttribute('uri'),
 		head = parent.document.head,
@@ -42,53 +41,68 @@
 					el[key] = attrs[key];
 				}
 				el.onload = function() {
-					(onload || init)(selector);
+					(onload || loadHandler)(selector);
 				};
 				head.appendChild(el);
 			}
 			return el;
 		},
-		init = function() {
+		loadHandler = function() {
 			if (!window._jQueryFactory) {
 				return;
 			}
+			var preinitialize = true;
 			for (var i = 0; i < libs.length; i++) {
-				var type = libs[i].replace('!', '');
-				if (loadedJs[type] === false) {
-					if (window[type]) {
-						loadedJs[type] = window[type];
-					} else {
-						return;
-					}
-				}
-				if (loadedCss[type] === false) {
-					var css = parent.document.styleSheets,
-						selector = '[' + type.toLowerCase() + ']';
+				var type = libs[i].replace('!', ''),
+					selector = '[_=' + type + ']';
+
+				if (loadedCss[type] === 0) {
+					var css = parent.document.styleSheets;
 					loop1:
-					for (var j = 0; j < 1; j++) {
-						for (var k = 0; k < css.length; k++) {
-							var rules = css[k].rules || css[k].cssRules;
-							for (var l = 0; l < rules.length; l++) {
-								var text = rules[l].selectorText || '';
-								if (text.indexOf(selector) !== -1) {
-									loadedCss[type] = true;
-									ig.wins.forEach(function(win) {
-										win.$(selector).removeClass('init');
-									});
-									break loop1;
-								}
+					for (var k = 0; k < css.length; k++) {
+						var rules = css[k].cssRules || css[k].rules;
+						for (var l = 0; l < rules.length; l++) {
+							var text = rules[l].selectorText || '';
+							if (text.indexOf(type) !== -1) {
+								loadedCss[type] = 1;
+								break loop1;
 							}
 						}
-						return;
 					}
 				}
-			}
-			for (type in loadedJs) {
-				ig.wins.forEach(function(win) {
-					win.$.each(win.$('[' + type + ']').removeClass('init'), function(i, el) {
-						ig.register(win.$, type, win.$(el));
+
+				if (loadedJs[type] === 0) {
+					if (parent[type]) {
+						var cls = parent[type];
+						cls.register = cls.register || function() {};
+						if (cls.loaded) {
+							ig.wins.forEach(function(win) {
+								cls.loaded(win.$, win);
+							});
+						}
+						loadedJs[type] = cls;
+					} else {
+						preinitialize = false;
+					}
+				}
+
+				if (loadedCss[type] === 1 && loadedJs[type] !== 0) {
+					loadedCss[type] = 2;
+					ig.wins.forEach(function(win) {
+						win.$(selector).removeClass('init');
 					});
-				});
+				}
+			}
+			if (preinitialize) {
+				for (type in loadedJs) {
+					ig.wins.forEach(function(win) {
+						var selector = '[_=' + type + ']';
+						parent[type].register(win.$, selector, win);
+						win.$(selector).removeClass('init').each(function(i, el) {
+							ig.preinit(win.$, type, win.$(el));
+						});
+					});
+				}
 			}
 		};
 
@@ -106,7 +120,7 @@
 				}
 			});
 		});
-		init(selector);
+		loadHandler(selector);
 		if (ig.jqueryReady) {
 			ig.jqueryReady(window.$);
 		}
@@ -117,15 +131,17 @@
 			pair = type.split(/(?=[A-Z])/);
 			var pkg = pair[0],
 			cls = pair[1].toLowerCase();
-		if (lib.charAt(lib.length - 1) !== '!') { //exclude link
-			loadedCss[type] = false;
-			addAsset('link', {rel: 'stylesheet', type: 'text/css', href: ig.cssPath(uri, type, pkg, cls)});
-		}
 		if (lib.charAt(0) !== '!') { //exclude script
-			loadedJs[type] = false;
+			loadedJs[type] = 0;
 			addAsset('script', {type: 'text/javascript', src: ig.jsPath(uri, type, pkg, cls)});
 		}
+		if (lib.charAt(lib.length - 1) !== '!') { //exclude link
+			loadedCss[type] = 0;
+			addAsset('link', {rel: 'stylesheet', type: 'text/css', href: ig.cssPath(uri, type, pkg, cls)});
+		} else {
+			loadedCss[type] = 1;
+		}
 	});
-	init();
+	loadHandler();
 
 })(window.top);
