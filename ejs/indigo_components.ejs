@@ -60,7 +60,7 @@
 		margin-top: 30px;
 	}
 
-	.icon:before {
+	.icon:before, .icon-flag {
 		background-image: url(<%- baseStaticPath %>/images/flags.png);
 		background-position: -112px -224px;
 	}
@@ -225,8 +225,8 @@
 			<b>Example:</b>
 			Customizing style
 		</p>
-		<%- code('igoButton', {label: `'Hello World - 4'`, style: `<i>'color: green; font-weight: bold'</i>`}) %>
-		<%- $('igoButton', {label: `Hello World - 4`, style: 'color: green; font-weight: bold'}) %><hr/>
+		<%- code('igoButton', {label: `'Hello World - 4'`, style: `<i>'color: green; font-weight: bold'</i>`, icon_class: `<i>'icon-flag'</i>`}) %>
+		<%- $('igoButton', {label: `Hello World - 4`, style: 'color: green; font-weight: bold', icon_class: 'icon-flag'}) %><hr/>
 
 		<p>
 			<b>Example:</b>

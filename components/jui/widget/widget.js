@@ -31,7 +31,7 @@ juiWidget.loaded = function($) {
 	$.cleanData = ( function( orig ) {
 		return function( elems ) {
 			var events, elem, i;
-			for ( i = 0; ( elem = elems[ i ] ) !== null; i++ ) {
+			for ( i = 0; !!( elem = elems[ i ] ); i++ ) {
 				try {
 
 					// Only trigger remove when necessary to save time

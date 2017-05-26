@@ -39,7 +39,6 @@
 
 	& > button > i {
 		background-repeat: no-repeat;
-		background-size: contain;
 		text-decoration: none;
 		width: @icon_size;
 		height: @icon_size;
@@ -53,6 +52,10 @@
 			margin-left: 5px;
 			float: right;
 		}
+	}
+
+	& > button > i[style] {
+		background-size: contain;
 	}
 
 	.error();
