@@ -175,7 +175,7 @@
 		<li><a href="#autocomplete">Autocomplete</a></li>
 		<li><a href="#button">Button</a></li>
 		<li><a href="#checkbox">Checkbox</a></li>
-		<li><a href="#datefield">DateField</a></li>
+		<li><a href="#datepicker">Datepicker</a></li>
 		<li><a href="#dialog">Dialog</a></li>
 		<li><a href="#dropdown">Dropdown</a></li>
 		<li><a href="#file">File</a></li>
@@ -306,13 +306,6 @@
 
 		<p>
 			<b>Example:</b>
-			Partial Checkbox
-		</p>
-		<%- code('juiCheckbox', {label: `'Hello World - 3'`, checked: true, partial: `<i>true</i>`}) %>
-		<%- $('juiCheckbox', {label: `Hello World - 3`, checked: true, partial: true}) %><hr/>
-
-		<p>
-			<b>Example:</b>
 			Custom styling Checkbox
 		</p>
 		<%- code('juiCheckbox', {label: `'Hello World - 4'`, style: `<i>'color: green; font-weight: bold'</i>`}) %>
@@ -333,53 +326,53 @@
 		<%- $('juiCheckbox', {label: `Hello World - 6`, class: 'custom', disabled: true}) %><hr/>
 	</div>
 
-	<h1 id="datefield">DateField:</h1>
+	<h1 id="datepicker">Datepicker:</h1>
 	<p>
-	The DateField component provides the user with a convenient way to select dates. The DateField control is displayed as a text input field with a calendar icon on its right side. Upon clicking the icon, the user is presented with a <code>CalendarControl</code>, from which they can scroll through months and years to select a specific date. Once a date has been selected, the <code>CalendarControl</code> will collapse and the DateField control will be populated with the selected date. If the user does not select a date, they can click the icon to collapse the calendar control and leave the DateField in its previous state. The DateField component can be customized to include prompts and styling attributes.
+	The Datepicker component provides the user with a convenient way to select dates. The Datepicker control is displayed as a text input field with a calendar icon on its right side. Upon clicking the icon, the user is presented with a <code>CalendarControl</code>, from which they can scroll through months and years to select a specific date. Once a date has been selected, the <code>CalendarControl</code> will collapse and the Datepicker control will be populated with the selected date. If the user does not select a date, they can click the icon to collapse the calendar control and leave the Datepicker in its previous state. The Datepicker component can be customized to include prompts and styling attributes.
 
 	</p>
-	<div ig-ns="datefield">
+	<div ig-ns="datepicker">
 		<p>
 			<b>Example:</b>
-			Default DateField
+			Default Datepicker
 		</p>
-		<%- code('juiDatefield') %>
-		<%- $('juiDatefield') %><hr/>
+		<%- code('juiDatepicker') %>
+		<%- $('juiDatepicker') %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Defining prompt text
 		</p>
-		<%- code('juiDatefield', {prompt: `<i>'Select a date'</i>`}) %>
-		<%- $('juiDatefield', {prompt: 'Select a date'}) %><hr/>
+		<%- code('juiDatepicker', {prompt: `<i>'Select a date'</i>`}) %>
+		<%- $('juiDatepicker', {prompt: 'Select a date'}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Setting time using milliseconds
 		</p>
-		<%- code('juiDatefield', {timestamp:`<i>Date.now()</i>`}) %>
-		<%- $('juiDatefield', {timestamp: Date.now()}) %><hr/>
+		<%- code('juiDatepicker', {timestamp:`<i>Date.now()</i>`}) %>
+		<%- $('juiDatepicker', {timestamp: Date.now()}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Customizing style
 		</p>
-		<%- code('juiDatefield', {timestamp: `new Date(2012, 0, 25).getTime()`, style: `<i>'color: green; font-weight: bold'</i>`}) %>
-		<%- $('juiDatefield', {timestamp: new Date(2012, 0, 25).getTime(), style: 'color: green; font-weight: bold'}) %><hr/>
+		<%- code('juiDatepicker', {timestamp: `new Date(2012, 0, 25).getTime()`, style: `<i>'color: green; font-weight: bold'</i>`}) %>
+		<%- $('juiDatepicker', {timestamp: new Date(2012, 0, 25).getTime(), style: 'color: green; font-weight: bold'}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Customizing days of week
 		</p>
-		<%- code('juiDatefield', {days: `<i>${JSON.stringify(customDay)}</i>`, months: `<i>${JSON.stringify(customMonth)}</i>`}) %>
-		<%- $('juiDatefield', {days: customDay, months: customMonth}) %><hr/>
+		<%- code('juiDatepicker', {days: `<i>${JSON.stringify(customDay)}</i>`, months: `<i>${JSON.stringify(customMonth)}</i>`}) %>
+		<%- $('juiDatepicker', {days: customDay, months: customMonth}) %><hr/>
 
 		<p>
 			<b>Example:</b>
-			Disabling DateField
+			Disabling Datepicker
 		</p>
-		<%- code('juiDatefield', {prompt: `'Disabled'`, class: `'custom'`, disabled: `<i>true</i>`}) %>
-		<%- $('juiDatefield', {prompt: 'Disabled', class: 'custom', disabled: true}) %><hr/>
+		<%- code('juiDatepicker', {prompt: `'Disabled'`, class: `'custom'`, disabled: `<i>true</i>`}) %>
+		<%- $('juiDatepicker', {prompt: 'Disabled', class: 'custom', disabled: true}) %><hr/>
 	</div>
 
 	<h1 id="dialog">Dialog:</h1>
