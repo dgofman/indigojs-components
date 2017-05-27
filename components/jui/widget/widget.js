@@ -9,7 +9,7 @@ juiWidget.loaded = function($) {
 
 	var version = $.ui.version = "@VERSION";
 
-//https://raw.githubusercontent.com/jquery/jquery-ui/master/ui/widget.js
+//https://github.com/jquery/jquery-ui/blob/master/ui/widget.js
 
 	/*!
 	 * jQuery UI Widget 1.12.1
@@ -729,7 +729,7 @@ juiWidget.loaded = function($) {
 		};
 	} );
 
-//https://raw.githubusercontent.com/jquery/jquery-ui/master/ui/keycode.js
+//https://github.com/jquery/jquery-ui/blob/master/ui/keycode.js
 
 	/*!
 	 * jQuery UI Keycode 1.12.1
@@ -764,7 +764,7 @@ juiWidget.loaded = function($) {
 		UP: 38
 	};
 
-//https://raw.githubusercontent.com/jquery/jquery-ui/master/ui/unique-id.js
+//https://github.com/jquery/jquery-ui/blob/master/ui/unique-id.js
 
 	/*!
 	 * jQuery UI Unique ID 1.12.1
@@ -802,7 +802,7 @@ juiWidget.loaded = function($) {
 		}
 	});
 
-//https://raw.githubusercontent.com/jquery/jquery-ui/master/ui/position.js
+//https://github.com/jquery/jquery-ui/blob/master/ui/position.js
 
 	/*!
 	 * jQuery UI Position @VERSION
@@ -1279,7 +1279,7 @@ juiWidget.loaded = function($) {
 		}
 	};
 
-//https://raw.githubusercontent.com/jquery/jquery-ui/master/ui/labels.js
+//https://github.com/jquery/jquery-ui/blob/master/ui/labels.js
 
 	/*!
 	 * jQuery UI Labels @VERSION
@@ -1334,7 +1334,37 @@ juiWidget.loaded = function($) {
 		return typeof this[ 0 ].form === "string" ? this.closest( "form" ) : $( this[ 0 ].form );
 	};
 
-//https://raw.githubusercontent.com/jquery/jquery-ui/master/ui/form-reset-mixin.js
+//https://github.com/jquery/jquery-ui/blob/master/ui/safe-active-element.js
+
+	$.ui.safeActiveElement = function( document ) {
+		var activeElement;
+
+		// Support: IE 9 only
+		// IE9 throws an "Unspecified error" accessing document.activeElement from an <iframe>
+		try {
+			activeElement = document.activeElement;
+		} catch ( error ) {
+			activeElement = document.body;
+		}
+
+		// Support: IE 9 - 11 only
+		// IE may return null instead of an element
+		// Interestingly, this only seems to occur when NOT in an iframe
+		if ( !activeElement ) {
+			activeElement = document.body;
+		}
+
+		// Support: IE 11 only
+		// IE11 returns a seemingly empty object in some cases when accessing
+		// document.activeElement from an <iframe>
+		if ( !activeElement.nodeName ) {
+			activeElement = document.body;
+		}
+
+		return activeElement;
+	};
+
+//https://github.com/jquery/jquery-ui/blob/master/ui/form-reset-mixin.js
 
 	/*!
 	 * jQuery UI Form Reset Mixin 1.12.1

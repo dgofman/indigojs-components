@@ -393,38 +393,10 @@
 			Defining title, content and footer buttons
 		</p>
 		<%- code('juiDialog', {id: `'dlg_custom'`, title: `<i>'Dialog Title'</i>`, content: `<i>'Dialog Content'</i>`, 
-			buttons: `<i>[{label: 'OK', style: 'color: red; font-weight: bold'}, {label: 'Close', class: 'close'}]</i>`}) %>
+			buttons: `<i>[{label:'OK', event: 'ok'}, {label: 'Close', event: 'close'}]</i>`}) %>
 		<%- $('juiDialog', {id: 'dlg_custom', title: 'Dialog Title', content: 'Dialog Content', 
-			buttons: [{label: 'OK', style: 'color: red; font-weight: bold'}, {label: 'Close', class: 'close'}]}) %>
+			buttons: [{label:'OK', event: 'ok'}, {label: 'Close', event: 'close'}]}) %>
 		<%- $('juiButton', {label: 'Custom Dialog', attrs: {dialog_id: 'dlg_custom'}} ) %><hr/>
-
-		<script type="text/template" id="dlg_header">
-			<span class="close pull-right">Close</span>
-			<span class="title">Template Dialog</span>
-		</script>
-
-		<script type="text/template" class="dlg_footer">
-			<button class="close">OK</button>
-		</script>
-
-		<%
-		var dlg_header = `<b>&lt;script</b> type="<b>text/template</b>" id="<i>dlg_header</i>"&gt;<br/>
-			&emsp;&lt;span class="close pull-right"&gt;<span class="val">Close</span>&lt;/span&gt;<br/>
-			&emsp;&lt;span class="title"&gt;<span class="val">Template Dialog</span>&lt;/span&gt;<br/>
-		<b>&lt;/script&gt;</b><br/><br/>`;
-
-		var dlg_footer = `<b>&lt;script</b> type="<b>text/template</b>" id="<i>dlg_footer</i>"&gt;<br/>
-			&emsp;&lt;button class="close"&gt;<span class="val">OK</span>&lt;/button&gt;<br/>
-		<b>&lt;/script&gt;</b><br/><br/>`;
-		%>
-
-		<p>
-			<b>Example:</b>
-			Using pre-defined templates
-		</p>
-		<%- code('juiDialog', {id: `'dlg_template'`, header_template: `<i>'#dlg_header'</i>`, content_template: `<i>'#templ'</i>`, footer_template: `<i>'.dlg_footer'</i>`}, [dlg_header, templ, dlg_footer].join('')) %>
-		<%- $('juiDialog', {id: 'dlg_template', header_template: '#dlg_header', content_template: '#templ', footer_template: '.dlg_footer'}) %>
-		<%- $('juiButton', {label: 'Template Dialog', attrs: {dialog_id: 'dlg_template'}} ) %><hr/>
 	</div>
 
 	<h1 id="dropdown">Dropdown:</h1>
