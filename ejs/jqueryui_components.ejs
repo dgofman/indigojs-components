@@ -65,7 +65,7 @@
 		background-position: -112px -224px;
 	}
 
-	.custom * {
+	.custom, .custom * {
 		color: red !important;
 		text-decoration: underline;
 	}
@@ -178,10 +178,6 @@
 		<li><a href="#datepicker">Datepicker</a></li>
 		<li><a href="#dialog">Dialog</a></li>
 		<li><a href="#dropdown">Dropdown</a></li>
-		<li><a href="#file">File</a></li>
-		<li><a href="#hbox">HBox</a></li>
-		<li><a href="#image">Image</a></li>
-		<li><a href="#input">Input</a></li>
 		<li><a href="#menu">Menu</a></li>
 		<li><a href="#radio">Radio</a></li>
 		<li><a href="#switch">Switch</a></li>
@@ -416,15 +412,15 @@
 			<b>Example:</b>
 			Using menu items, selecting index and expanding by default
 		</p>
-		<%- code('juiDropdown', {menus: `[<i>'Menu1'</i>, <i>'Menu2'</i>, <i>'Menu3'</i>]`, selectedIndex: `<i>0</i>`, open: `<i>true</i>`}) %>
-		<%- $('juiDropdown', {menus: ['Menu1', 'Menu2', 'Menu3'], selectedIndex: 0, open: true}) %><hr/>
+		<%- code('juiDropdown', {menus: `[<i>'Menu1'</i>, <i>'Menu2'</i>, <i>'Menu3'</i>]`, selectedIndex: `<i>1</i>`}) %>
+		<%- $('juiDropdown', {menus: ['Menu1', 'Menu2', 'Menu3'], selectedIndex: 1}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Setting default prompt and customizing style
 		</p>
-		<%- code('juiDropdown', {prompt: `<i>'Hello World - 1'</i>`, style: `<i>'color: green; font-weight: bold'</i>`}) %>
-		<%- $('juiDropdown', {prompt: `Hello World - 1`, style: 'color: green; font-weight: bold'}) %><hr/>
+		<%- code('juiDropdown', {prompt: `<i>'Hello World - 1'</i>`, class: `<i>'custom'</i>`}) %>
+		<%- $('juiDropdown', {prompt: `Hello World - 1`, class: 'custom'}) %><hr/>
 
 		<p>
 			<b>Example:</b>
@@ -441,12 +437,8 @@
 		<%- $('juiDropdown', {menus: [{lbl: 'Menu1'}, {lbl: 'Menu2'}, {lbl: 'Menu3'}], labelField: 'lbl', selectedIndex: 1}) %><hr/>
 
 		<%
-			function customLabelRenderer(menu, opts, defaultItemRenderer, index) {
-				return $('juiRadio', {label: '%LABEL%', checked: true});
-			};
-
 			function customItemRenderer(menu, opts, defaultItemRenderer, index) {
-				return `<li data="%DATA%">${ $('juiCheckbox', {label: '%LABEL%', style: menu.style}) }</li>`;
+				return `<option data="%DATA%" menu-class="custom" icon-class="ui-icon${menu.$get('icon')}"${menu.$attr('style', 'menu-style')}${menu.$attr('icon_style', 'icon-style')}>%LABEL%</option>`;
 			}
 		%>
 
@@ -455,12 +447,12 @@
 			Using customized <code>itemRenderer</code> and <code>labelRenderer</code>
 		</p>
 		<%- code('juiDropdown', {menus: `[
-			{lf: 'Menu1', df: 1}, {lf: 'Menu2', df: 2, style: 'color: red'}, {lf: 'Menu3', df: 3, selected: true}]`, 
-			labelField: `'lf'`, dataField: `'df'`, labelRenderer: `<i>'&lt;input type="radio" checked/&gt;%LABEL%'</i>`, itemRenderer: `<i>'&lt;li&gt;&lt;input type="checkbox" data="%DATA%"/&gt;%LABEL%&lt;/li&gt;'</i>`}) %>
+			{lf: 'Menu1', icon: 'ui-icon-script'}, {lf: 'Menu2', icon: '<i>ui-icon-image</i>', style: '<i>color: green !important; font-weight: bold</i>'}, {lf: 'Menu3', icon_style: '<i>background-image: url(/static/images/indigo.png); background-size: contain</i>', selected: true}]`, 
+			labelField: 'lf', itemRenderer: `<i>customItemRenderer</i>`}) %>
 
 		<%- $('juiDropdown', {menus: [
-			{lf: 'Menu1', df: 1}, {lf: 'Menu2', df: 2, style: 'color: red'}, {lf: 'Menu3', df: 3, selected: true}], 
-			labelField: 'lf', dataField: 'df', labelRenderer: customLabelRenderer, itemRenderer: customItemRenderer}) %><hr/>
+			{lf: 'Menu1', icon: 'ui-icon-script'}, {lf: 'Menu2', icon: 'ui-icon-image', style: 'color: green !important; font-weight: bold'}, {lf: 'Menu3', icon_style: 'background-image: url(/static/images/indigo.png); background-size: contain', selected: true}], 
+			labelField: 'lf', itemRenderer: customItemRenderer}) %><hr/>
 
 		<p>
 			<b>Example:</b>
@@ -468,140 +460,6 @@
 		</p>
 		<%- code('juiDropdown', {prompt: `'Hello World - 3'`, class: `'custom'`, disabled: `<i>true</i>`}) %>
 		<%- $('juiDropdown', {prompt: `Hello World - 3`, class: 'custom', disabled: true}) %><hr/>
-	</div>
-
-	<h1 id="file">File:</h1>
-	<p>
-		The File component allows the user to select and upload a file from their own directories. The file system directory is organized in a tree structure. Upon clicking the File control, the user is presented with a File Dialog window in which their directory’s content is displayed.
-	</p>
-	<div ig-ns="file">
-		<p>
-			<b>Example:</b>
-			Using custom label
-		</p>
-		<%- code('juiFile', {label: `<i>'Upload File...'</i>`}) %>
-		<%- $('juiFile', {label: 'Upload File...'}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Applying icon style and disabled click
-		</p>
-		<%- code('juiFile', {label: `'Upload File...'`, class: `<i>'icon'</i>`, disabled: `<i>true</i>`}) %>
-		<%- $('juiFile', {label: 'Upload File...', class: 'icon', disabled: true}) %><hr/>
-	</div>
-
-	<h1 id="hbox">HBox:</h1>
-	<p>
-		The HBox is a layout pane which presents its children in a single horizontal row. The custom size on the <code>left</code> or <code>right</code> is specified, and the remaining elements will take up the remaining width of the parent element. The HBox prevents the element with unspecified width from overflowing to a new line. 
-	</p>
-	<div ig-ns="hbox">
-		<p>
-			<b>Example:</b>
-			Float Right
-		</p>
-		<%- code('juiHbox', {right: `<i>'&lt;button&gt;OK&lt;/button&gt;'</i>`, content: `<i>'&lt;input value="Hello World - 1"/&gt;'</i>`}) %>
-		<%- $('juiHbox', {
-			right: '<button>OK</button>',
-			content: `<input value="Hello World - 1"/>`,
-			parentStyle: 'display: block; width: 400px; padding: 10px; border: 1px solid red'
-		}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Float Left
-		</p>
-		<%- code('juiHbox', {left: `<i>'&lt;button&gt;OK&lt;/button&gt;'</i>`, content: `<i>'&lt;input value="Hello World - 2"/&gt;'</i>`}) %>
-		<%- $('juiHbox', {
-			left: '<button>OK</button>',
-			content: `<input value="Hello World - 2"/>`,
-			parentStyle: 'display: block; width: 400px; padding: 10px; margin: 10px 0; border: 1px solid blue'
-		}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Content only
-		</p>
-		<%- code('juiHbox', {content: `<i>'&lt;input value="Hello World - 3"/&gt;'</i>`}) %>
-		<%- $('juiHbox', {
-			content: $('juiInput', {value: `Hello World - 3`}),
-			parentStyle: 'display: block; width: 400px; padding: 10px; margin: 10px 0; border: 1px solid green'
-		}) %><hr/>
-	</div>
-
-	<h1 id="image">Image:</h1>
-	<p>
-		The image control makes it possible to import image files (including GIF, JPEG, PNG, etc.) at runtime. The image can be loaded into an HTML <code>DIV</code> or <code>IMG</code> control when <code>img</code> is set to true. Images can be customized with regards to size, styling, etc.
-	</p>
-	<div ig-ns="image">
-		<p>
-			<b>Example:</b>
-			Setting image url
-		</p>
-		<%- code('juiImage', {url: `<i>'${baseStaticPath}/images/indigo.png'</i>`}) %>
-		<%- $('juiImage', {url: `${baseStaticPath}/images/indigo.png`}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Image sizing using pixels
-		</p>
-		<%- code('juiImage', {url: `'${baseStaticPath}/images/indigo.png'`, width: `<i>30</i>`, height: `<i>30</i>`}) %>
-		<%- $('juiImage', {url: `${baseStaticPath}/images/indigo.png`, width: 30, height: 30, title: 'indigo JS'}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Image sizing using em and title
-		</p>
-		<%- code('juiImage', {url: `'${baseStaticPath}/images/indigo.png'`, width: `<i>'2em'</i>`, height: `<i>'2em'</i>`, title: `<i>'indigo JS'</i>`}) %>
-		<%- $('juiImage', {url: `${baseStaticPath}/images/indigo.png`, width: '2em', height: '2em', title: 'indigo JS'}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Using IMG tag
-		</p>
-		<%- code('juiImage', {url: `'${baseStaticPath}/images/indigo.png'`, img: `<i>true</i>`}) %>
-		<%- $('juiImage', {url: `${baseStaticPath}/images/indigo.png`, img: true}) %><hr/>
-	</div>
-
-	<h1 id="input">Input:</h1>
-	<p>
-		The Input control allows for secure gathering and handling of user input. Input needs to be altered for each platform to ensure that styling and interaction guidelines are followed and the user will have a smooth experience. The input text can have a specified input-type to customize styling and appearance. The Input field can also be disabled, preventing the user from entering any information, by setting the <code>disabled</code> property to <code>true</code>.
-
-	</p>
-	<div ig-ns="input">
-		<p>
-			<b>Example:</b>
-			Input value parameter
-		</p>
-		<%- code('juiInput', {value: `<i>'Hello World - 1'</i>`}) %>
-		<%- $('juiInput', {value: `Hello World - 1`}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Using custom class
-		</p>
-		<%- code('juiInput', {value: `'Hello World - 2'`, class: `<i>'custom'</i>`}) %>
-		<%- $('juiInput', {value: `Hello World - 2`, class: 'custom'}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Disabling input field
-		</p>
-		<%- code('juiInput', {value: `'Hello World - 3'`, class: `'custom'`, disabled: `<i>true</i>`}) %>
-		<%- $('juiInput', {value: `Hello World - 3`, class: 'custom', disabled: true}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Input field attributes
-		</p>
-		<%- code('juiInput', {value: `'Hello'`, maxlen: `<i>5</i>`, required: `<i>true</i>`, style: `<i>'color: green'</i>`}) %>
-		<%- $('juiInput', {value: 'Hello', maxlen: 5, required: true, style: 'color: green'}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Changing input type 
-		</p>
-		<%- code('juiInput', {value: 'Hello World - 4', type: `<i>'password'</i>`}) %>
-		<%- $('juiInput', {value: `Hello World - 4`, type: 'password'}) %><hr/>
 	</div>
 
 	<h1 id="menu">Menu:</h1>
