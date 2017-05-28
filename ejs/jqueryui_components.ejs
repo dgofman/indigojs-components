@@ -94,6 +94,10 @@
 		text-align: left;
 	}
 
+	.tabStyle > div {
+		height: 300px;
+	}
+
 	.code .cid {
 		color: #4a86ef;
 		font-weight: bold;
@@ -679,7 +683,7 @@
 			Using predefined templates
 		</p>
 		<%- code('juiTabs', {labels: `['Label1', 'Label2', 'Label3']`, contents: `['View1', 'View2', 'View3']`, templates: `[<i>'#templ'</i>, null, <i>'#templ'</i>]`}, templ) %>
-		<%- $('juiTabs', {labels: ['Label1', 'Label2', 'Label3'], contents: ['View1', 'View2', 'View3'], templates: ['#templ', null, '#templ']}) %><hr/>
+		<%- $('juiTabs', {labels: ['Label1', 'Label2', 'Label3'], contents: ['View1', 'View2', 'View3'], templates: ['#templ', null, '#templ'], class: 'tabStyle'}) %><hr/>
 	</div>
 
 	<h1 id="tooltip">Tooltip</h1>
