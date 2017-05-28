@@ -164,7 +164,7 @@
 		}
 		return `<div class="code">
 			${before}
-			<b>&lt;%- $(</b> '<span class="cid">${cid}</span>', {${opts.join(', ')}} <b>) %&gt;</b>
+			<b>&lt;%- $(</b>'<span class="cid">${cid}</span>', {${opts.join(', ')}} <b>) %&gt;</b>
 			${after}
 		</div>`;
 	}
@@ -531,8 +531,7 @@
 			<b>Example:</b>
 			Grouping radio buttons by using <code>radiogroup</code>
 		</p>
-		<%- code('juiRadio', {label: `'Hello World - 5'`, group: `'group_yes_no'`, value: `<i>'no'</i>`, class: `'custom'`}, `<b>&lt;%- $(</b>'<span class="cid">juiRadiogroup</span>', {<b>id</b>: <span class="val">'group_yes_no'</span>, <b>value</b>: <i>'no'</i><b>}) %&gt;</b><br/><b>&lt;%- $(</b>'<span class="cid">juiRadio</span>', {<b>label</b>: <span class="val">'Hello World - 4'</span>, <b>group</b>: <span class="val">'group_yes_no'</span>, <b>value</b>: <i>'yes'</i>, <b>style</b>: <span class="val">'color: green; font-weight: bold'</span><b>}) %&gt;</b><br/>`) %>
-		<%- $('juiRadiogroup', {id: 'group_yes_no', value: 'no'}) %>
+		<%- code('juiRadio', {label: `'Hello World - 5'`, group: `'group_yes_no'`, value: `<i>'no'</i>`, class: `'custom'`}, `<b>&lt;%- $(</b>'<span class="cid">juiRadio</span>', {<b>label</b>: <span class="val">'Hello World - 4'</span>, <b>group</b>: <span class="val">'group_yes_no'</span>, <b>value</b>: <i>'yes'</i>, <b>style</b>: <span class="val">'color: green; font-weight: bold'</span><b>}) %&gt;</b><br/>`) %>
 		<%- $('juiRadio', {label: `Hello World - 4`, group: 'group_yes_no', value: 'yes', style: 'color: green; font-weight: bold'}) %><br/>
 		<%- $('juiRadio', {label: `Hello World - 5`, group: 'group_yes_no', value: 'no', class: 'custom'}) %><hr/>
 
