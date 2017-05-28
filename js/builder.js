@@ -105,21 +105,23 @@
 	ig.builder = function(contentPath, parent) {
 		var model = createModel();
 		loader(contentPath, function(data) {
-			var html = window.ejs.render(data, model),
-				scripts = parent.querySelectorAll('script');
+			var html = window.ejs.render(data, model);
 			parent.innerHTML = html;
-			for (var i = 0; i < scripts.length; i++) { //execute embedded scripts
-				try {
-					/*jshint evil:true */
-					eval(scripts[i].innerHTML);
-				} catch (e) {}
-			}
+
 			var script = document.createElement('script');
 			script.src = 'js/loader.js';
 			script.setAttribute('rel', 'igocore');
 			script.setAttribute('uri', 'build/css');
 			script.setAttribute('libs', libs.join(','));
 			parent.appendChild(script);
+
+			var scripts = parent.querySelectorAll('script');
+			for (var i = 0; i < scripts.length; i++) { //execute embedded scripts
+				try {
+					/*jshint evil:true */
+					eval(scripts[i].innerHTML);
+				} catch (e) {}
+			}
 		});
 	};
 

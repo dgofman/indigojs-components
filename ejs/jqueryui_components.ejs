@@ -180,6 +180,7 @@
 		<li><a href="#dropdown">Dropdown</a></li>
 		<li><a href="#menu">Menu</a></li>
 		<li><a href="#radio">Radio</a></li>
+		<li><a href="#progressbar">Progressbar</a></li>
 		<li><a href="#switch">Switch</a></li>
 		<li><a href="#tabs">Tabs</a></li>
 		<li><a href="#text">Text</a></li>
@@ -541,6 +542,52 @@
 		</p>
 		<%- code('juiRadio', {label: `'Hello World - 6'`, class: `'custom'`, disabled: `<i>true</i>`}) %>
 		<%- $('juiRadio', {label: `Hello World - 6`, class: 'custom', disabled: true}) %>
+	</div>
+
+	<h1 id="progressbar">Progressbar:</h1>
+	<p>
+		The progress bar is designed to display the current percent complete for a process. The bar is coded to be flexibly sized through CSS and will scale to fit inside its parent container by default.
+
+		A determinate progress bar should only be used in situations where the system can accurately update the current status. A determinate progress bar should never fill from left to right, then loop back to empty for a single process — if the actual status cannot be calculated, an indeterminate progress bar should be used to provide user feedback.
+	</p>
+	<div ig-ns="progressbar">
+		<p>
+			<b>Example:</b>
+			Default determinate progress bar.
+		</p>
+		<%- code('juiProgressbar') %>
+		<%- $('juiProgressbar') %><hr/>
+
+		<p>
+			<b>Example:</b>
+			Custom updated label demo.
+		</p>
+		<%- code('juiProgressbar', {label: '<i>Loading...</i>',  value: `<i>40</i>`, style: '<i>color: green</i>'}) %>
+		<%- $('juiProgressbar', {label: 'Loading...',  value: 40, style: 'color: green'}) %><hr/>
+
+		<script>
+			var pb;
+			window.progress = function() {
+				if ($) {
+					if (!pb) {
+						pb = $('#myProgressbar>pre');
+					}
+					var val = pb.progressbar('value') || 0;
+					pb.progressbar('value', val + 10);
+					if (val < 99) {
+						setTimeout(window.progress, 1000);
+					}
+				}
+			}
+		</script>
+
+		<p>
+			<b>Example:</b>
+			Custom class.
+		</p>
+		<%- code('juiProgressbar', {label: 'Waiting...', complete: '<i>Complete!</i>', value: 0, class: '<i>custom</i>'}) %>
+		<%- $('juiProgressbar', {id: 'myProgressbar', label: 'Waiting...', complete: 'Complete!', value: 0, class: 'custom'}) %><hr/>
+		<button onclick="window.progress()">Start Download</button>
 	</div>
 
 	<h1 id="switch">Switch:</h1>
