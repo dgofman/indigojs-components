@@ -181,7 +181,7 @@
 		<li><a href="#menu">Menu</a></li>
 		<li><a href="#radio">Radio</a></li>
 		<li><a href="#progressbar">Progressbar</a></li>
-		<li><a href="#switch">Switch</a></li>
+		<li><a href="#slider">Slider</a></li>
 		<li><a href="#tabs">Tabs</a></li>
 		<li><a href="#text">Text</a></li>
 		<li><a href="#textarea">TextArea</a></li>
@@ -590,43 +590,31 @@
 		<button onclick="window.progress()">Start Download</button>
 	</div>
 
-	<h1 id="switch">Switch:</h1>
+	<h1 id="slider">Slider:</h1>
 	<p>
 		Like the Checkbox, a Switch component holds a boolean value. The Switch allows the user to turn a particular setting or feature on or off. This component can be customized with styling properties as well as certain attributes (such as <code>disabled</code> and <code>checked</code>) to control its behavior.
 	</p>
-	<div ig-ns="switch">
+	<div ig-ns="slider">
 		<p>
 			<b>Example:</b>
-			Default switch
+			Default slider
 		</p>
-		<%- code('juiSwitch') %>
-		<%- $('juiSwitch') %><hr/>
+		<%- code('juiSlider') %>
+		<%- $('juiSlider') %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Setting title and changing state
 		</p>
-		<%- code('juiSwitch', {title: `<i>'Network Control'</i>`, checked: `<i>true</i>`}) %>
-		<%- $('juiSwitch', {title: 'Network Control', checked: true}) %><hr/>
-
-		<style>
-			.myswitch input:checked + .slider {
-				background-color: red !important;
-			}
-		</style>
-		<p>
-			<b>Example:</b>
-			Applying custom style
-		</p>
-		<%- code('juiSwitch', {title: `'Settings'`, checked: true, class: `<i>'myswitch'</i>`}, `<b>&lt;style&gt;</b><br><i>.myswitch</i> input:checked + .slider {<br>	<span class="val">&emsp;background-color: red !important;</span><br>}<br><b>&lt;/style&gt;</b><br>`) %>
-		<%- $('juiSwitch', {title: 'Settings', checked: true, class: 'myswitch'}) %><hr/>
+		<%- code('juiSlider', {value: `<i>10</i>`}) %>
+		<%- $('juiSlider', {value: 10}) %><hr/>
 
 		<p>
 			<b>Example:</b>
-			Disabling switch
+			Setting title and changing state
 		</p>
-		<%- code('juiSwitch', {title: `'Power Control'`, checked: true, disabled: `<i>true</i>`}) %>
-		<%- $('juiSwitch', {title: 'Power Control', checked: true, disabled: true}) %><hr/>
+		<%- code('juiSlider', {handle: `<i>true</i>`, value: `<i>100</i>`, min: `<i>50</i>`, max: `<i>150</i>`}) %>
+		<%- $('juiSlider', {handle: true, value: 100, min: 50, max: 150}) %><hr/>
 	</div>
 
 	<h1 id="tabs">Tabs:</h1>
