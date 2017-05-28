@@ -471,56 +471,40 @@
 			<b>Example:</b>
 			Creating custom menu
 		</p>
-		<%- code('juiMenu', {menus: `<i>[{label: 'Menu 1', class: 'icon us'}, {label: 'Menu 2', class: 'icon gb'}, {label: 'Menu 3', class: 'icon ca'}]</i>`, background: `'#0d76d0'`}) %>
-		<style>
-			.icon>p:before {
-				width: 16px;
-				background-image: url('<%- baseStaticPath %>/images/flags.png'); 
-				background-repeat: no-repeat;
-				line-height: 1.1;
-			}
-			.us>p:before {
-				background-position: -112px -223px;
-			}
-			.gb>p:before {
-				background-position: -160px -79px;
-			}
-			.ca>p:before {
-				background-position: -64px -47px;
-			}
-		</style>
-		<%- $('juiMenu', {menus: [{label: 'Menu 1', class: 'icon us'}, {label: 'Menu 2', class: 'icon gb'}, {label: 'Menu 3', class: 'icon ca'}], background: '#0d76d0'}) %><hr/>
+		<%- code('juiMenu', {menus: `[{label: 'Save', class: '<i>ui-icon ui-icon-disk</i>'}, {label: 'Zoom In', class: '<i>ui-icon ui-icon-zoomin</i>'}, {label: 'Zoom Out', class: '<i>ui-icon ui-icon-zoomout</i>'}, {label: 'Print...', class: '<i>ui-icon ui-icon-print</i>', disabled: <i>true</i>}]`}) %>
+
+		<%- $('juiMenu', {menus: [{label: 'Save', class: 'ui-icon ui-icon-disk'}, {label: 'Zoom In', class: 'ui-icon ui-icon-zoomin'}, {label: 'Zoom Out', class: 'ui-icon ui-icon-zoomout'}, {label: 'Print...', class: 'ui-icon ui-icon-print', disabled: true}]}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Selecting menu by index and defining custom <code>labelField</code>
 		</p>
-		<%- code('juiMenu', {menus: `[{<i>lbl</i>: 'Menu 1'}, {<i>lbl</i>: 'Menu 2'}]`, labelField: `<i>'lbl'</i>`, selectedIndex: `<i>1</i>`, background: `'#5b87ac'`}) %>
-		<%- $('juiMenu', {menus: [{lbl: 'Menu 1'}, {lbl: 'Menu 2'}], labelField: 'lbl', selectedIndex: 1, background: '#5b87ac'}) %><hr/>
+		<%- code('juiMenu', {menus: `[{<i>lbl</i>: 'Menu 1'}, {<i>lbl</i>: 'Menu 2'}]`, labelField: `<i>'lbl'</i>`}) %>
+		<%- $('juiMenu', {menus: [{lbl: 'Menu 1'}, {lbl: 'Menu 2'}], labelField: 'lbl'}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Creating menu using <code>itemRenderer</code>
 		</p>
-		<%- code('juiMenu', {menus: `[{lbl: 'Menu 1'}]`, itemRenderer: `<i>'&lt;li class="icon us"&gt;&lt;p&gt;%LABEL%&lt;/p&gt;&lt;/li&gt;'</i>`, background: `'#cf4d4d'`}) %>
-		<%- $('juiMenu', {menus: [{label: 'Menu 1'}], itemRenderer: function() { return `<li class="icon us"><p>%LABEL%</p></li>`}, background: '#cf4d4d'}) %><hr/>
+		<%- code('juiMenu', {menus: `[{lbl: 'Menu 1'}, {label: 'Menu 2'}]`, itemRenderer: `function() { return <i>&grave;&lt;li style="padding: 5px"&gt;&lt;input type="checkbox"/&gt;%LABEL%&lt;/li&gt;&grave;</i>}`}) %>
+		<%- $('juiMenu', {menus: [{label: 'Menu 1'}, {label: 'Menu 2'}], itemRenderer: function() { return `<li style="padding: 5px"><input type="checkbox"/>%LABEL%</li>`}}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Creating sub menus
 		</p>
-		<%- code('juiMenu', {menus: `<i>'[{label: 'Menu 1', nav: 'http://indigojs.com', target: '_blank', sub: [
+		<%- code('juiMenu', {menus: `<i>'[{label: 'Menu 1', sub: [
 					{label: 'Sub1', class: 'custom'}, {label: 'Sub2', sub: [
-						{label: 'Sub2-1'}
+						{label: 'Sub3'}
 					]}
 				]
-			}]'</i>`, background: `'#5d9747'`}) %>
-		<%- $('juiMenu', {menus: [{label: 'Menu 1', nav: 'http://indigojs.com', target: '_blank', sub: [
+			}]'</i>`}) %>
+		<%- $('juiMenu', {menus: [{label: 'Menu 1', sub: [
 					{label: 'Sub1', class: 'custom'}, {label: 'Sub2', sub: [
-						{label: 'Sub2-1'}
+						{label: 'Sub3'}
 					]}
 				]
-			}], background: '#5d9747'}) %><hr/>
+			}]}) %><hr/>
 	</div>
 
 	<h1 id="radio">Radio:</h1>
