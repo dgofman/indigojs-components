@@ -182,16 +182,14 @@
 		<li><a href="#radio">Radio</a></li>
 		<li><a href="#progressbar">Progressbar</a></li>
 		<li><a href="#slider">Slider</a></li>
+		<li><a href="#spinner">Spinner</a></li>
 		<li><a href="#tabs">Tabs</a></li>
-		<li><a href="#text">Text</a></li>
-		<li><a href="#textarea">TextArea</a></li>
-		<li><a href="#togglebox">ToggleBox</a></li>
 		<li><a href="#tooltip">Tooltip</a></li>
 	</ul>
 </div>
 <div class="right">
 	<h1>jQuery UI Widgets</h1>
-	<h1 id="accordion">Accordion:</h1>
+	<h1 id="accordion">Accordion</h1>
 	<p>
 		Click headers to expand/collapse content that is broken into logical sections, much like tabs. Optionally, toggle sections open/closed on mouseover.
 
@@ -220,7 +218,7 @@
 		<%- $('juiAccordion', {labels: ['Label1', 'Label2', 'Label3'], contents: ['View1', 'View2', 'View3'], templates: ['#templ', null, '#templ']}) %><hr/>
 	</div>
 
-	<h1 id="autocomplete">Autocomplete:</h1>
+	<h1 id="autocomplete">Autocomplete</h1>
 	<p>
 		The Autocomplete widgets provides suggestions while you type into the field. Here the suggestions are tags for programming languages, give "ja" (for Java or JavaScript) a try.
 
@@ -234,7 +232,7 @@
 		<%- $('juiAutocomplete', {availableTags: availableTags.join(',')}) %><hr/>
 	</div>
 
-	<h1 id="button">Button:</h1>
+	<h1 id="button">Button</h1>
 	<p>
 		The Button component allows the user to easily  interact with the interface and navigate through an application. By default the Button is rectangular, however the style attributes can be modified to change shape and color and to specify labels and icons to clearly convey what action will be  carried out. Each button is associated with a handler method which listens for a specified event and calls a particular function when triggered.
 	</p>
@@ -282,7 +280,7 @@
 		<%- $('juiButton', {label: `Hello World - 6`, class: 'custom', disabled: true}) %><hr/>
 	</div>
 
-	<h1 id="checkbox">Checkbox:</h1>
+	<h1 id="checkbox">Checkbox</h1>
 	<p>
 		<p>The Checkbox is a square-shaped component that stores a <em>boolean</em> value based on the user’s input. If the user does not interact with the component, the boolean value will remain default. The <code>checked</code> attribute is used to set the default value of the Checkbox, and the <code>disabled</code> attribute is used to prevent the user from changing the value. Checkbox will retain its styling across platforms. </p>
 	</p>
@@ -323,7 +321,7 @@
 		<%- $('juiCheckbox', {label: `Hello World - 6`, class: 'custom', disabled: true}) %><hr/>
 	</div>
 
-	<h1 id="datepicker">Datepicker:</h1>
+	<h1 id="datepicker">Datepicker</h1>
 	<p>
 	The Datepicker component provides the user with a convenient way to select dates. The Datepicker control is displayed as a text input field with a calendar icon on its right side. Upon clicking the icon, the user is presented with a <code>CalendarControl</code>, from which they can scroll through months and years to select a specific date. Once a date has been selected, the <code>CalendarControl</code> will collapse and the Datepicker control will be populated with the selected date. If the user does not select a date, they can click the icon to collapse the calendar control and leave the Datepicker in its previous state. The Datepicker component can be customized to include prompts and styling attributes.
 
@@ -372,7 +370,7 @@
 		<%- $('juiDatepicker', {prompt: 'Disabled', class: 'custom', disabled: true}) %><hr/>
 	</div>
 
-	<h1 id="dialog">Dialog:</h1>
+	<h1 id="dialog">Dialog</h1>
 	<p>
 		The Dialog component creates a modal with three distinct sections: header, footer, and content. Each can be customized to display specified information to the user. The Dialog box covers a part of the UI and can be used for short messages and quick decisions (such as error messages and password confirmation). User flows that require more in-depth information would be better-suited for full-screen.
 	</p>
@@ -396,7 +394,7 @@
 		<%- $('juiButton', {label: 'Custom Dialog', attrs: {dialog_id: 'dlg_custom'}} ) %><hr/>
 	</div>
 
-	<h1 id="dropdown">Dropdown:</h1>
+	<h1 id="dropdown">Dropdown</h1>
 	<p>
 		The Dropdown component provides the user with a collapsible list of options from which they can select a single value. The default value can be set using <code>selectedIndex</code>. If no value is specified, it can be set with <code>prompt</code>.
 
@@ -463,7 +461,7 @@
 		<%- $('juiDropdown', {prompt: `Hello World - 3`, class: 'custom', disabled: true}) %><hr/>
 	</div>
 
-	<h1 id="menu">Menu:</h1>
+	<h1 id="menu">Menu</h1>
 	<p>
 		The Menu is a navigation component that contains links to other pages or bookmarks. By default, this control is a horizontal top-level menu bar that can contain pop-up sub-menus. The Menu automatically adapts to whichever platform it is being run on, however can be customized. The top-level menu is generally visible at all times. Open sub-menus disappear as the user selects an item or clicks outside of the menu.
 	</p>
@@ -508,7 +506,7 @@
 			}]}) %><hr/>
 	</div>
 
-	<h1 id="radio">Radio:</h1>
+	<h1 id="radio">Radio</h1>
 	<p>
 		The Radio is an input component which contains a boolean value, similar to the Checkbox. Unlike the Checkbox, Radio buttons are generally part of a group. Radio buttons can be grouped using the IndigoJs <code>radiogroup</code> component or <code>group</code> property. Exactly one button must be selected from the Radio group. Radio buttons are styled differently across platforms.
 	</p>
@@ -544,7 +542,7 @@
 		<%- $('juiRadio', {label: `Hello World - 6`, class: 'custom', disabled: true}) %>
 	</div>
 
-	<h1 id="progressbar">Progressbar:</h1>
+	<h1 id="progressbar">Progressbar</h1>
 	<p>
 		The progress bar is designed to display the current percent complete for a process. The bar is coded to be flexibly sized through CSS and will scale to fit inside its parent container by default.
 
@@ -590,7 +588,7 @@
 		<button onclick="window.progress()">Start Download</button>
 	</div>
 
-	<h1 id="slider">Slider:</h1>
+	<h1 id="slider">Slider</h1>
 	<p>
 		Like the Checkbox, a Switch component holds a boolean value. The Switch allows the user to turn a particular setting or feature on or off. This component can be customized with styling properties as well as certain attributes (such as <code>disabled</code> and <code>checked</code>) to control its behavior.
 	</p>
@@ -617,7 +615,46 @@
 		<%- $('juiSlider', {handle: true, value: 100, min: 50, max: 150}) %><hr/>
 	</div>
 
-	<h1 id="tabs">Tabs:</h1>
+	<h1 id="spinner">Spinner</h1>
+	<p>
+		Like the Checkbox, a Switch component holds a boolean value. The Switch allows the user to turn a particular setting or feature on or off. This component can be customized with styling properties as well as certain attributes (such as <code>disabled</code> and <code>checked</code>) to control its behavior.
+	</p>
+	<div ig-ns="spinner">
+		<p>
+			<b>Example:</b>
+			Default spinner
+		</p>
+		<%- code('juiSpinner') %>
+		<%- $('juiSpinner') %><hr/>
+
+		<p>
+			<b>Example:</b>
+			Setting title and changing state
+		</p>
+		<%- code('juiSpinner', {value: `<i>10</i>`, style: '<i>color: green; font-weight: bold</i>'}) %>
+		<%- $('juiSpinner', {value: 10, style: 'color: green; font-weight: bold'}) %><hr/>
+
+		<p>
+			<b>Example:</b>
+			Setting title and changing state
+		</p>
+		<%
+			var globalize = `<b>&lt;script</b> type="<b>text/javascript</b>" src="<i>http://jqueryui.com/resources/demos/external/globalize/globalize.js</i>"<b>&gt;&lt;/script&gt;</b><br/>`;
+
+			var globalizeJP = `<b>&lt;script</b> type="<b>text/javascript</b>" src="<i>http://jqueryui.com/resources/demos/external/globalize/globalize.culture.ja-JP.js</i>"<b>&gt;&lt;/script&gt;</b><br/><br/>`;
+		%>
+		<%- code('juiSpinner', {value: 300, min: `<i>100</i>`, max: `<i>500</i>`, step: `<i>25</i>`, numberFormat: '<i>C</i>', culture: '<i>ja-JP</i>'}, [globalize, globalizeJP].join('')) %>
+		<%- $('juiSpinner', {value: 300, min: 100, max: 500, step: 25, numberFormat: 'C', culture: 'ja-JP'}) %><hr/>
+
+		<p>
+			<b>Example:</b>
+			Setting title and changing state
+		</p>
+		<%- code('juiSpinner', {value: 100, class: '<i>custom</i>', disabled: `<i>true</i>`}) %>
+		<%- $('juiSpinner', {value: 100, class: 'custom', disabled: true}) %><hr/>
+	</div>
+
+	<h1 id="tabs">Tabs</h1>
 	<p>
 		
 		The tab component allows for a multi-tabbed interface. Each tab is associated with a particular view. The user can navigate between views by clicking on their respective tabs. The tab contents can be set with labels and predefined templates. When the user clicks a new tab, the previously displayed view will be hidden completely prior to loading the new one.
@@ -645,116 +682,7 @@
 		<%- $('juiTabs', {labels: ['Label1', 'Label2', 'Label3'], contents: ['View1', 'View2', 'View3'], templates: ['#templ', null, '#templ']}) %><hr/>
 	</div>
 
-	<h1 id="text">Text:</h1>
-	<p>
-		The Text control displays text that is longer than a single line. By default, the text will be uneditable, however this can be changed by setting <code>editable = true</code>. The text can be formatted with HTML tags and padding properties. Text aligns contents top left and does not support scrolling features. The width and height properties can be customized. If the text content exceeds the specified height limit, an ellipsis should be used. 
-
-	</p>
-	<div ig-ns="text">
-		<p>
-			<b>Example:</b>
-			Displaying the entire text
-		</p>
-		<%- code('juiText', {value: `<i>'Lorem ipsum dolor sit amet...'</i>`}) %>
-		<%- $('juiText', {value: loremIpsum, class: 'textstyle'}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Defining maximum viewpoint height
-		</p>
-		<%- code('juiText', {value: `'Lorem ipsum dolor sit amet...'`, height: `<i>16</i>`}) %>
-		<%- $('juiText', {value: loremIpsum, class: 'textstyle', height: 16, parentStyle: 'border-color: blue'}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Applying ellipsis
-		</p>
-		<%- code('juiText', {value: `'Lorem ipsum dolor sit amet...'`, height: 16, ellipsis: `<i>true</i>`}) %>
-		<%- $('juiText', {value: loremIpsum, class: 'textstyle', height: 16, parentStyle: 'border-color: yellow', ellipsis: true}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Setting editable text with ellipsis
-		</p>
-		<%- code('juiText', {value: `'Lorem ipsum dolor sit amet...'`, height: 54, ellipsis: true, editable: `<i>true</i>`}) %>
-		<%- $('juiText', {value: loremIpsum, class: 'textstyle', height: 54, parentStyle: 'border-color: magenta', ellipsis: true, editable: true}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Customizing style
-		</p>
-		<%- code('juiText', {value: `'Lorem ipsum dolor sit amet...'`, height: 98, ellipsis: true, style: `<i>'color: green; font-size: 18px; line-height: 2; font-weight: bold'</i>`}) %>
-		<%- $('juiText', {value: loremIpsum, class: 'textstyle', height: 98, parentStyle: 'border-color: red', ellipsis: true, style: 'color: green; font-size: 18px; line-height: 2; font-weight: bold'}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Text rendering function
-		</p>
-		<%- code('juiText', {value: `<i>function(opts) { return opts.text.substring(0, 45) + '...' }</i>`}) %>
-		<%- $('juiText', {value: function(opts) { return opts.text.substring(0, 45) + '...' }, text: loremIpsum, class: 'textstyle', parentStyle: 'min-height: 22px; border-color: orange'}) %>
-	</div>
-
-	<h1 id="textarea">TextArea:</h1>
-	<p>
-		The TextArea control is based on HTML TextArea, however it can be set to display a specified amount of rows and maximum length. To disable text editing, the <code>disabled</code> property should be set to true. TextArea does not support resizing and is compatible across browsers.
-	</p>
-	<div ig-ns="textarea">
-		<p>
-			<b>Example:</b>
-			Setting text value
-		</p>
-		<%- code('juiTextarea', {value: `<i>'Lorem ipsum dolor sit amet...'</i>`}) %>
-		<%- $('juiTextarea', {value: loremIpsum}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Setting total rows and disable for editing
-		</p>
-		<%- code('juiTextarea', {value: `'Lorem ipsum dolor sit amet...'`, rows: `<i>5</i>`, disabled: `<i>true</i>`}) %>
-		<%- $('juiTextarea', {value: loremIpsum, rows: 5, disabled: true, parentStyle: 'width: 400px; border: 1px solid blue'}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Defining maxlength and customize input
-		</p>
-		<%- code('juiTextarea', {value: `<i>function(opts) { return loremIpsum.substring(0, 5) }</i>`, maxlen: `<i>5</i>`}) %>
-		<%- $('juiTextarea', {value: function(opts) { return loremIpsum.substring(0, 5) }, maxlen: 5, class: 'textstyle'}) %><hr/>
-	</div>
-
-	<h1 id="togglebox">ToggleBox:</h1>
-	<p>
-		The ToggleBox control allows for displaying and hiding information from view. When the associated button is selected, the information in the ToggleBox will be displayed; when deselected it will be collapsed. It is possible to define multiple toggled content items to be displayed simultaneously by using the <code>toggle-content</code> class.
-	</p>
-	<div ig-ns="togglebox">
-		<p>
-			<b>Example:</b>
-			Defining Label and Toggle Content
-		</p>
-		<%- code('juiTogglebox', {label: `<i>'Hello World 1'</i>`, content: `<i>'&lt;p class="toggle-content"&gt;Lorem ipsum dolor sit amet...&lt;/p&gt;'</i>`}) %>
-		<%- $('juiTogglebox', {label: `Hello World - 1`, content: `<p class="toggle-content">${loremIpsum}</p>`}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Defining Template
-		</p>
-		<%- code('juiTogglebox', {label: `'Hello World 2'</i>`, template: `<i>'#templ'</i>`}, templ) %>
-		<%- $('juiTogglebox', {label: `Hello World - 2`, template: '#templ'}) %><hr/>
-
-		<p>
-			<b>Example:</b>
-			Defining multiple toggle contents
-		</p>
-		<%- code('juiTogglebox', {label: `'US Population'</i>`, content: `'<i>Header 1&lt;p class="toggle-content">Content 1&lt;/p&gt;Header 2&lt;p class="toggle-content">Content 2&lt;/p&gt;'</i>`}) %>
-		<%- $('juiTogglebox', {label: `US Population`, content: `<b>Americans</b>: <p class="toggle-content">308,745,538 - 100.0 %</p>
-			<b>White</b>: <p class="toggle-content">196,817,552 - 63.7 %</p>
-			<b>Black</b>: <p class="toggle-content">37,685,848 - 12.2 %</p>
-			<b>Asian</b>: <p class="toggle-content">14,465,124 - 4.7 %</p>
-			<b>American Indian or Alaska Native</b>: <p class="toggle-content">2,247,098 - 0.7 %</p>
-			<b>Hispanic or Latino</b>: <p class="toggle-content">: 50,477,594 - 16.3 %</p>
-		`}) %><hr/>
-	</div>
-
-	<h1 id="tooltip">Tooltip:</h1>
+	<h1 id="tooltip">Tooltip</h1>
 	<p>
 		The ToolTip functions to provide the user with helpful information. The ToolTip pops up when the user mouses over a particular element, providing information about that element. It can be customized with position settings and styling. If no porition is specified, the Tooltip will automatically position itself relative to its parent container's boundaries.
 	</p>

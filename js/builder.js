@@ -118,9 +118,12 @@
 			var scripts = parent.querySelectorAll('script');
 			for (var i = 0; i < scripts.length; i++) { //execute embedded scripts
 				try {
+					script = scripts[i];
 					/*jshint evil:true */
-					eval(scripts[i].innerHTML);
-				} catch (e) {}
+					if ((script.type || '').indexOf('template') === -1) {
+						eval(script.innerHTML);
+					}
+				} catch (e) {console.error(e, script.innerHTML);}
 			}
 		});
 	};

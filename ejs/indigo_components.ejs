@@ -168,7 +168,7 @@
 </div>
 <div class="right">
 	<h1>Indigo Components</h1>
-	<h1 id="accordion">Accordion:</h1>
+	<h1 id="accordion">Accordion</h1>
 	<p>
 		The Accordion is a navigator made up of child containers declared as an array. Each child uses the parent container’s navigator button. This button, when triggered by the user, uses animation to expand the corresponding child container and collapse whichever one was currently being displayed. By default, only one child container is expanded at a time, however this can be altered such that multiple containers are simultaneously displayed by setting <code>multiple</code> = true.
 	</p>
@@ -195,7 +195,7 @@
 		<%- $('igoAccordion', {labels: ['Label1', 'Label2', 'Label3'], contents: ['View1', 'View2', 'View3'], templates: ['#templ', null, '#templ']}) %><hr/>
 	</div>
 
-	<h1 id="button">Button:</h1>
+	<h1 id="button">Button</h1>
 	<p>
 		The Button component allows the user to easily  interact with the interface and navigate through an application. By default the Button is rectangular, however the style attributes can be modified to change shape and color and to specify labels and icons to clearly convey what action will be  carried out. Each button is associated with a handler method which listens for a specified event and calls a particular function when triggered.
 	</p>
@@ -243,7 +243,7 @@
 		<%- $('igoButton', {label: `Hello World - 6`, class: 'custom', disabled: true}) %><hr/>
 	</div>
 
-	<h1 id="checkbox">Checkbox:</h1>
+	<h1 id="checkbox">Checkbox</h1>
 	<p>
 		<p>The Checkbox is a square-shaped component that stores a <em>boolean</em> value based on the user’s input. If the user does not interact with the component, the boolean value will remain default. The <code>checked</code> attribute is used to set the default value of the Checkbox, and the <code>disabled</code> attribute is used to prevent the user from changing the value. Checkbox will retain its styling across platforms. </p>
 	</p>
@@ -291,7 +291,7 @@
 		<%- $('igoCheckbox', {label: `Hello World - 6`, class: 'custom', disabled: true}) %><hr/>
 	</div>
 
-	<h1 id="datefield">DateField:</h1>
+	<h1 id="datefield">DateField</h1>
 	<p>
 	The DateField component provides the user with a convenient way to select dates. The DateField control is displayed as a text input field with a calendar icon on its right side. Upon clicking the icon, the user is presented with a <code>CalendarControl</code>, from which they can scroll through months and years to select a specific date. Once a date has been selected, the <code>CalendarControl</code> will collapse and the DateField control will be populated with the selected date. If the user does not select a date, they can click the icon to collapse the calendar control and leave the DateField in its previous state. The DateField component can be customized to include prompts and styling attributes.
 
@@ -340,7 +340,7 @@
 		<%- $('igoDatefield', {prompt: 'Disabled', class: 'custom', disabled: true}) %><hr/>
 	</div>
 
-	<h1 id="dialog">Dialog:</h1>
+	<h1 id="dialog">Dialog</h1>
 	<p>
 		The Dialog component creates a modal with three distinct sections: header, footer, and content. Each can be customized to display specified information to the user. The Dialog box covers a part of the UI and can be used for short messages and quick decisions (such as error messages and password confirmation). User flows that require more in-depth information would be better-suited for full-screen.
 	</p>
@@ -392,7 +392,7 @@
 		<%- $('igoButton', {label: 'Template Dialog', attrs: {dialog_id: 'dlg_template'}} ) %><hr/>
 	</div>
 
-	<h1 id="dropdown">Dropdown:</h1>
+	<h1 id="dropdown">Dropdown</h1>
 	<p>
 		The Dropdown component provides the user with a collapsible list of options from which they can select a single value. The default value can be set using <code>selectedIndex</code>. If no value is specified, it can be set with <code>prompt</code>.
 
@@ -463,7 +463,7 @@
 		<%- $('igoDropdown', {prompt: `Hello World - 3`, class: 'custom', disabled: true}) %><hr/>
 	</div>
 
-	<h1 id="file">File:</h1>
+	<h1 id="file">File</h1>
 	<p>
 		The File component allows the user to select and upload a file from their own directories. The file system directory is organized in a tree structure. Upon clicking the File control, the user is presented with a File Dialog window in which their directory’s content is displayed.
 	</p>
@@ -483,7 +483,7 @@
 		<%- $('igoFile', {label: 'Upload File...', class: 'icon', disabled: true}) %><hr/>
 	</div>
 
-	<h1 id="hbox">HBox:</h1>
+	<h1 id="hbox">HBox</h1>
 	<p>
 		The HBox is a layout pane which presents its children in a single horizontal row. The custom size on the <code>left</code> or <code>right</code> is specified, and the remaining elements will take up the remaining width of the parent element. The HBox prevents the element with unspecified width from overflowing to a new line. 
 	</p>
@@ -521,7 +521,7 @@
 		}) %><hr/>
 	</div>
 
-	<h1 id="image">Image:</h1>
+	<h1 id="image">Image</h1>
 	<p>
 		The image control makes it possible to import image files (including GIF, JPEG, PNG, etc.) at runtime. The image can be loaded into an HTML <code>DIV</code> or <code>IMG</code> control when <code>img</code> is set to true. Images can be customized with regards to size, styling, etc.
 	</p>
@@ -555,7 +555,7 @@
 		<%- $('igoImage', {url: `${baseStaticPath}/images/indigo.png`, img: true}) %><hr/>
 	</div>
 
-	<h1 id="input">Input:</h1>
+	<h1 id="input">Input</h1>
 	<p>
 		The Input control allows for secure gathering and handling of user input. Input needs to be altered for each platform to ensure that styling and interaction guidelines are followed and the user will have a smooth experience. The input text can have a specified input-type to customize styling and appearance. The Input field can also be disabled, preventing the user from entering any information, by setting the <code>disabled</code> property to <code>true</code>.
 
@@ -597,7 +597,7 @@
 		<%- $('igoInput', {value: `Hello World - 4`, type: 'password'}) %><hr/>
 	</div>
 
-	<h1 id="menu">Menu:</h1>
+	<h1 id="menu">Menu</h1>
 	<p>
 		The Menu is a navigation component that contains links to other pages or bookmarks. By default, this control is a horizontal top-level menu bar that can contain pop-up sub-menus. The Menu automatically adapts to whichever platform it is being run on, however can be customized. The top-level menu is generally visible at all times. Open sub-menus disappear as the user selects an item or clicks outside of the menu.
 	</p>
@@ -658,7 +658,7 @@
 			}], background: '#5d9747'}) %><hr/>
 	</div>
 
-	<h1 id="radio">Radio:</h1>
+	<h1 id="radio">Radio</h1>
 	<p>
 		The Radio is an input component which contains a boolean value, similar to the Checkbox. Unlike the Checkbox, Radio buttons are generally part of a group. Radio buttons can be grouped using the IndigoJs <code>radiogroup</code> component or <code>group</code> property. Exactly one button must be selected from the Radio group. Radio buttons are styled differently across platforms.
 	</p>
@@ -695,7 +695,7 @@
 		<%- $('igoRadio', {label: `Hello World - 6`, class: 'custom', disabled: true}) %>
 	</div>
 
-	<h1 id="switch">Switch:</h1>
+	<h1 id="switch">Switch</h1>
 	<p>
 		Like the Checkbox, a Switch component holds a boolean value. The Switch allows the user to turn a particular setting or feature on or off. This component can be customized with styling properties as well as certain attributes (such as <code>disabled</code> and <code>checked</code>) to control its behavior.
 	</p>
@@ -734,7 +734,7 @@
 		<%- $('igoSwitch', {title: 'Power Control', checked: true, disabled: true}) %><hr/>
 	</div>
 
-	<h1 id="tabs">Tabs:</h1>
+	<h1 id="tabs">Tabs</h1>
 	<p>
 		
 		The tab component allows for a multi-tabbed interface. Each tab is associated with a particular view. The user can navigate between views by clicking on their respective tabs. The tab contents can be set with labels and predefined templates. When the user clicks a new tab, the previously displayed view will be hidden completely prior to loading the new one.
@@ -762,7 +762,7 @@
 		<%- $('igoTabs', {labels: ['Label1', 'Label2', 'Label3'], contents: ['View1', 'View2', 'View3'], templates: ['#templ', null, '#templ']}) %><hr/>
 	</div>
 
-	<h1 id="text">Text:</h1>
+	<h1 id="text">Text</h1>
 	<p>
 		The Text control displays text that is longer than a single line. By default, the text will be uneditable, however this can be changed by setting <code>editable = true</code>. The text can be formatted with HTML tags and padding properties. Text aligns contents top left and does not support scrolling features. The width and height properties can be customized. If the text content exceeds the specified height limit, an ellipsis should be used. 
 
@@ -811,7 +811,7 @@
 		<%- $('igoText', {value: function(opts) { return opts.text.substring(0, 45) + '...' }, text: loremIpsum, class: 'textstyle', parentStyle: 'min-height: 22px; border-color: orange'}) %>
 	</div>
 
-	<h1 id="textarea">TextArea:</h1>
+	<h1 id="textarea">TextArea</h1>
 	<p>
 		The TextArea control is based on HTML TextArea, however it can be set to display a specified amount of rows and maximum length. To disable text editing, the <code>disabled</code> property should be set to true. TextArea does not support resizing and is compatible across browsers.
 	</p>
@@ -838,7 +838,7 @@
 		<%- $('igoTextarea', {value: function(opts) { return loremIpsum.substring(0, 5) }, maxlen: 5, class: 'textstyle'}) %><hr/>
 	</div>
 
-	<h1 id="togglebox">ToggleBox:</h1>
+	<h1 id="togglebox">ToggleBox</h1>
 	<p>
 		The ToggleBox control allows for displaying and hiding information from view. When the associated button is selected, the information in the ToggleBox will be displayed; when deselected it will be collapsed. It is possible to define multiple toggled content items to be displayed simultaneously by using the <code>toggle-content</code> class.
 	</p>
@@ -871,7 +871,7 @@
 		`}) %><hr/>
 	</div>
 
-	<h1 id="tooltip">Tooltip:</h1>
+	<h1 id="tooltip">Tooltip</h1>
 	<p>
 		The ToolTip functions to provide the user with helpful information. The ToolTip pops up when the user mouses over a particular element, providing information about that element. It can be customized with position settings and styling. If no porition is specified, the Tooltip will automatically position itself relative to its parent container's boundaries.
 	</p>
