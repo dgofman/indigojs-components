@@ -72,6 +72,7 @@
 
 	.border, .textstyle {
 		border: 1px solid green;
+		display: inline-block;
 	}
 
 	.textstyle {
@@ -696,116 +697,106 @@
 				<b>Example:</b>
 				Setting tooltip top left
 			</p>
-			<%- code('juiTooltip', {target: `<i>'#topLeft'</i>`, position: `<i>'top-left'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <i>'Top Left'</i>, <b>id</b>: <i>'topLeft'</i>}<b>) %&gt;</b><br>`) %>
-			<%- $('juiText', {value: 'Top Left', id: 'topLeft', class: 'border'}) %>
+			<%- code('juiTooltip', {target: `<i>'#topLeft'</i>`, position: `<i>'top-left'</i>`}, `<b>&lt;div id</b>="<i>topLeft</i>" class="border"&gt;Top Left<b>&lt;/div&gt;</b><br>`) %>
+			<div id="topLeft" class="border">Top Left</div>
 			<%- $('juiTooltip', {target: '#topLeft', position: 'top-left'}) %><hr/>
 
 			<p>
 				<b>Example:</b>
 				Setting tooltip top right
 			</p>
-			<%- code('juiTooltip', {target: `<i>'#topRight'</i>`, position: `<i>'top-right'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <i>'Top Right'</i>, <b>id</b>: <i>'topRight'</i>}<b>) %&gt;</b><br>`) %>
-			<%- $('juiText', {value: 'Top Right', id: 'topRight', class: 'border'}) %>
+			<%- code('juiTooltip', {target: `<i>'#topRight'</i>`, position: `<i>'top-right'</i>`}, `<b>&lt;div id</b>="<i>topRight</i>" class="border"&gt;Top Right<b>&lt;/div&gt;</b><br>`) %>
+			<div id="topRight" class="border">Top Right</div>
 			<%- $('juiTooltip', {target: '#topRight', position: 'top-right'}) %><hr/>
 
 			<p>
 				<b>Example:</b>
 				Setting tooltip top center
 			</p>
-			<%- code('juiTooltip', {target: `<i>'#topCenter'</i>`, position: `<i>'top'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <i>'Top Center'</i>, <b>id</b>: <i>'topCenter'</i>}<b>) %&gt;</b><br>`) %>
-			<%- $('juiText', {value: 'Top Center', id: 'topCenter', class: 'border'}) %>
-			<%- $('juiTooltip', {target: '#topCenter', position: 'top'}) %><hr/>
+			<%- code('juiTooltip', {target: `<i>'#topCenter'</i>`, position: `<i>'top-center'</i>`}, `<b>&lt;div id</b>="<i>topCenter</i>" class="border"&gt;Top Center<b>&lt;/div&gt;</b><br>`) %>
+			<div id="topCenter" class="border">Top Center</div>
+			<%- $('juiTooltip', {target: '#topCenter', position: 'top-center'}) %><hr/>
 
 			<p>
 				<b>Example:</b>
 				Setting tooltip bottom left
 			</p>
-			<%- code('juiTooltip', {target: `<i>'#bottomLeft'</i>`, position: `<i>'bottom-left'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <i>'Bottom Left'</i>, <b>id</b>: <i>'bottomLeft'</i>}<b>) %&gt;</b><br>`) %>
-			<%- $('juiText', {value: 'Bottom Left', id: 'bottomLeft', class: 'border'}) %>
+			<%- code('juiTooltip', {target: `<i>'#bottomLeft'</i>`, position: `<i>'bottom-left'</i>`}, `<b>&lt;div id</b>="<i>bottomLeft</i>" class="border"&gt;Bottom Left<b>&lt;/div&gt;</b><br>`) %>
+			<div id="bottomLeft" class="border">Bottom Left</div>
 			<%- $('juiTooltip', {target: '#bottomLeft', position: 'bottom-left'}) %><hr/>
 
 			<p>
 				<b>Example:</b>
 				Setting tooltip bottom right
 			</p>
-			<%- code('juiTooltip', {target: `<i>'#bottomRight'</i>`, position: `<i>'bottom-right'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <i>'Bottom Right'</i>, <b>id</b>: <i>'bottomRight</i>}<b>) %&gt;</b><br>`) %>
-			<%- $('juiText', {value: 'Bottom Right', id: 'bottomRight', class: 'border'}) %>
+			<%- code('juiTooltip', {target: `<i>'#bottomRight'</i>`, position: `<i>'bottom-right'</i>`}, `<b>&lt;div id</b>="<i>bottomRight</i>" class="border"&gt;Bottom Right<b>&lt;/div&gt;</b><br>`) %>
+			<div id="bottomRight" class="border">Bottom Right</div>
 			<%- $('juiTooltip', {target: '#bottomRight', position: 'bottom-right'}) %><hr/>
 
 			<p>
 				<b>Example:</b>
 				Setting tooltip bottom center
 			</p>
-			<%- code('juiTooltip', {target: `<i>'#bottomCenter'</i>`, position: `<i>'bottom'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <i>'Bottom Center'</i>, <b>id</b>: <i>'bottomCenter</i>}<b>) %&gt;</b><br>`) %>
-			<%- $('juiText', {value: 'Bottom Center', id: 'bottomCenter', class: 'border'}) %>
-			<%- $('juiTooltip', {target: '#bottomCenter', position: 'bottom'}) %><hr/>
+			<%- code('juiTooltip', {target: `<i>'#bottomCenter'</i>`, position: `<i>'bottom-center'</i>`}, `<b>&lt;div id</b>="<i>bottomCenter</i>" class="border"&gt;Bottom Center<b>&lt;/div&gt;</b><br>`) %>
+			<div id="bottomCenter" class="border">Bottom Center</div>
+			<%- $('juiTooltip', {target: '#bottomCenter', position: 'bottom-center'}) %><hr/>
 
 			<p>
 				<b>Example:</b>
 				Setting tooltip left top
 			</p>
-			<%- code('juiTooltip', {target: `<i>'#leftTop'</i>`, position: `<i>'left-top'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <i>'Left Top'</i>, <b>id</b>: <i>'leftTop</i>}<b>) %&gt;</b><br>`) %>
-			<%- $('juiText', {value: 'Left Top', id: 'leftTop', class: 'border'}) %>
+			<%- code('juiTooltip', {target: `<i>'#leftTop'</i>`, position: `<i>'left-top'</i>`}, `<b>&lt;div id</b>="<i>leftTop</i>" class="border"&gt;Left Top<b>&lt;/div&gt;</b><br>`) %>
+			<div id="leftTop" class="border">Left Top</div>
 			<%- $('juiTooltip', {target: '#leftTop', position: 'left-top'}) %><hr/>
 
 			<p>
 				<b>Example:</b>
 				Setting tooltip left bottom
 			</p>
-			<%- code('juiTooltip', {target: `<i>'#leftBottom'</i>`, position: `<i>'left-bottom'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <i>'Left Bottom'</i>, <b>id</b>: <i>'leftBottom</i>}<b>) %&gt;</b><br>`) %>
-			<%- $('juiText', {value: 'Left Bottom', id: 'leftBottom', class: 'border'}) %>
+			<%- code('juiTooltip', {target: `<i>'#leftBottom'</i>`, position: `<i>'left-bottom'</i>`}, `<b>&lt;div id</b>="<i>leftBottom</i>" class="border"&gt;Left Bottom<b>&lt;/div&gt;</b><br>`) %>
+			<div id="leftBottom" class="border">Left Bottom</div>
 			<%- $('juiTooltip', {target: '#leftBottom', position: 'left-bottom'}) %><hr/>
 
 			<p>
 				<b>Example:</b>
 				Setting tooltip left middle
 			</p>
-			<%- code('juiTooltip', {target: `<i>'#leftMiddle'</i>`, position: `<i>'left'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <i>'Left Middle'</i>, <b>id</b>: <i>'leftMiddle</i>}<b>) %&gt;</b><br>`) %>
-			<%- $('juiText', {value: 'Left Middle', id: 'leftMiddle', class: 'border'}) %>
-			<%- $('juiTooltip', {target: '#leftMiddle', position: 'left'}) %><hr/>
+			<%- code('juiTooltip', {target: `<i>'#leftCenter'</i>`, position: `<i>'left-center'</i>`}, `<b>&lt;div id</b>="<i>leftCenter</i>" class="border"&gt;Left Center<b>&lt;/div&gt;</b><br>`) %>
+			<div id="leftCenter" class="border">Left Middle</div>
+			<%- $('juiTooltip', {target: '#leftCenter', position: 'left-center'}) %><hr/>
 
 			<p>
 				<b>Example:</b>
 				Setting tooltip right top
 			</p>
-			<%- code('juiTooltip', {target: `<i>'#rightTop'</i>`, position: `<i>'right-top'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <i>'Right Top'</i>, <b>id</b>: <i>'rightTop</i>}<b>) %&gt;</b><br>`) %>
-			<%- $('juiText', {value: 'Right Top', id: 'rightTop', class: 'border'}) %>
+			<%- code('juiTooltip', {target: `<i>'#rightTop'</i>`, position: `<i>'right-top'</i>`}, `<b>&lt;div id</b>="<i>rightTop</i>" class="border"&gt;Right Top<b>&lt;/div&gt;</b><br>`) %>
+			<div id="rightTop" class="border">Right Top</div>
 			<%- $('juiTooltip', {target: '#rightTop', position: 'right-top'}) %><hr/>
 
 			<p>
 				<b>Example:</b>
-				Setting tooltip right top
+				Setting tooltip right bottom
 			</p>
-			<%- code('juiTooltip', {target: `<i>'#rightBottom'</i>`, position: `<i>'right-bottom'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <i>'Right Bottom'</i>, <b>id</b>: <i>'rightBottom</i>}<b>) %&gt;</b><br>`) %>
-			<%- $('juiText', {value: 'Right Bottom', id: 'rightBottom', class: 'border'}) %>
+			<%- code('juiTooltip', {target: `<i>'#rightBottom'</i>`, position: `<i>'right-bottom'</i>`}, `<b>&lt;div id</b>="<i>rightBottom</i>" class="border"&gt;Right Bottom<b>&lt;/div&gt;</b><br>`) %>
+			<div id="rightBottom" class="border">Right Bottom</div>
 			<%- $('juiTooltip', {target: '#rightBottom', position: 'right-bottom'}) %><hr/>
 
 			<p>
 				<b>Example:</b>
-				Setting tooltip right top
+				Setting tooltip right middle
 			</p>
-			<%- code('juiTooltip', {target: `<i>'#rightMiddle'</i>`, position: `<i>'right'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <i>'Right Middle'</i>, <b>id</b>: <i>'rightMiddle</i>}<b>) %&gt;</b><br>`) %>
-			<%- $('juiText', {value: 'Right Middle', id: 'rightMiddle', class: 'border'}) %>
+			<%- code('juiTooltip', {target: `<i>'#rightMiddle'</i>`, position: `<i>'right'</i>`}, `<b>&lt;div id</b>="<i>rightMiddle</i>" class="border"&gt;Right Middle<b>&lt;/div&gt;</b><br>`) %>
+			<div id="rightMiddle" class="border">Right Middle</div>
 			<%- $('juiTooltip', {target: '#rightMiddle', position: 'right'}) %><hr/>
 
 			<p>
 				<b>Example:</b>
-				Defining text in tooltip, multiple target selectors and auto position
+				Setting tooltip style
 			</p>
-			<%- code('juiTooltip', {value: `<i>'targets should display the same tooltip'</i>`, target: `<i>'#mulSel1, .mulSel2'</i>`, style: `<i>'color: green; font-weight: bold'</i>`}, `<b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <i>'Text 1'</i>, <b>id</b>: <i>'mulSel1</i>}<b>) %&gt;</b><br><b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <i>'Text 2'</i>, <b>class</b>: <i>'mulSel2</i>}<b>) %&gt;</b><br>`) %>
-			<%- $('juiText', {value: 'Text 3', class: 'mulSel3 border', parentStyle: 'float: right'}) %>
-			<%- $('juiText', {value: 'Text 1', id: 'mulSel1', class: 'border', parentStyle: 'float: left'}) %>
-			<center><%- $('juiText', {value: 'Text 2', class: 'mulSel2 border'}) %></center>
-			<br/>
-			<%- $('juiTooltip', {value: 'targets should display the same tooltip', target: '#mulSel1, .mulSel2, .mulSel3', style: 'color: green; font-weight: bold'}) %><hr/>
+			<%- code('juiTooltip', {value: '<i>Custom Error Message</i>', target: '#tltError', tltclass: '<i>ui-state-error</i>'}, `<b>&lt;div id</b>="<i>tltError</i>" class="border"&gt;Tooltip Error<b>&lt;/div&gt;</b><br>`) %>
+			<div id="tltError" class="border">Tooltip Error</div>
+			<%- $('juiTooltip', {value: 'Custom Error Message', target: '#tltError', tltclass: 'ui-state-error'}) %><hr/>
 
-			<p>
-				<b>Example:</b>
-				Auto scrolling
-			</p>
-			<%- code('juiTooltip', {position: 'right', target: `<i>'.rightText'</i>`, width: `'250px'`, height: `'200px'`, scroll: `<i>100</i>`, scrollTimeout: `<i>700</i>`}, `<b>&lt;%- $(</b>'<span class="cid">juiText</span>', {<b>value</b>: <span class="val">'Lorem ipsum dolor sit amet...'</span>, <b>class</b>: <i>'rightText</i>, height: <span class="val">94</span>, ellipsis: <span class="val">true</span>}<b>) %&gt;</b><br>`) %>
-			<%- $('juiText', {value: loremIpsum, class: 'rightText textstyle', height: 94, ellipsis: true}) %>
-			<%- $('juiTooltip', {position: 'right', target: '.rightText', width: '250px', height: '200px', scroll: 100, scrollTimeout: 700}) %><hr/>
 		</center>
 	</div>
 </div>
