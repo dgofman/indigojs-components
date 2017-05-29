@@ -124,8 +124,6 @@
 	var customDay = [1,2,3,4,5,6,7],
 		customMonth = ['J1','F2','M3','A4','M5', 'J6', 'J7', 'A8', 'S9', 'O10', 'N11', 'D12'];
 
-	var loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-
 	var templ = `<b>&lt;script</b> type="<b>text/template</b>" id="<i>templ</i>"&gt;<br/>
 		&emsp;&lt;h1&gt;<span class="val">HEADER 1</span>&lt;/h1&gt;<br/>
 		&emsp;&lt;h2&gt;<span class="val">HEADER 2</span>&lt;/h2&gt;<br/>
@@ -196,9 +194,9 @@
 	<h1>jQuery UI Widgets</h1>
 	<h1 id="accordion">Accordion</h1>
 	<p>
-		Click headers to expand/collapse content that is broken into logical sections, much like tabs. Optionally, toggle sections open/closed on mouseover.
+		Accordions support arbitrary markup, but each content panel must always be the next sibling after its associated header. Displays collapsible content panels for presenting information in a limited amount of space.
 
-		The underlying HTML markup is a series of headers (H3 tags) and content divs so the content is usable without JavaScript.
+		The panels can be activated programmatically by setting the active option.
 	</p>
 	<div ig-ns="accordion">
 		<p>
@@ -225,13 +223,17 @@
 
 	<h1 id="autocomplete">Autocomplete</h1>
 	<p>
-		The Autocomplete widgets provides suggestions while you type into the field. Here the suggestions are tags for programming languages, give "ja" (for Java or JavaScript) a try.
+		Autocomplete enables users to quickly find and select from a pre-populated list of values as they type, leveraging searching and filtering.
 
-		The datasource is a simple JavaScript array, provided to the widget using the source-option.
+		When typing in the autocomplete field, the plugin starts searching for entries that match and displays a list of values to choose from. By entering more characters, the user can filter down the list to better matches.
+
+		This can be used to choose previously selected values, such as entering tags for articles or entering email addresses from an address book. Autocomplete can also be used to populate associated information, such as entering a city name and getting the zip code.
+
+		You can pull data in from a local or remote source: Local is good for small data sets, e.g., an address book with 50 entries; remote is necessary for big data sets, such as a database with hundreds or millions of entries to select from. To find out more about customizing the data source, see the documentation for the source option.
 	</p>
 	<div ig-ns="autocomplete">
 		<p>
-			<b>Example:</b>
+			<b>Example:</b> The Autocomplete widgets provides suggestions while you type into the field. Here the suggestions are tags for programming languages, give "ja" (for Java or JavaScript) a try.
 		</p>
 		<%- code('juiAutocomplete', {availableTags: `[<i>'${availableTags.join('\', \'')}'</i>]`}) %>
 		<%- $('juiAutocomplete', {availableTags: availableTags.join(',')}) %><hr/>
@@ -239,7 +241,9 @@
 
 	<h1 id="button">Button</h1>
 	<p>
-		The Button component allows the user to easily  interact with the interface and navigate through an application. By default the Button is rectangular, however the style attributes can be modified to change shape and color and to specify labels and icons to clearly convey what action will be  carried out. Each button is associated with a handler method which listens for a specified event and calls a particular function when triggered.
+		Button enhances standard form elements like buttons, inputs and anchors to themeable buttons with appropriate hover and active styles.
+
+		When using an input of type button, submit or reset, support is limited to plain text labels with no icons.
 	</p>
 	<div ig-ns="button">
 		<p>
@@ -793,7 +797,7 @@
 				<b>Example:</b>
 				Setting tooltip style
 			</p>
-			<%- code('juiTooltip', {value: '<i>Custom Error Message</i>', target: '#tltError', tltclass: '<i>ui-state-error</i>'}, `<b>&lt;div id</b>="<i>tltError</i>" class="border"&gt;Tooltip Error<b>&lt;/div&gt;</b><br>`) %>
+			<%- code('juiTooltip', {value: `<i>'Custom Error Message'</i>`, target: '#tltError', tltclass: `<i>'ui-state-error'</i>`}, `<b>&lt;div id</b>="<i>tltError</i>" class="border"&gt;Tooltip Error<b>&lt;/div&gt;</b><br>`) %>
 			<div id="tltError" class="border">Tooltip Error</div>
 			<%- $('juiTooltip', {value: 'Custom Error Message', target: '#tltError', tltclass: 'ui-state-error'}) %><hr/>
 
