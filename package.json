@@ -13,7 +13,6 @@
 		"grunt": "latest",
 		"uglify-js": "latest",
 		"grunt-contrib-less": "latest",
-		"grunt-contrib-copy": "latest",
 		"babel-core": "~6.24.1",
 		"babel-plugin-transform-es2015-template-literals": "latest",
 		"jquery-ui": "git+https://github.com/jquery/jquery-ui.git"
