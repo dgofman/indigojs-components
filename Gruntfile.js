@@ -2,8 +2,10 @@
 
 const fs = require('fs'),
 	path = require('path'),
+	UglifyJS = require('uglify-js'),
 	babel = require('babel-core'),
-	babelPlugins = ['transform-es2015-template-literals'];
+	babelPlugins = ['transform-es2015-template-literals'],
+	regExp = /\/\*{{IMPORT:(.*)?}}\*\//;
 
 module.exports = function(grunt) {
 
@@ -33,38 +35,44 @@ module.exports = function(grunt) {
 					'./build/css/index.css': ['./less/common.less', './less/indigo.less', './less/index.less'],
 				}
 			}
-		},
-
-		uglify: {
-			igo: {
-				options: {
-					expand: true,
-					sourceMap: true,
-					sourceMapName : './build/js/igoComponents.map',
-					quoteStyle: 3
-				},
-				src: ['./components/igo/**/*.js'],
-				dest: './build/js/igoComponents.min.js'
-			},
-			jui: {
-				options: {
-					expand: true,
-					sourceMap: true,
-					sourceMapName : './build/js/juiComponents.map',
-					quoteStyle: 3
-				},
-				src: ['./components/jui/**/*.js'],
-				dest: './build/js/juiComponents.min.js'
-			}
-		},
-
-		copy: {
-			images: {
-				expand: true,
-				src: './components/jui/widget/images/*',
-				dest: './build/css'
-			},
 		}
+	});
+
+	grunt.registerTask('uglify', function () {
+		const options = {
+			sourceMap: true,
+			warnings: true
+		};
+
+		['igo', 'jui'].forEach(function(pkg) {
+			let contents = [];
+			grunt.file.recurse(path.resolve(__dirname, `components/${pkg}`), function(abspath, rootdir, subdir, filename) {
+				if (filename.split('.').pop() === 'js') {
+					let content = fs.readFileSync(abspath, 'utf8');
+					content = content.replace(new RegExp(regExp, 'g'), function(comment) {
+						const file = comment.match(regExp)[1];
+						return fs.readFileSync(path.resolve(__dirname, file), 'utf8');
+					});
+					contents.push(content);
+				}
+			});
+			const result = UglifyJS.minify(contents.join('\n'), options);
+
+			if (result.error) {
+				console.error(result.error);
+			} else {
+				grunt.file.mkdir('./build/js');
+				fs.writeFileSync(path.resolve(__dirname, `build/js/${pkg}Components.min.js`), result.code);
+				fs.writeFileSync(path.resolve(__dirname, `build/js/${pkg}Components.map`), result.map);
+			}
+		});
+	});
+
+	grunt.registerTask('copy', function () {
+		const destDir = path.resolve(__dirname,'./build/css/images');
+		grunt.file.recurse(path.resolve(__dirname, `node_modules/jquery-ui/themes/base/images`), function(abspath, rootdir, subdir, filename) {
+			grunt.file.copy(abspath, path.resolve(destDir, filename));
+		});
 	});
 
 	grunt.registerTask('ejs', function () {
@@ -107,8 +115,6 @@ module.exports = function(grunt) {
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-less');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	grunt.registerTask('default', ['less', 'uglify', 'ejs', 'copy']);
 };
