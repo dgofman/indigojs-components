@@ -3,7 +3,7 @@
 const http = require('http'),
 	opn = require('opn'),
 	fs = require('fs'),
-	port = 3000,
+	port = process.env.PORT || 3000,
 	mimeTypes = {
 		html: 'text/html; charset=utf-8',
 		js: 'text/javascript',
