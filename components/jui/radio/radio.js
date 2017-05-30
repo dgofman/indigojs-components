@@ -9,3 +9,7 @@ function juiRadio($) {
 		}
 	};
 }
+
+juiRadio.register = function($) {
+//dependencies of checkbox.js
+};
