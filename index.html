@@ -55,9 +55,9 @@
 		var loadPage = function() {
 			var contents = document.querySelectorAll('.igo-content');
 			for (var i = 0; i < contents.length; i++) {
-				contents[i].style = 'display: none';
+				contents[i].style.display = 'none';
 			}
-			document.querySelector('.igo-content.' + (location.search === '?pkg=jui' ? 'jui' : 'igo')).style = 'display: flex';
+			document.querySelector('.igo-content.' + (location.search === '?pkg=jui' ? 'jui' : 'igo')).style.display = 'flex';
 		};
 		window.onhashchange = function() {
 			loadPage();
