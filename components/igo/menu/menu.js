@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function igoMenu($) {
 
 	return {
@@ -26,3 +25,4 @@ function igoMenu($) {
 		}
 	};
 }
+igoMenu.register = null;

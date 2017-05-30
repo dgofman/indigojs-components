@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function igoButton($) {
 
 	return {
@@ -19,3 +18,4 @@ function igoButton($) {
 		}
 	};
 }
+igoButton.register = null;

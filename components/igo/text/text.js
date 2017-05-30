@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function igoText($) {
 
 	return {
@@ -36,3 +35,4 @@ function igoText($) {
 		}
 	};
 }
+igoText.register = null;

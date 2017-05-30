@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function juiRadio($) {
 
 	return {
@@ -10,6 +9,6 @@ function juiRadio($) {
 	};
 }
 
-juiRadio.register = function($) {
+juiRadio.register = function() {
 //dependencies of checkbox.js
 };

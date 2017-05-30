@@ -1,10 +1,9 @@
 'use strict';
 
-/*jshint unused:false*/
-function juiWidget($) {
+function juiWidget() {
 }
 
-juiWidget.loaded = function($) {
+juiWidget.loaded = function() {
 /*{{IMPORT:node_modules/jquery-ui/ui/version.js}}*/
 /*{{IMPORT:node_modules/jquery-ui/ui/widget.js}}*/
 /*{{IMPORT:node_modules/jquery-ui/ui/keycode.js}}*/

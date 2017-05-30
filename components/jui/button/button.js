@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function juiButton($) {
 
 	return {
@@ -10,6 +9,6 @@ function juiButton($) {
 	};
 }
 
-juiButton.register = function($) {
+juiButton.register = function() {
 /*{{IMPORT:node_modules/jquery-ui/ui/widgets/button.js}}*/
 };

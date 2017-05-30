@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function igoSwitch($) {
 
 	return {
@@ -21,3 +20,4 @@ function igoSwitch($) {
 		}
 	};
 }
+igoSwitch.register = null;

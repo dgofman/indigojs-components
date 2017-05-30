@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function igoRadio($) {
 
 	return {
@@ -31,3 +30,4 @@ function igoRadio($) {
 		}
 	};
 }
+igoRadio.register = null;

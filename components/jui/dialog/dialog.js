@@ -1,7 +1,6 @@
 'use strict';
 
-/*jshint unused:false*/
-function juiDialog($, selector, ig) {
+function juiDialog($) {
 
 	return {
 		preinit: function(el) {
@@ -33,6 +32,6 @@ function juiDialog($, selector, ig) {
 	};
 }
 
-juiDialog.register = function($) {
+juiDialog.register = function() {
 /*{{IMPORT:node_modules/jquery-ui/ui/widgets/dialog.js}}*/
 };

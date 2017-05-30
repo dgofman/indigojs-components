@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function igoAccordion($) {
 
 	return {
@@ -13,3 +12,4 @@ function igoAccordion($) {
 		}
 	};
 }
+igoAccordion.register = null;

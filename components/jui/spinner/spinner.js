@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function juiSpinner($) {
 
 	return {
@@ -22,6 +21,6 @@ function juiSpinner($) {
 	};
 }
 
-juiSpinner.register = function($) {
+juiSpinner.register = function() {
 /*{{IMPORT:node_modules/jquery-ui/ui/widgets/spinner.js}}*/
 };

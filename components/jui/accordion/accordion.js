@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function juiAccordion($) {
 
 	return {
@@ -23,6 +22,6 @@ function juiAccordion($) {
 	};
 }
 
-juiAccordion.register = function($) {
+juiAccordion.register = function() {
 /*{{IMPORT:node_modules/jquery-ui/ui/widgets/accordion.js}}*/
 };

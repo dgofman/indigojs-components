@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function igoTogglebox($) {
 
 	return {
@@ -13,3 +12,4 @@ function igoTogglebox($) {
 		}
 	};
 }
+igoTogglebox.register = null;

@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function igoFile($) {
 
 	return {
@@ -46,3 +45,4 @@ function igoFile($) {
 		}
 	};
 }
+igoFile.register = null;

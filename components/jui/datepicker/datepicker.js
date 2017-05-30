@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function juiDatepicker($) {
 
 	return {
@@ -28,6 +27,6 @@ function juiDatepicker($) {
 	};
 }
 
-juiDatepicker.register = function($) {
+juiDatepicker.register = function() {
 /*{{IMPORT:node_modules/jquery-ui/ui/widgets/datepicker.js}}*/
 };

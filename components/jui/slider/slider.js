@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function juiSlider($) {
 
 	return {
@@ -28,6 +27,6 @@ function juiSlider($) {
 	};
 }
 
-juiSlider.register = function($) {
+juiSlider.register = function() {
 /*{{IMPORT:node_modules/jquery-ui/ui/widgets/slider.js}}*/
 };

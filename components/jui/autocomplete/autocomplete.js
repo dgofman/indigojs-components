@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function juiAutocomplete($) {
 
 	return {
@@ -13,6 +12,6 @@ function juiAutocomplete($) {
 	};
 }
 
-juiAutocomplete.register = function($) {
+juiAutocomplete.register = function() {
 /*{{IMPORT:node_modules/jquery-ui/ui/widgets/autocomplete.js}}*/
 };

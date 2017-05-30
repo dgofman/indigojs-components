@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function igoCheckbox($) {
 
 	return {
@@ -31,3 +30,4 @@ function igoCheckbox($) {
 		}
 	};
 }
+igoCheckbox.register = null;

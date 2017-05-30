@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function igoTabs($) {
 
 	return {
@@ -23,3 +22,4 @@ function igoTabs($) {
 		}
 	};
 }
+igoTabs.register = null;

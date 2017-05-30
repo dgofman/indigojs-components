@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function igoTooltip($) {
 
 	var arrow_gap = 7;
@@ -18,7 +17,7 @@ function igoTooltip($) {
 					p = $('>div>p', el),
 					value = p.html(), scrollTop, interval;
 				targets.forEach(function(t) {
-					$(t).event('mouseout.target', function(e) {
+					$(t).event('mouseout.target', function() {
 						el.hide();
 						clearInterval(interval);
 					}).event('mouseover.target', function(e) {
@@ -105,3 +104,4 @@ function igoTooltip($) {
 		}
 	};
 }
+igoTooltip.register = null;

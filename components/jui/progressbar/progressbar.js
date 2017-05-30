@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function juiProgressbar($) {
 
 	return {
@@ -19,6 +18,6 @@ function juiProgressbar($) {
 	};
 }
 
-juiProgressbar.register = function($) {
+juiProgressbar.register = function() {
 /*{{IMPORT:node_modules/jquery-ui/ui/widgets/progressbar.js}}*/
 };

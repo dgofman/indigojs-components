@@ -1,7 +1,6 @@
 'use strict';
 
-/*jshint unused:false*/
-function juiDropdown($, selector, ig) {
+function juiDropdown($) {
 
 	return {
 		preinit: function(el) {

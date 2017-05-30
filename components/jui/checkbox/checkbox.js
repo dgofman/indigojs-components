@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function juiCheckbox($) {
 
 	return {
@@ -10,6 +9,6 @@ function juiCheckbox($) {
 	};
 }
 
-juiCheckbox.register = function($) {
+juiCheckbox.register = function() {
 /*{{IMPORT:node_modules/jquery-ui/ui/widgets/checkboxradio.js}}*/
 };

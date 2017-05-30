@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function juiMenu($) {
 
 	return {
@@ -10,6 +9,6 @@ function juiMenu($) {
 	};
 }
 
-juiMenu.register = function($) {
+juiMenu.register = function() {
 /*{{IMPORT:node_modules/jquery-ui/ui/widgets/menu.js}}*/
 };

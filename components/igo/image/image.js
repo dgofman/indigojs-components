@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function igoImage($) {
 
 	return {
@@ -19,3 +18,4 @@ function igoImage($) {
 		}
 	};
 }
+igoImage.register = null;

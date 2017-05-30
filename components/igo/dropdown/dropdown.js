@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function igoDropdown($, selector, ig) {
 
 	return {

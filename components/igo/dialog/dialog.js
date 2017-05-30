@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function igoDialog($, selector, ig) {
 
 	return {
@@ -79,3 +78,4 @@ function igoDialog($, selector, ig) {
 		}
 	};
 }
+igoDialog.register = null;

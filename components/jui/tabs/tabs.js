@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function juiTabs($) {
 
 	return {
@@ -23,6 +22,6 @@ function juiTabs($) {
 	};
 }
 
-juiTabs.register = function($) {
+juiTabs.register = function() {
 /*{{IMPORT:node_modules/jquery-ui/ui/widgets/tabs.js}}*/
 };

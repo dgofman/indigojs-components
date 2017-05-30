@@ -1,6 +1,5 @@
 'use strict';
 
-/*jshint unused:false*/
 function juiTooltip($) {
 
 	return {
@@ -50,6 +49,6 @@ function juiTooltip($) {
 	};
 }
 
-juiTooltip.register = function($) {
+juiTooltip.register = function() {
 /*{{IMPORT:node_modules/jquery-ui/ui/widgets/tooltip.js}}*/
 };
