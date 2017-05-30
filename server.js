@@ -12,7 +12,7 @@ const http = require('http'),
 	};
 
 const requestHandler = (req, res) => {
-	const filePath = req.url === '/' ? 'index.html' : req.url.substring(1);
+	const filePath = req.url === '/' || req.url.indexOf('/index') === 0 ? 'index.html' : req.url.substring(1);
 	fs.exists(filePath, exists => {
 		if (exists) {
 			const ext = filePath.split('.').pop();

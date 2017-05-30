@@ -176,7 +176,7 @@
 <div class="left">
 	<ul>
 		<b>Packages:</b><br/>
-		<div><a href="#">igo</a></div>
+		<div><a href="/index?pkg=igo">igo</a></div>
 		<div><b>jui</b></div>
 		<hr/>
 
@@ -199,7 +199,7 @@
 <div class="right">
 	<h1>jQuery UI Widgets</h1>
 	<p>
-		Query UI is a curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library. If you're new to jQuery UI, you might want to check out our main site for more information and full demos. If you're new to jQuery, you might also be interested in the jQuery Learning Center tutorials.
+		jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library. Widgets are full-featured UI controls that bring the richness of desktop applications to the Web. All widgets provide a solid core with plenty of extension points for customizing behavior, as well as full theming support.
 	</p>
 
 	<h1 id="accordion">Accordion</h1>
@@ -218,7 +218,7 @@
 
 		<p>
 			<b>Example:</b>
-			Customizing content, multiple selection, and default view index
+			Customizing content and default view index
 		</p>
 		<%- code('juiAccordion', {labels: `['Label1', 'Label2', 'Label3']`, contents: `[<i>'View1'</i>, <i>'View2'</i>, <i>'View3'</i>]`, multiple: `<i>true</i>`, selectedIndex: `<i>1</i>`}) %>
 		<%- $('juiAccordion', {labels: ['Label1', 'Label2', 'Label3'], contents: ['View1', 'View2', 'View3'], multiple: true, selectedIndex: 1}) %><hr/>
@@ -301,7 +301,7 @@
 
 	<h1 id="checkbox">Checkbox</h1>
 	<p>
-		<p>The Checkbox is a square-shaped component that stores a <em>boolean</em> value based on the user’s input. If the user does not interact with the component, the boolean value will remain default. The <code>checked</code> attribute is used to set the default value of the Checkbox, and the <code>disabled</code> attribute is used to prevent the user from changing the value. Checkbox will retain its styling across platforms. </p>
+		<p>Native HTML input elements are impossible to style consistently. This widget allows working around that limitation by positining the associated label on top of the hidden input, and emulating the checkbox element itself using an (optional) icon. The original input still receives focus and all events, the label merely provides a themeable button on top. </p>
 	</p>
 	<div ig-ns="checkbox">
 		<p>
@@ -342,8 +342,9 @@
 
 	<h1 id="datepicker">Datepicker</h1>
 	<p>
-	The Datepicker component provides the user with a convenient way to select dates. The Datepicker control is displayed as a text input field with a calendar icon on its right side. Upon clicking the icon, the user is presented with a <code>CalendarControl</code>, from which they can scroll through months and years to select a specific date. Once a date has been selected, the <code>CalendarControl</code> will collapse and the Datepicker control will be populated with the selected date. If the user does not select a date, they can click the icon to collapse the calendar control and leave the Datepicker in its previous state. The Datepicker component can be customized to include prompts and styling attributes.
+	The jQuery UI Datepicker is a highly configurable plugin that adds datepicker functionality to your pages. You can customize the date format and language, restrict the selectable date ranges and add in buttons and other navigation options easily.
 
+	By default, the datepicker calendar opens in a small overlay when the associated text field gains focus. For an inline calendar, simply attach the datepicker to a div or span.
 	</p>
 	<div ig-ns="datepicker">
 		<p>
@@ -391,7 +392,9 @@
 
 	<h1 id="dialog">Dialog</h1>
 	<p>
-		The Dialog component creates a modal with three distinct sections: header, footer, and content. Each can be customized to display specified information to the user. The Dialog box covers a part of the UI and can be used for short messages and quick decisions (such as error messages and password confirmation). User flows that require more in-depth information would be better-suited for full-screen.
+		A dialog is a floating window that contains a title bar and a content area. The dialog window can be moved, resized and closed with the 'x' icon by default.
+		If the content length exceeds the maximum height, a scrollbar will automatically appear.
+		A bottom button bar and semi-transparent modal overlay layer are common options that can be added.
 	</p>
 	<div ig-ns="dialog">
 		<p>
@@ -415,8 +418,9 @@
 
 	<h1 id="dropdown">Dropdown</h1>
 	<p>
-		The Dropdown component provides the user with a collapsible list of options from which they can select a single value. The default value can be set using <code>selectedIndex</code>. If no value is specified, it can be set with <code>prompt</code>.
+		The Dropdown - jQuery Selectmenu transforms a &lt;select&gt; element into a themeable and customizable control. The widget acts as a proxy to the original &lt;select&gt;; therefore the original element's state is maintained for form submission and serialization.
 
+		Selectmenu supports &lt;optgroup&gt; elements and custom markup to render specific presentations like multiple lines. The &lt;select&gt; and its options can be disabled by adding a disabled attribute.
 	</p>
 	<div ig-ns="dropdown">
 		<p>
@@ -428,7 +432,7 @@
 
 		<p>
 			<b>Example:</b>
-			Using menu items, selecting index and expanding by default
+			Using menu items, selecting index
 		</p>
 		<%- code('juiDropdown', {menus: `[<i>'Menu1'</i>, <i>'Menu2'</i>, <i>'Menu3'</i>]`, selectedIndex: `<i>1</i>`}) %>
 		<%- $('juiDropdown', {menus: ['Menu1', 'Menu2', 'Menu3'], selectedIndex: 1}) %><hr/>
@@ -462,7 +466,7 @@
 
 		<p>
 			<b>Example:</b>
-			Using customized <code>itemRenderer</code> and <code>labelRenderer</code>
+			Using customized <code>itemRenderer</code>
 		</p>
 		<%- code('juiDropdown', {menus: `[
 			{lf: 'Menu1', icon: 'ui-icon-script'}, {lf: 'Menu2', icon: '<i>ui-icon-image</i>', style: '<i>color: green !important; font-weight: bold</i>'}, {lf: 'Menu3', icon_style: '<i>background-image: url(/static/images/indigo.png); background-size: contain</i>', selected: true}]`, 
@@ -474,7 +478,7 @@
 
 		<p>
 			<b>Example:</b>
-			Default Dropdown
+			Disabling Dropdown
 		</p>
 		<%- code('juiDropdown', {prompt: `'Hello World - 3'`, class: `'custom'`, disabled: `<i>true</i>`}) %>
 		<%- $('juiDropdown', {prompt: `Hello World - 3`, class: 'custom', disabled: true}) %><hr/>
@@ -482,7 +486,9 @@
 
 	<h1 id="menu">Menu</h1>
 	<p>
-		The Menu is a navigation component that contains links to other pages or bookmarks. By default, this control is a horizontal top-level menu bar that can contain pop-up sub-menus. The Menu automatically adapts to whichever platform it is being run on, however can be customized. The top-level menu is generally visible at all times. Open sub-menus disappear as the user selects an item or clicks outside of the menu.
+		A menu can be created from any valid markup as long as the elements have a strict parent/child relationship. The most commonly used element is the unordered list (&lt;ul&gt;). Additionally, the contents of each menu item must be wrapped with a block-level DOM element. If you use a structure other than &lt;ul&gt;/&lt;li&gt;, including using the same element for the menu and the menu items, use the menus option to specify a way to differentiate the two elements, e.g., menus: "div.menuElement".
+
+		Any menu item can be disabled by adding the ui-state-disabled class to that element.
 	</p>
 	<div ig-ns="menu">
 		<p>
@@ -527,7 +533,7 @@
 
 	<h1 id="radio">Radio</h1>
 	<p>
-		The Radio is an input component which contains a boolean value, similar to the Checkbox. Unlike the Checkbox, Radio buttons are generally part of a group. Radio buttons can be grouped using the IndigoJs <code>radiogroup</code> component or <code>group</code> property. Exactly one button must be selected from the Radio group. Radio buttons are styled differently across platforms.
+		Native HTML input elements are impossible to style consistently. This widget allows working around that limitation by positining the associated label on top of the hidden input, and emulating the radio element itself using an (optional) icon. The original input still receives focus and all events, the label merely provides a themeable button on top.
 	</p>
 	<div ig-ns="radio">
 		<p>
@@ -547,9 +553,9 @@
 
 		<p>
 			<b>Example:</b>
-			Grouping radio buttons by using <code>radiogroup</code>
+			Setting value and customizing style
 		</p>
-		<%- code('juiRadio', {label: `'Hello World - 5'`, group: `'group_yes_no'`, value: `<i>'no'</i>`, class: `'custom'`}, `<b>&lt;%- $(</b>'<span class="cid">juiRadio</span>', {<b>label</b>: <span class="val">'Hello World - 4'</span>, <b>group</b>: <span class="val">'group_yes_no'</span>, <b>value</b>: <i>'yes'</i>, <b>style</b>: <span class="val">'color: green; font-weight: bold'</span><b>}) %&gt;</b><br/>`) %>
+		<%- code('juiRadio', {label: `'Hello World - 5'`, group: `'group_yes_no'`, value: `<i>'no'</i>`, class: `'<i>custom</i>'`}, `<b>&lt;%- $(</b>'<span class="cid">juiRadio</span>', {<b>label</b>: <span class="val">'Hello World - 4'</span>, <b>group</b>: <span class="val">'group_yes_no'</span>, <b>value</b>: <i>'yes'</i>, <b>style</b>: <span class="val">'<i>color: green; font-weight: bold</i>'</span><b>}) %&gt;</b><br/>`) %>
 		<%- $('juiRadio', {label: `Hello World - 4`, group: 'group_yes_no', value: 'yes', style: 'color: green; font-weight: bold'}) %><br/>
 		<%- $('juiRadio', {label: `Hello World - 5`, group: 'group_yes_no', value: 'no', class: 'custom'}) %><hr/>
 
@@ -609,7 +615,9 @@
 
 	<h1 id="slider">Slider</h1>
 	<p>
-		Like the Checkbox, a Switch component holds a boolean value. The Switch allows the user to turn a particular setting or feature on or off. This component can be customized with styling properties as well as certain attributes (such as <code>disabled</code> and <code>checked</code>) to control its behavior.
+		The jQuery UI Slider plugin makes selected elements into sliders. There are various options such as multiple handles and ranges. The handle can be moved with the mouse or the arrow keys.
+
+		The slider widget will create handle elements with the class ui-slider-handle on initialization. You can specify custom handle elements by creating and appending the elements and adding the ui-slider-handle class before initialization. It will only create the number of handles needed to match the length of value/values.
 	</p>
 	<div ig-ns="slider">
 		<p>
@@ -621,14 +629,14 @@
 
 		<p>
 			<b>Example:</b>
-			Setting title and changing state
+			Setting value and customizing style
 		</p>
 		<%- code('juiSlider', {value: `<i>10</i>`}) %>
 		<%- $('juiSlider', {value: 10}) %><hr/>
 
 		<p>
 			<b>Example:</b>
-			Setting title and changing state
+			The basic slider is horizontal and has a single handle that can be moved with the mouse
 		</p>
 		<%- code('juiSlider', {handle: `<i>true</i>`, value: `<i>100</i>`, min: `<i>50</i>`, max: `<i>150</i>`}) %>
 		<%- $('juiSlider', {handle: true, value: 100, min: 50, max: 150}) %><hr/>
@@ -636,7 +644,9 @@
 
 	<h1 id="spinner">Spinner</h1>
 	<p>
-		Like the Checkbox, a Switch component holds a boolean value. The Switch allows the user to turn a particular setting or feature on or off. This component can be customized with styling properties as well as certain attributes (such as <code>disabled</code> and <code>checked</code>) to control its behavior.
+		The Spinner, or number stepper widget, is perfect for handling all kinds of numeric input. It allows users to type a value directly, or modify an existing value by spinning with the keyboard, mouse or scrollwheel. When combined with Globalize, you can even spin currencies and dates in a variety of locales.
+
+		Spinner wraps a text input with two buttons to increment and decrement the current value. Key events are added so that the same incrementing and decrementing can be done with the keyboard. Spinner delegates to Globalize for number formatting and parsing.
 	</p>
 	<div ig-ns="spinner">
 		<p>
@@ -648,14 +658,14 @@
 
 		<p>
 			<b>Example:</b>
-			Setting title and changing state
+			Setting value and customizing style
 		</p>
 		<%- code('juiSpinner', {value: `<i>10</i>`, style: '<i>color: green; font-weight: bold</i>'}) %>
 		<%- $('juiSpinner', {value: 10, style: 'color: green; font-weight: bold'}) %><hr/>
 
 		<p>
 			<b>Example:</b>
-			Setting title and changing state
+			Example of a donation form, with currency selection and amount spinner
 		</p>
 		<%
 			var globalize = `<b>&lt;script</b> type="<b>text/javascript</b>" src="<i>http://jqueryui.com/resources/demos/external/globalize/globalize.js</i>"<b>&gt;&lt;/script&gt;</b><br/>`;
@@ -667,7 +677,7 @@
 
 		<p>
 			<b>Example:</b>
-			Setting title and changing state
+			Using disabled property
 		</p>
 		<%- code('juiSpinner', {value: 100, class: '<i>custom</i>', disabled: `<i>true</i>`}) %>
 		<%- $('juiSpinner', {value: 100, class: 'custom', disabled: true}) %><hr/>
@@ -675,8 +685,11 @@
 
 	<h1 id="tabs">Tabs</h1>
 	<p>
-		
-		The tab component allows for a multi-tabbed interface. Each tab is associated with a particular view. The user can navigate between views by clicking on their respective tabs. The tab contents can be set with labels and predefined templates. When the user clicks a new tab, the previously displayed view will be hidden completely prior to loading the new one.
+		Tabs are generally used to break content into multiple sections that can be swapped to save space, much like an accordion.
+		Tabs have a particular set of markup that must be used in order for them to work properly:<br/>
+		* The tabs themselves must be in either an ordered (&lt;ol&gt;) or unordered (&lt;ul&gt;) list<br/>
+		* Each tab "title" must be inside of a list item (&lt;li&gt;) and wrapped by an anchor (&lt;a&gt;) with an href attribute<br/>
+		* Each tab panel may be any valid element but it must have an id which corresponds to the hash in the anchor of the associated tab.<br/>
 	</p>
 	<div ig-ns="tabs">
 		<p>
@@ -703,7 +716,10 @@
 
 	<h1 id="tooltip">Tooltip</h1>
 	<p>
-		The ToolTip functions to provide the user with helpful information. The ToolTip pops up when the user mouses over a particular element, providing information about that element. It can be customized with position settings and styling. If no porition is specified, the Tooltip will automatically position itself relative to its parent container's boundaries.
+		Tooltip replaces native tooltips, making them themeable as well as allowing various customizations:<br/>
+		* Display other content than just the title, like inline footnotes or extra content retrieved via Ajax.<br/>
+		* Customize the positioning, e.g., to center the tooltip above elements.<br/>
+		* Add extra styling to customize the appearance, for warning or error fields.<br/>
 	</p>
 	<div ig-ns="tooltip">
 		<center>

@@ -47,8 +47,23 @@
 </head>
 
 <body>
-	<section class="igo-content" indigo-builder="ejs/jqueryui_components.ejs"></section>
+	<section class="igo-content igo" indigo-builder="build/ejs/indigo_components.html"></section>
+	<section class="igo-content jui" indigo-builder="build/ejs/jqueryui_components.html"></section>
 	<script type="text/javascript" src="js/builder.js" indigo-pkgs="igo,jui"></script>
+
+	<script type="text/javascript">
+		var loadPage = function() {
+			var contents = document.querySelectorAll('.igo-content');
+			for (var i = 0; i < contents.length; i++) {
+				contents[i].style = 'display: none';
+			}
+			document.querySelector('.igo-content.' + (location.search === '?pkg=jui' ? 'jui' : 'igo')).style = 'display: flex';
+		};
+		window.onhashchange = function() {
+			loadPage();
+		};
+		loadPage();
+	</script>
 </body>
 
 </html>
