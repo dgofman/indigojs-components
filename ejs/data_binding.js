@@ -1,0 +1,75 @@
+'use strict';
+
+(function($, indigo) {
+	indigo.info('Init Main');
+
+	indigo.import('Checkbox', 'Switch', 'Button', function(Checkbox, Switch, Button) { //callback class references
+
+		indigo.namespace('[ig-ns=one-binding', function(ns) {
+			var login_model = {username: 'User', password: '12345'};
+			//Bind value(s) to the model
+			indigo.watch(login_model, function(name, value) { //watch function
+							indigo.debug(name + '=' + value);
+					})
+					.bind('username', {value: ns.create('Input', 0)})
+					.bind('password', {value: ns.create('Input', 1)});
+
+			ns.create('Button').click = function() {
+				alert(JSON.stringify(login_model));
+			};
+		});
+
+		var model = {readOnlyValue: 'NULL', bindState: false, bindLabel: 'Hello IndigoJS'};
+
+		indigo.namespace('[ig-ns=menu_text]', function(ns) {
+			var Dropdown = indigo.import('Dropdown'), //import as single class
+				imports = indigo.import('Input', 'Text', 'Tooltip'), //assign array of classes
+				Input = imports[0], //input
+				sch = ns.create('Switch'), //Create class by name
+				chk = ns.create(Checkbox),
+				rng = ns.create(Input, '#selDropIndex'), //Create component by assigning CSS selector
+				dpd = ns.create(Dropdown),
+				btn = ns.create(Button),
+				int = ns.create(Input), 
+				txt = ns.create(imports[1]), //text
+				tlt = ns.create(imports[2]); //tooltip
+
+			//Bind Dropdown selected index and input text
+			  indigo.bind('selectedIndex', [{index: dpd}, {value: rng}]) //create and bind a new model
+					//Bind Checkbox and Dropdown access
+					.bind('disableDropdown', [{checked: chk}, {disabled: dpd}])
+					//Bind Switch and Dropdown open/close popup menu
+					.bind('popupDropdown', [{checked: sch}, {open: dpd}]);
+
+			//Bind text values between Text, Input, Tooltip, Checkbox, Button, DropDown components
+			indigo.bind('bindLabel', [{value: txt}, {value: int}, {value: tlt}, {label: chk}, {label: btn}, {prompt: dpd, $watch: function(name, value, model) {
+				indigo.info('Dropdown name: ', name, ', value: ', value, ' model: ', JSON.stringify(model));
+				this.indexByText(value);
+				this[name] = value;
+			}}], model);
+		});
+
+		var ns = indigo.namespace('[ig-ns=check_switch]'),
+			img = ns.create(indigo.import('Image')),
+			txt = ns.create(indigo.import('Text')),
+			chk = ns.create(Checkbox),
+			sch = ns.create(Switch),
+			btn = ns.create(Button, 1); //Create component by using order index
+
+		btn.click = function() {
+			alert('Hello World');
+		};
+
+		//Bind url value of Image component and Text
+		indigo.bind('imageUrl', [{url: img}, {text: txt, $watch: function(name, value) {
+			this.value = '<a href=#>' + value + '</a>';
+		}}], model);
+
+		img.url = 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
+
+		//Bind Switch and Checkbox state with Button access and editable Text
+		indigo.bind('bindState', [{checked: chk}, {checked: sch}, {editable: txt}, {disabled: btn, $watch: function(name, value) {
+			this[name] = !value;
+		}}], model);
+	});
+})(window.$, window.indigoJS);

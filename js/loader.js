@@ -1,7 +1,9 @@
 'use strict';
 
-(function(parent) {
-	var ig = parent.indigoJS = parent.indigoJS || {};
+(function(top) {
+	var ig = top.indigoJS = top.indigoJS || {},
+		console = window.console;
+	ig.rootScope = ig.rootScope || {};
 	ig.wins = ig.wins || [];
 	ig.cssPath = ig.cssPath || function(uri, type, pkg, cls) {
 		return uri + '/' + pkg + '/' + cls + '.css';
@@ -11,6 +13,16 @@
 	};
 	ig.jqPath = ig.jqPath || function() {
 		return uri + '/jquery/jquery-3.1.1' + (ig.DEBUG ? '' : '.min') + '.js';
+	};
+	ig.debug = function() {
+		if (ig.DEBUG && console) {
+			console.log.apply(console, arguments);
+		}
+	};
+	ig.info = function() {
+		if (ig.INFO && console) {
+			console.info.apply(console, arguments);
+		}
 	};
 	ig.attr = function(el, type, val) {
 		return val ? el.attr(type, type) : el.removeAttr(type);
@@ -28,9 +40,10 @@
 	};
 
 	var core = document.querySelector('script[rel=igocore]'),
+		mains = document.querySelectorAll('input[igo-main]'),
 		libs = core.getAttribute('libs').split(','),
 		uri = core.getAttribute('uri'),
-		head = parent.document.head,
+		head = top.document.head,
 		loadedCss = ig.loadedCss = ig.loadedCss || {},
 		loadedJs = ig.loadedJs = ig.loadedJs || {},
 		addAsset = function(tag, attrs, onload) {
@@ -57,7 +70,7 @@
 					selector = '[_=' + type + ']';
 
 				if (loadedCss[type] === 0) {
-					var css = parent.document.styleSheets;
+					var css = top.document.styleSheets;
 					loop1:
 					for (var k = 0; k < css.length; k++) {
 						var rules = css[k].cssRules || css[k].rules;
@@ -72,8 +85,8 @@
 				}
 
 				if (loadedJs[type] === 0) {
-					if (parent[type]) {
-						var cls = parent[type];
+					if (top[type]) {
+						var cls = top[type];
 						cls.register = cls.register || function() {};
 						if (cls.loaded) {
 							ig.wins.forEach(function(win) {
@@ -96,7 +109,7 @@
 			if (preinitialize) {
 				for (type in loadedJs) {
 					ig.wins.forEach(function(win) {
-						parent[type].register(win.$, '[_=' + type + ']', win);
+						top[type].register(win.$, '[_=' + type + ']', win);
 					});
 				}
 				for (type in loadedJs) {
@@ -106,11 +119,17 @@
 						});
 					});
 				}
+				for (var j = 0; j < mains.length; j++) {
+					addAsset('script', {type: 'text/javascript', src: mains[j].value});
+				}
 			}
 		};
 
 	if (ig.wins.indexOf(window) === -1) {
 		ig.wins.push(window);
+	}
+	if (mains.length) {
+		addAsset('script', {type: 'text/javascript', src: 'js/indigo.js'});
 	}
 	addAsset('script', {type: 'text/javascript', src: ig.jqPath(uri)}, function(selector) {
 		ig.wins.forEach(function(win) {

@@ -97,7 +97,7 @@
 				return createModel(model, opts);
 			};
 			model.$finalize = function() {
-				return '';
+				return arguments.length ? '<input igo-main type="hidden" value="' + [].slice.call(arguments).join() + '"/>' : '';
 			};
 			return model;
 		};

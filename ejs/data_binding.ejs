@@ -1,0 +1,44 @@
+<div>
+	<h3>One-way Data Binding:</h3>
+	<div ig-ns="one-binding" class="clearfix" style="width: 400px; padding: 10px; border: 1px solid green">
+		<%- $('igoHbox', {
+			left: '<b>Username:</b>',
+			content: $('igoInput')
+		}) %><br/>
+		<%- $('igoHbox', {
+			left: '<b>Password:</b>',
+			content: $('igoInput', {type: 'password'})
+		}) %><br/>
+		<%- $('igoButton', {label: 'Submit', class: 'pull-right'}) %>
+	</div>
+
+	<h3>Two-way Data Binding:</h3>
+	<div ig-ns="two-binding">
+		<div ig-ns="menu_text">
+			<%- $('igoDropdown', {menus: ['Menu1', 'Menu2', 'Menu3']}) %><br/>
+			<%- $('igoInput', {value: 'Hello World'}) %><br/>
+			<%- $('igoCheckbox', {label: 'Hello World'}) %><br/>
+			<%- $('igoSwitch') %><br/>
+			<b>Tooltip Text:</b>
+			<div class="tooltip-wrap" style="border: 1px solid blue">
+				<%- $('igoText', {value: 'Hello World'}) %>
+				<%- $('igoTooltip') %>
+			</div><br/>
+			<b>Dropdown Index:</b> <%- $('igoInput', {id: 'selDropIndex', type: 'number', disabled: true}) %><br/>
+			<%- $('igoButton', {label: 'Button'}) %>
+		</div>
+
+		<hr/>
+
+		<div ig-ns="check_switch">
+			<%- $('igoCheckbox', {label: 'Hello World', checked: true}) %> <br/>
+			<%- $('igoSwitch', {checked: true}) %>
+			<%- $('igoButton', {label: 'Button 1', id: 'mybutton'}) %>
+			<%- $('igoButton', {label: 'Button 2'}) %>
+			<%- $('igoImage', {url: '/static/images/indigo.png', parentStyle: 'width: 30px; height: 30px'}) %><br/>
+			<%- $('igoText') %>
+		</div>
+	</div>
+</div>
+
+<%- $finalize('ejs/data_binding.js') %>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>IndigpJS Components</title>
+<title>IndigoJS Components</title>
 <meta charset="UTF-8">
 
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -49,6 +49,8 @@
 <body>
 	<section class="igo-content igo" indigo-builder="build/ejs/indigo_components.html"></section>
 	<section class="igo-content jui" indigo-builder="build/ejs/jqueryui_components.html"></section>
+	<section class="igo-content demo" indigo-builder="ejs/data_binding.ejs"></section>
+
 	<script type="text/javascript" src="js/builder.js" indigo-pkgs="igo,jui"></script>
 
 	<script type="text/javascript">
@@ -57,7 +59,7 @@
 			for (var i = 0; i < contents.length; i++) {
 				contents[i].style.display = 'none';
 			}
-			document.querySelector('.igo-content.' + (location.search === '?pkg=jui' ? 'jui' : 'igo')).style.display = 'flex';
+			document.querySelector('.igo-content.' + (location.search.substring(1) || 'igo')).style.display = 'flex';
 		};
 		window.onhashchange = function() {
 			loadPage();
