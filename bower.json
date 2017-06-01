@@ -11,9 +11,17 @@
 	"homepage": "http://www.inidgojs.com",
 	"ignore": [
 		"**/.*",
+		".git",
+		"build",
+		"ejs",
 		"node_modules",
 		"bower_components",
+		"static",
 		"test",
-		"tests"
+		"tests",
+		"favicon.ico",
+		"index.html",
+		"README.md",
+		"server.js"
 	]
 }

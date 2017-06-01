@@ -22,14 +22,14 @@
 		staticPath: '/static',
 
 		cssPath: function(uri, type, pkg, cls) {
-			if (indigoJS.DEBUG) {
+			if (indigoJS.DEBUG && pkg !== 'jui') {
 				return 'build/css/components/' + pkg + '/' + cls + '/' + cls + '.css';
 			} else {
 				return 'build/css/' + pkg + 'Components.css';
 			}
 		},
 		jsPath: function(uri, type, pkg, cls) {
-			if (indigoJS.DEBUG) {
+			if (indigoJS.DEBUG && pkg !== 'jui') {
 				return 'components/' + pkg + '/' + cls + '/' + cls + '.js';
 			} else {
 				return 'build/js/' + pkg + 'Components.min.js';
@@ -47,24 +47,82 @@
 </head>
 
 <body>
-	<section class="igo-content igo" indigo-builder="build/ejs/indigo_components.html"></section>
-	<section class="igo-content jui" indigo-builder="build/ejs/jqueryui_components.html"></section>
-	<section class="igo-content demo" indigo-builder="ejs/data_binding.ejs"></section>
+	<section class="igo-content igo"></section>
+	<section class="igo-content jui"></section>
+	<section class="igo-content demo"></section>
 
-	<script type="text/javascript" src="js/builder.js" indigo-pkgs="igo,jui"></script>
+	<script type="text/javascript" src="js/builder.js" id="builder"></script>
 
 	<script type="text/javascript">
+		var contents = document.querySelectorAll('.igo-content'),
+			urls = {
+				igo: 'build/ejs/indigo_components.html',
+				jui: 'build/ejs/jqueryui_components.html',
+				demo: 'ejs/data_binding.ejs'
+			}
 		var loadPage = function() {
-			var contents = document.querySelectorAll('.igo-content');
+			var cls = (location.search.substring(1) || 'igo'),
+				active = document.querySelector('.igo-content.' + cls),
+				url = urls[cls];
 			for (var i = 0; i < contents.length; i++) {
 				contents[i].style.display = 'none';
 			}
-			document.querySelector('.igo-content.' + (location.search.substring(1) || 'igo')).style.display = 'flex';
+			if (url) {//lazzy loading
+				delete urls[cls];
+				if (indigoJS.builder) {
+					indigoJS.package(cls === 'jui' ? cls : 'igo', function(pkg) {
+						indigoJS.builder(url, active);
+					});
+				} else {
+					active.setAttribute('indigo-builder', url);
+					document.querySelector('#builder').setAttribute('indigo-pkgs', 'igo,jui');
+				}
+			}
+			active.style.display = 'flex';
 		};
 		window.onhashchange = function() {
 			loadPage();
 		};
 		loadPage();
+
+		for (i = 0; i < contents.length; i++) {
+			(function(content) {
+				content.addEventListener('CONTENT_LOADED', function() {
+					var div = content.querySelector('.right');
+					if (!div) return;
+					var map = {}, as = [], active, start = 0,
+						h1s = content.querySelectorAll('h1[id]');
+					for (var j = 0; j < h1s.length; j++) {
+						var top, h1 = h1s[j], next = h1s[j + 1],
+							a = content.querySelector('.left a[href*="#' + h1.id + '"]');
+						if (next) {
+							top = next.getBoundingClientRect().top;
+						} else {
+							top = div.scrollHeight;
+						}
+						map[h1.id] = {start: start, end: top, a: a};
+						as.push(a);
+						start = top;
+					}
+					div.onscroll = function() {
+						var pos = Math.max(div.scrollTop - 100, 0);
+						for (var id in map) {
+							var o = map[id];
+							if (pos >= o.start && pos < o.end) {
+								if (active !== o.a) {
+									active = o.a;
+									as.forEach(function(a) {
+										a.className = null;
+									});
+									active.className = 'selected';
+								}
+							}
+						}
+					};
+					div.onscroll();
+				});
+			})(contents[i]);
+		}
 	</script>
 </body>
 

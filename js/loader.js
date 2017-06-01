@@ -46,43 +46,31 @@
 		head = top.document.head,
 		loadedCss = ig.loadedCss = ig.loadedCss || {},
 		loadedJs = ig.loadedJs = ig.loadedJs || {},
-		addAsset = function(tag, attrs, onload) {
-			var el, selector = tag + (tag === 'link' ? '[href="' + attrs.href + '"]' : '[src="' + attrs.src + '"]');
-			if (!head.querySelector(selector)) {
+		addAsset = function(tag, attrs, type, onload) {
+			var el, url = tag + (tag === 'link' ? '[href="' + attrs.href + '"]' : '[src="' + attrs.src + '"]');
+			if (!head.querySelector(url)) {
 				el = document.createElement(tag);
 				for (var key in attrs) {
 					el[key] = attrs[key];
 				}
 				el.onload = function() {
-					(onload || loadHandler)(selector);
+					(onload || loadHandler)(url, type);
 				};
 				head.appendChild(el);
 			}
 			return el;
 		},
-		loadHandler = function() {
-			if (!window._jQueryFactory) {
+		loadHandler = function(url, ctype) {
+			if (!top._jQueryFactory) {
+				return;
+			}
+			if (loadedCss[ctype] === 2 || loadedJs[ctype]) {
 				return;
 			}
 			var preinitialize = true;
 			for (var i = 0; i < libs.length; i++) {
 				var type = libs[i].replace('!', ''),
 					selector = '[_=' + type + ']';
-
-				if (loadedCss[type] === 0) {
-					var css = top.document.styleSheets;
-					loop1:
-					for (var k = 0; k < css.length; k++) {
-						var rules = css[k].cssRules || css[k].rules;
-						for (var l = 0; l < rules.length; l++) {
-							var text = rules[l].selectorText || '';
-							if (text.indexOf(type) !== -1) {
-								loadedCss[type] = 1;
-								break loop1;
-							}
-						}
-					}
-				}
 
 				if (loadedJs[type] === 0) {
 					if (top[type]) {
@@ -96,6 +84,21 @@
 						loadedJs[type] = cls;
 					} else {
 						preinitialize = false;
+					}
+				}
+
+				if (preinitialize && loadedCss[type] === 0) {
+					var css = top.document.styleSheets;
+					loop1:
+					for (var k = 0; k < css.length; k++) {
+						var rules = css[k].cssRules || css[k].rules;
+						for (var l = 0; l < rules.length; l++) {
+							var text = rules[l].selectorText || '';
+							if (text.indexOf(type) !== -1) {
+								loadedCss[type] = 1;
+								break loop1;
+							}
+						}
 					}
 				}
 
@@ -131,9 +134,9 @@
 	if (mains.length) {
 		addAsset('script', {type: 'text/javascript', src: 'js/indigo.js'});
 	}
-	addAsset('script', {type: 'text/javascript', src: ig.jqPath(uri)}, function(selector) {
+	addAsset('script', {type: 'text/javascript', src: ig.jqPath(uri)}, null, function(url, type) {
 		ig.wins.forEach(function(win) {
-			window._jQueryFactory(win);
+			top._jQueryFactory(win);
 			win.$.fn.extend({
 				event: function(type, callback) {
 					win.$.fn.off.call(this, type);
@@ -142,7 +145,7 @@
 				}
 			});
 		});
-		loadHandler(selector);
+		loadHandler(url, type);
 		if (ig.jqueryReady) {
 			ig.jqueryReady(window.$);
 		}
@@ -153,15 +156,19 @@
 			pair = type.split(/(?=[A-Z])/);
 			var pkg = pair[0],
 			cls = pair[1].toLowerCase();
-		if (lib.charAt(0) !== '!') { //exclude script
-			loadedJs[type] = 0;
-			addAsset('script', {type: 'text/javascript', src: ig.jsPath(uri, type, pkg, cls)});
+		if (loadedJs[type] === undefined) {
+			if (lib.charAt(0) !== '!') { //exclude script
+				loadedJs[type] = 0;
+				addAsset('script', {type: 'text/javascript', src: ig.jsPath(uri, type, pkg, cls)}, type);
+			}
 		}
-		if (lib.charAt(lib.length - 1) !== '!') { //exclude link
-			loadedCss[type] = 0;
-			addAsset('link', {rel: 'stylesheet', type: 'text/css', href: ig.cssPath(uri, type, pkg, cls)});
-		} else {
-			loadedCss[type] = 1;
+		if (loadedCss[type] === undefined) {
+			if (lib.charAt(lib.length - 1) !== '!') { //exclude link
+				loadedCss[type] = 0;
+				addAsset('link', {rel: 'stylesheet', type: 'text/css', href: ig.cssPath(uri, type, pkg, cls)}, type);
+			} else {
+				loadedCss[type] = 1;
+			}
 		}
 	});
 	loadHandler();
