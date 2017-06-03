@@ -11,8 +11,12 @@
 
 <script type="text/javascript" src="js/ejs/ejs.js"></script>
 
+<!-- juiSpinner Localization -->
 <script type="text/javascript" src="https://jqueryui.com/resources/demos/external/globalize/globalize.js"></script>
 <script type="text/javascript" src="https://jqueryui.com/resources/demos/external/globalize/globalize.culture.ja-JP.js"></script>
+
+<!-- Source Code styling -->
+<link rel="stylesheet" type="text/css" href="build/css/ejs/styles.css">
 
 <script type="text/javascript">
 	var indigoJS = {
@@ -95,14 +99,16 @@
 					for (var j = 0; j < h1s.length; j++) {
 						var top, h1 = h1s[j], next = h1s[j + 1],
 							a = content.querySelector('.left a[href*="#' + h1.id + '"]');
-						if (next) {
-							top = next.getBoundingClientRect().top;
-						} else {
-							top = div.scrollHeight;
+						if (a) {
+							if (next) {
+								top = next.getBoundingClientRect().top;
+							} else {
+								top = div.scrollHeight;
+							}
+							map[h1.id] = {start: start, end: top, a: a};
+							as.push(a);
+							start = top;
 						}
-						map[h1.id] = {start: start, end: top, a: a};
-						as.push(a);
-						start = top;
 					}
 					div.onscroll = function() {
 						var pos = Math.max(div.scrollTop - 100, 0);
@@ -115,6 +121,7 @@
 										a.className = null;
 									});
 									active.className = 'selected';
+									return;
 								}
 							}
 						}

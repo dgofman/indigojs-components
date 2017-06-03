@@ -2,17 +2,17 @@
 
 (function(top) {
 	var ig = top.indigoJS = top.indigoJS || {},
-		eventModel = function(o) {
-			var proto = Object.getPrototypeOf(o),
-				events = proto.__events__;
-			if (!events) {
-				events = Object.defineProperty(proto, '__events__', {
-					value: {},
-					writable: true,
+		stateModel = function(o) {
+			var states = o.__states__;
+			if (!states) {
+				var value = {};
+				states = Object.defineProperty(o, '__states__', {
+					get: function() { return value; },
+					set: function(val) { return value = val; },
 					enumerable: false
-				}).__events__;
+				}).__states__;
 			}
-			return events;
+			return states;
 		},
 		bindProperties = function(bindMap, callback) {
 			for (var name in bindMap) {//find a bind property name
@@ -34,16 +34,16 @@
 			callback = arguments[--length];
 		}
 		for (var i = 0; i < length; i++) {
-			var className = arguments[i];
-			if (className.charCodeAt(0) < 91) {
-				className = 'igo' + className; //Button -> igoButton 
+			var type = arguments[i];
+			if (type.charCodeAt(0) < 91) {
+				type = 'igo' + type; //Button -> igoButton 
 			}
-			var factory = top[className];
+			var factory = top[type];
 			if (typeof factory !== 'function') {
-				throw new Error('ClassNotFoundException: ' + className);
+				throw new Error('ClassNotFoundException: ' + type);
 			}
 			if (!factory.classInstance) {
-				var selector = '[_=' + className + ']',
+				var selector = '[_=' + type + ']',
 					apis = factory(window.$, selector, ig),
 					clazz = function(el) {
 						this.$el = el;
@@ -110,16 +110,16 @@
 				for (var name in apis) {
 					var descriptor = apis[name];
 					if (descriptor && descriptor.set && descriptor.get) {
-						descriptor.set = (function(set, type) {
+						descriptor.set = (function(set, propName) {
 							return function(value) {
-								var events = eventModel(this);
-								if (!events[type]) {
-									events[type] = true;
-									ig.info(type, value, this.toString());
+								var states = stateModel(this);
+								if (!states[propName]) {
+									states[propName] = true;
+									ig.info(propName, value, this.toString());
 									set.call(this, value);
-									this.$el.trigger(type, [value]);
+									this.$el.trigger(propName, [value]);
 								}
-								delete events[type];
+								delete states[propName];
 							};
 						})(descriptor.set, name);
 						Object.defineProperty(clazz.prototype, name, descriptor);
@@ -133,7 +133,7 @@
 		if (callback) {
 			callback.apply(this, classes);
 		} else {
-			return classes.length === 1 ? classes[0] : classes;
+			return classes[0];
 		}
 	};
 	ig.create = function(clazz, idxOrSelector, parent) {
@@ -188,18 +188,21 @@
 		if (!Array.isArray(bindMap)) { //single bind
 			bindMap = [bindMap];
 		}
-		for (var i = 0; i < bindMap.length; i++) {
-			bindProperties(bindMap[i], function(o) {
+		var states = stateModel(model);
+		bindMap.forEach(function(map) {
+			bindProperties(map, function(o) {
 				o.self.$el.on(o.name, function(e, value) {
-					model[name] = value;
-					if (o.$watch) {
-						if (o.self[o.name] !== value) {
-							o.$watch.call(o.self, o.name, value, model);
+					if (!states[name]) {
+						model[name] = value;
+						if (o.$watch) {
+							if (o.self[o.name] !== value) {
+								o.$watch.call(o.self, o.name, value, model);
+							}
 						}
 					}
 				});
 			});
-		}
+		});
 
 		var self = this,
 			watch = arguments[3],
@@ -209,23 +212,24 @@
 				return val;
 			},
 			set: function(value) {
+				var fire = (val !== value);
 				val = value;
-				var events = eventModel(model);
-				if (!events[name]) {
-					events[name] = true;
-					for (i = 0; i < bindMap.length; i++) {
-						bindProperties(bindMap[i], function(o) {
+				var states = stateModel(model);
+				if (!states[name]) {
+					states[name] = true;
+					bindMap.forEach(function(map) {
+						bindProperties(map, function(o) {
 							if (o.$watch) {
-								o.$watch.call(o.self, o.name, value, model);
+								o.$watch.call(o.self, name, value, model);
 							} else {
 								o.self[o.name] = value;
 							}
 						});
+					});
+					if (watch && fire) {
+						watch(name, value, model);
 					}
-					if (watch && model[name] !== undefined) {
-						watch(name, value);
-					}
-					delete events[name];
+					delete states[name];
 				}
 			}, enumerable: true
 		});
@@ -234,6 +238,26 @@
 		return {
 			bind: function(name, bindMap, newModel) {
 				return self.bind(name, bindMap, newModel || model, watch);
+			},
+			trigger: function(events, prop, el) {
+				bindMap.forEach(function(map) {
+					bindProperties(map, function(o) {
+						(el || o.self.$el).on(events, function(e) {
+							if (map.$watch) {
+								map.$watch.call(o.self, name, o.self[prop || o.name], model, e);
+							} else {
+								model[name] = o.self[prop || o.name];
+							}
+						});
+					});
+				});
+				return self.bind(name, bindMap, model, watch);
+			},
+			watch: function(callback) {
+				bindMap.forEach(function(map) {
+					map.$watch = callback;
+				});
+				return self.bind(name, bindMap, model, watch);
 			}
 		};
 	};

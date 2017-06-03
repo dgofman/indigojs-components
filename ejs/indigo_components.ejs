@@ -7,113 +7,6 @@
 	<h6>HEADER 6</h6>
 </script>
 
-<style>
-	section {
-		display: flex;
-		justify-content: space-between;
-		font-family: 'Helvetica Neue', Helvetica, sans-serif;
-	}
-
-	section>div.right {
-		flex-grow: 1;
-		padding: 10px;
-		overflow: auto;
-	}
-
-	div.right hr:last-child {
-		margin-bottom: 40px;
-	}
-
-	section>div.left {
-		background-color: #f5f2f2;
-		min-width: 150px;
-		max-width: 150px;
-		border-right: 1px solid #999;
-	}
-
-	section>div.left ul {
-		position: fixed;
-		top: 10px;
-		left: 10px;
-		list-style: none;
-		line-height: 25px;
-		padding: 5px;
-	}
-
-	ul a {
-		color: blue;
-		border-bottom: 1px dotted;
-	}
-
-	.selected {
-		color: red;
-		font-weight: bold;
-	}
-
-	h1 {
-		color: #6F00FF;
-		padding: 40px 0 10px;
-	}
-
-	hr {
-		border-color: #5b87ac;
-		border-style: dotted;
-		margin-top: 30px;
-	}
-
-	.icon:before, .icon-flag {
-		background-image: url(<%- baseStaticPath %>/images/flags.png);
-		background-position: -112px -224px;
-	}
-
-	.custom * {
-		color: red !important;
-		text-decoration: underline;
-	}
-
-	.border, .textstyle {
-		border: 1px solid green;
-	}
-
-	.textstyle {
-		min-height: 100px;
-		width: 400px;
-	}
-
-	.code {
-		border: 1px solid #ccc;
-		border-radius: 3px;
-		background: #f9f9f9;
-		margin: 20px 0;
-		padding: 20px;
-		text-align: left;
-	}
-
-	p {
-		padding: 10px;
-		line-height: 20px;
-		text-align: left;
-	}
-
-	.code .cid {
-		color: #4a86ef;
-		font-weight: bold;
-	}
-
-	.code .key {
-		font-weight: bolder;
-	}
-
-	.code .val {
-		color: #f2576d;
-	}
-
-	.code i {
-		color: #20891c;
-		font-weight: bold;
-	}
-</style>
-
 <%
 	var icon = baseStaticPath + '/images/indigo.png';
 
@@ -783,42 +676,42 @@
 			Displaying the entire text
 		</p>
 		<%- code('igoText', {value: `<i>'Lorem ipsum dolor sit amet...'</i>`}) %>
-		<%- $('igoText', {value: loremIpsum, class: 'textstyle'}) %><hr/>
+		<%- $('igoText', {value: loremIpsum, class: 'boxStyle'}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Defining maximum viewpoint height
 		</p>
 		<%- code('igoText', {value: `'Lorem ipsum dolor sit amet...'`, height: `<i>16</i>`}) %>
-		<%- $('igoText', {value: loremIpsum, class: 'textstyle', height: 16, parentStyle: 'border-color: blue'}) %><hr/>
+		<%- $('igoText', {value: loremIpsum, class: 'boxStyle', height: 16, parentStyle: 'border-color: blue'}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Applying ellipsis
 		</p>
 		<%- code('igoText', {value: `'Lorem ipsum dolor sit amet...'`, height: 16, ellipsis: `<i>true</i>`}) %>
-		<%- $('igoText', {value: loremIpsum, class: 'textstyle', height: 16, parentStyle: 'border-color: yellow', ellipsis: true}) %><hr/>
+		<%- $('igoText', {value: loremIpsum, class: 'boxStyle', height: 16, parentStyle: 'border-color: yellow', ellipsis: true}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Setting editable text with ellipsis
 		</p>
 		<%- code('igoText', {value: `'Lorem ipsum dolor sit amet...'`, height: 54, ellipsis: true, editable: `<i>true</i>`}) %>
-		<%- $('igoText', {value: loremIpsum, class: 'textstyle', height: 54, parentStyle: 'border-color: magenta', ellipsis: true, editable: true}) %><hr/>
+		<%- $('igoText', {value: loremIpsum, class: 'boxStyle', height: 54, parentStyle: 'border-color: magenta', ellipsis: true, editable: true}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Customizing style
 		</p>
 		<%- code('igoText', {value: `'Lorem ipsum dolor sit amet...'`, height: 98, ellipsis: true, style: `<i>'color: green; font-size: 18px; line-height: 2; font-weight: bold'</i>`}) %>
-		<%- $('igoText', {value: loremIpsum, class: 'textstyle', height: 98, parentStyle: 'border-color: red', ellipsis: true, style: 'color: green; font-size: 18px; line-height: 2; font-weight: bold'}) %><hr/>
+		<%- $('igoText', {value: loremIpsum, class: 'boxStyle', height: 98, parentStyle: 'border-color: red', ellipsis: true, style: 'color: green; font-size: 18px; line-height: 2; font-weight: bold'}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Text rendering function
 		</p>
 		<%- code('igoText', {value: `<i>function(opts) { return opts.text.substring(0, 45) + '...' }</i>`}) %>
-		<%- $('igoText', {value: function(opts) { return opts.text.substring(0, 45) + '...' }, text: loremIpsum, class: 'textstyle', parentStyle: 'min-height: 22px; border-color: orange'}) %>
+		<%- $('igoText', {value: function(opts) { return opts.text.substring(0, 45) + '...' }, text: loremIpsum, class: 'boxStyle', parentStyle: 'min-height: 22px; border-color: orange'}) %>
 	</div>
 
 	<h1 id="textarea">TextArea</h1>
@@ -845,7 +738,7 @@
 			Defining maxlength and customize input
 		</p>
 		<%- code('igoTextarea', {value: `<i>function(opts) { return loremIpsum.substring(0, 5) }</i>`, maxlen: `<i>5</i>`}) %>
-		<%- $('igoTextarea', {value: function(opts) { return loremIpsum.substring(0, 5) }, maxlen: 5, class: 'textstyle'}) %><hr/>
+		<%- $('igoTextarea', {value: function(opts) { return loremIpsum.substring(0, 5) }, maxlen: 5, class: 'boxStyle'}) %><hr/>
 	</div>
 
 	<h1 id="togglebox">ToggleBox</h1>
@@ -999,7 +892,7 @@
 				Auto scrolling
 			</p>
 			<%- code('igoTooltip', {position: 'right', target: `<i>'.rightText'</i>`, width: `'250px'`, height: `'200px'`, scroll: `<i>100</i>`, scrollTimeout: `<i>700</i>`}, `<b>&lt;%- $(</b>'<span class="cid">igoText</span>', {<b>value</b>: <span class="val">'Lorem ipsum dolor sit amet...'</span>, <b>class</b>: <i>'rightText</i>, height: <span class="val">94</span>, ellipsis: <span class="val">true</span>}<b>) %&gt;</b><br>`) %>
-			<%- $('igoText', {value: loremIpsum, class: 'rightText textstyle', height: 94, ellipsis: true}) %>
+			<%- $('igoText', {value: loremIpsum, class: 'rightText boxStyle', height: 94, ellipsis: true}) %>
 			<%- $('igoTooltip', {position: 'right', target: '.rightText', width: '250px', height: '200px', scroll: 100, scrollTimeout: 700}) %><hr/>
 		</center>
 	</div>

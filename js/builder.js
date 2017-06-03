@@ -33,6 +33,9 @@
 			model.opts = opts || {},
 			model.$ = function(type, opts) {
 				var begin, html = '';
+				if (type.charCodeAt(0) < 91) {
+					type = 'igo' + type; //Button -> igoButton 
+				}
 				if (templates[type]) {
 					opts = opts || {};
 					model.opts = opts || {};
@@ -40,7 +43,7 @@
 					begin = '<c _=' + type + ' tabindex="-1" class="init' + model.$get('class') + '"' + model.$get('disabled', 'disabled') + model.$attr('id');
 					html = window.ejs.render(templates[type], model);
 					if (opts.show === false) {
-						opts.parentStyle = 'display: none; ' + opts.parentStyle || '';
+						opts.parentStyle = 'display: none; ' + (opts.parentStyle || '');
 					}
 					html = begin + model.$attr('parentStyle', 'style') + '>' + html + '</c>';
 				}

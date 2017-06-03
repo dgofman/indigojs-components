@@ -21,6 +21,12 @@ module.exports = function(grunt) {
 						src: ['./components/**/*.less'],
 						dest: './build/css',
 						ext: '.css'
+					},
+					{
+						expand: true,
+						src: './ejs/styles.ejs',
+						dest: './build/css',
+						ext: '.css'
 					}
 				]
 			},
@@ -108,7 +114,7 @@ module.exports = function(grunt) {
 		}
 		fs.readdirSync(srcDir).forEach(function(file) {
 			let index = file.lastIndexOf('.ejs');
-			if (index === file.length - 4) {
+			if (file !== 'styles.ejs' && index === file.length - 4) {
 				fs.writeFileSync(path.resolve(destDir, file.substring(0, index) + '.html'), babelCode(fs.readFileSync(path.resolve(srcDir, file), 'utf8')));
 			}
 		});

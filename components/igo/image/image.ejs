@@ -12,7 +12,9 @@
 		attrs.push(`height: ${opts.height}`);
 	}
 
-	opts.parentStyle = attrs.join('; ');
+	if (attrs.length) {
+		opts.parentStyle = attrs.join('; ') + '; ' + (opts.parentStyle || '');
+	}
 
 	if (opts.img) {
 %>
