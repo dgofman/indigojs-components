@@ -21,12 +21,29 @@ For improved performance and CPU usage, use [IndigoJS NodeJs framework](https://
 npm install -g bower
 ```
 
-###### 3. Install IndigoJS Components
+###### 3. Download IndigoJS Components
+
+```
+git clone https://github.com/dgofman/indigojs-components.git
+```
+
+###### 4. Install and run demo
+
+```
+cd indigojs-components
+
+npm install
+
+npm start
+```
+
+### Additional Tips
+
+To get the latest IndigoJS components updates, use the bower package manager to run your application.
 
 ```
 bower install indigojs-components
 ```
-###### Additional Tips
 
 Execute the grunt command after making changes to EJS or LESS files. This allows for the conversion of LESS to CSS and EJS to HTML.
 ```
@@ -50,7 +67,7 @@ Embedded packages:
 
 **Hint:**
 You can replace or attach the content file by using JavaScript:
-```IndigoJS.builder('NEW_CONTENT_FILE', document.querySelector('section'));```
+```indigoJS.builder('NEW_CONTENT_FILE', document.querySelector('section'));```
 
 
 
