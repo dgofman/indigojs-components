@@ -39,7 +39,7 @@
 				if (templates[type]) {
 					opts = opts || {};
 					model.opts = opts || {};
-					model.componentIndex = componentIndex++;
+					model.componentIndex = ++componentIndex;
 					begin = '<c _=' + type + ' tabindex="-1" class="init' + model.$get('class') + '"' + model.$get('disabled', 'disabled') + model.$attr('id');
 					html = window.ejs.render(templates[type], model);
 					if (opts.show === false) {
@@ -89,11 +89,11 @@
 			};
 			model.$title = function(title) {
 				title = title || model.opts.title;
-				return ' ' + (title ? ' title="' + title + '"' : '');
+				return ' tabindex="' + model.componentIndex + '"' + (title ? ' title="' + title + '"' : '');
 			};
 			model.$label = function(title) {
 				title = title || model.opts.title;
-				return ' ' + (title ? ' aria-label="' + title + '"' : '');
+				return ' tabindex="' + model.componentIndex + '"' + (title ? ' aria-label="' + title + '"' : '');
 			};
 			model.$assign = function(opts, model) {
 				model = model || opts;

@@ -13,13 +13,6 @@
 				}).__states__;
 			}
 			return states;
-		},
-		bindProperties = function(bindMap, callback) {
-			for (var name in bindMap) {//find a bind property name
-				if (name !== '$watch') {
-					return callback({name: name, self: bindMap[name], $watch: bindMap.$watch});
-				}
-			}
 		};
 
 	ig.uid = function () {
@@ -54,7 +47,7 @@
 
 				clazz.prototype.constructor = clazz;
 				clazz.prototype.toString = function() {
-					return selector + '::' + this.$el[0].outerHTML;
+					return selector + '::' + this.$el.parent().html();
 				};
 				clazz.prototype.define = function(name, get, set) {
 					var descriptor = {};
@@ -153,111 +146,122 @@
 		return new clazz(el);
 	};
 	ig.namespace = function(selector, callbak) {
-		var self = this,
-			parent = window.$(selector),
+		var parent = window.$(selector),
 			ns = {
-				create: function(clazz, idxOrSelector) {
-					return self.create.call(self, clazz, idxOrSelector, parent);
+				$: function(sel) { return parent.find(sel); },
+				create: function(type, idxOrSelector) {
+					return ig.create.call(ig, type, idxOrSelector, parent);
 				}
 			};
+		if (parent.length !== 1) {
+			console.log('WARN: namespace expected only one matching selector: ' + parent.length);
+		}
 		if (callbak) { callbak(ns); }
 		return ns;
 	};
-	ig.watch = function(model, handler) {
-		var self = this, ref;
-		return ref = {
-			handler: handler || function() {},
-			bind: function(name, bindMap) {
-				if (typeof bindMap  === 'string') { //bind property name
-					model[name] = model[name] || null;
-					var map = {};
-					map[bindMap] = arguments[2];
-					if (typeof arguments[3] === 'function') {
-						map['$watch'] = arguments[3];
-					}
-					bindMap = map;
+	ig.watch = function(model, watch) {
+		watch = watch || function() {
+			if (watch) {
+				watch.apply(ig, arguments);
+			}
+		};
+		return {
+			bind: function(prop, chain, host, $watch) {
+				if ($watch) {
+					return ig.bind(model, prop, [{chain: chain, host: host, $watch: $watch}], host, watch);
 				}
-				return self.bind(name, bindMap, model, function() {
-					ref.handler.apply(self, arguments);
-				});
+				return ig.bind(model, prop, chain, host, watch);
 			}
 		};
 	};
-	ig.bind = function(name, bindMap, model) {
+	ig.bind = function(model, prop, chain, host, watch) {
+		var states = stateModel(model),
+			promise, chains = [];
 		model = model || {};
-		if (!Array.isArray(bindMap)) { //single bind
-			bindMap = [bindMap];
+		if (Array.isArray(host)) {
+			host.forEach(function(host) {
+				chains.push({chain: chain, host: host, $watch: watch});
+			});
+		} else if (Array.isArray(chain)) {
+			chains = chain;
+		} else {
+			chains[0] = {chain: chain, host: host, $watch: watch};
 		}
-		var states = stateModel(model);
-		bindMap.forEach(function(map) {
-			bindProperties(map, function(o) {
-				o.self.$el.on(o.name, function(e, value) {
-					if (!states[name]) {
-						model[name] = value;
-						if (o.$watch) {
-							if (o.self[o.name] !== value) {
-								o.$watch.call(o.self, o.name, value, model);
-							}
+		if (prop) {
+			chains.forEach(function(o, index) {
+				if (!o.chain || !o.host) {
+					for (var key in o) {//transform {chain: host, $watch: $watch} - > {chain: chain, host: host, $watch: $watch}
+						if (key !== '$watch') {
+							o = {chain: key, host: o[key], $watch: o.$watch};
+							break;
 						}
 					}
-				});
-			});
-		});
-
-		var self = this,
-			watch = arguments[3],
-			val = model[name];
-		Object.defineProperty(model, name, {
-			get: function() {
-				return val;
-			},
-			set: function(value) {
-				var fire = (val !== value);
-				val = value;
-				var states = stateModel(model);
-				if (!states[name]) {
-					states[name] = true;
-					bindMap.forEach(function(map) {
-						bindProperties(map, function(o) {
-							if (o.$watch) {
-								o.$watch.call(o.self, name, value, model);
-							} else {
-								o.self[o.name] = value;
-							}
-						});
-					});
-					if (watch && fire) {
-						watch(name, value, model);
-					}
-					delete states[name];
+					chains[index] = o;
 				}
-			}, enumerable: true
-		});
-		model[name] = val;
+				o.host.$el.on(o.chain, function(e, value) {
+					model[prop] = value;
+				});
+				if (model[prop] !== undefined && model[prop]  !== o.host[o.chain]) {
+					o.host[o.chain] = model[prop];
+					if(o.$watch !== watch) {
+						o.$watch.call(o.host, prop, model[prop], model, {type: 'bind-' + index});
+					}
+				}
+			});
+			if (watch && model[prop] !== undefined) {
+				watch.call(host, prop, model[prop], model, {type: 'bind'});
+			}
 
-		return {
-			bind: function(name, bindMap, newModel) {
-				return self.bind(name, bindMap, newModel || model, watch);
-			},
-			trigger: function(events, prop, el) {
-				bindMap.forEach(function(map) {
-					bindProperties(map, function(o) {
-						(el || o.self.$el).on(events, function(e) {
-							if (map.$watch) {
-								map.$watch.call(o.self, name, o.self[prop || o.name], model, e);
-							} else {
-								model[name] = o.self[prop || o.name];
+			var val = model[prop];
+			Object.defineProperty(model, prop, {
+				get: function() {
+					return val;
+				},
+				set: function(value) {
+					var propagate = (val !== value);
+					val = value;
+					if (!states[prop]) {
+						states[prop] = true;
+						chains.forEach(function(o, index) {
+							if (o.$watch) {
+								if (propagate && o.$watch !== watch) {
+									o.$watch.call(o.host, prop, value, model, {type: 'model-' + index});
+								}
 							}
+							o.host[o.chain] = value;
 						});
+						if (watch && propagate) {
+							watch.call(host, prop, value, model, {type: 'model'});
+						}
+						delete states[prop];
+					}
+				}, enumerable: true
+			});
+		}
+
+		return promise = {
+			bind: function($prop, chain, host, $watch) {
+				if ($prop === prop) {
+					chains.push({chain: chain, host: host, $watch: $watch || watch});
+					chain = chains;
+				}
+				return ig.bind(model, $prop, chain, host, $watch || watch);
+			},
+			trigger: function(events) {
+				chains.forEach(function(o) {
+					o.host.$el.on(events, function(e) {
+						states[prop] = true;
+						model[prop] = o.host[o.chain];
+						chains.forEach(function(o) {
+							o.host[o.chain] = model[prop];
+						});
+						if (o.$watch) {
+							o.$watch.call(o.host, prop, model[prop], model, e);
+						}
+						delete states[prop];
 					});
 				});
-				return self.bind(name, bindMap, model, watch);
-			},
-			watch: function(callback) {
-				bindMap.forEach(function(map) {
-					map.$watch = callback;
-				});
-				return self.bind(name, bindMap, model, watch);
+				return promise;
 			}
 		};
 	};

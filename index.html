@@ -47,6 +47,18 @@
 			}
 		}
 	};
+
+	function printSource(id) {
+		var frame = document.createElement('iframe');
+		frame.domain = document.domain;
+		frame.style.position = 'absolute';
+		frame.style.top = '-10000px';
+		document.body.appendChild(frame);
+		frame.contentDocument.write(document.querySelector(id + '>div>div').innerHTML);
+		frame.focus();
+		frame.contentWindow.print();
+		frame.parentNode.removeChild(frame);
+	}
 </script>
 </head>
 
