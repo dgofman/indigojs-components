@@ -7,8 +7,8 @@
 	var model = {ipt1Value: 'Value1', ipt2Value: 'Value2'},
 		parent = $('div[ex1]'),
 		div = parent.find('div.output'),
-		watch = function(name, value) {
-			indigo.debug('div[ex1]', name, value);
+		watch = function(name, value, model, e) {
+			indigo.debug('div[ex1]', name, value, e.type);
 			div.html('<b>Name:</b> ' + name + '<br><b>Value:</b> ' + value + '<br><b>Model</b>: ' + JSON.stringify(model));
 		},
 		ipt1 = indigo.create('Input', 0, parent),
@@ -23,8 +23,8 @@
 	indigo.namespace('div[ex2]', function(ns) {
 		var Input = indigo.import('Input'),
 			div = ns.$('div.output');
-		indigo.watch({ipt1Value: 'Value1', ipt2Value: 'Value2'}, function(name, value, model) {
-			indigo.debug('div[ex2]', name, value);
+		indigo.watch({ipt1Value: 'Value1', ipt2Value: 'Value2'}, function(name, value, model, e) {
+			indigo.debug('div[ex2]', name, value, e.type);
 			div.html('<b>Name:</b> ' + name + '<br><b>Value:</b> ' + value + '<br><b>Model</b>: ' + JSON.stringify(model));
 		})
 		.bind('ipt1Value', 'value', ns.create(Input))
