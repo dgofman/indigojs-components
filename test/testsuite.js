@@ -58,10 +58,15 @@ describe('Should test validate', () => {
 	include('../js/utils/errcode.js');
 });
 
-
-
-
-
+describe('Should test request', () => {
+	global.test = (test) => {
+		global.define = (rest, module) => {
+			test(module, assert, {});
+		};
+		include('../js/utils/request.js');
+	};
+	include('./request.js');
+});
 
 
 
