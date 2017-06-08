@@ -9,8 +9,10 @@
 
     // Predefined globals
 
+    // Whether the standard mocha globals should be predefined.
+    "mocha": true,
     // Whether the standard browser globals should be predefined.
-    "browser": false,
+    "browser": true,
     // Whether the Node.js environment globals should be predefined.
     "node": true,
     // Whether the Rhino environment globals should be predefined.
@@ -31,8 +33,7 @@
 
     // Custom predefined globals.
     "predef": [
-        "__appDir", "define", "alert", "window", "document", 
-        "beforeEach", "afterEach", "describe", "before", "after", "it"
+        "__appDir", "define"
     ],
 
     // Development

@@ -5,6 +5,7 @@
 	"scripts": {
 		"start": "node .",
 		"jshint": "./node_modules/.bin/jshint . --config .jshintrc",
+		"cover": "./node_modules/.bin/istanbul cover  test/tests.js --reporter spec --check-leaks",
 		"postinstall": "grunt"
 	},
 	"dependencies": {
@@ -16,5 +17,8 @@
 		"babel-core": "~6.24.1",
 		"babel-plugin-transform-es2015-template-literals": "latest",
 		"jquery-ui": "git+https://github.com/jquery/jquery-ui.git"
+	},
+	"devDependencies": {
+		"istanbul": "latest"
 	}
 }

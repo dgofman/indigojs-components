@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Test - validate</title>
+<script type="text/javascript">
+	window.define = function(rest, module) {
+		var ErrCode = module();
+		window.test = function(test) {
+			window.define = function(rest, module) {
+				test(module, ErrCode, function(actual, expected, message) {
+					var b = actual === expected;
+					document.write('<h4><font color="' + (b ? 'green' : 'red') + '">' + (b ? 'OK' : 'ERROR') + ' - ' + 
+						message + (b ? '': '<br/>actual: ' + actual + '<br/>expected: ' + expected) + '</font><h4>');
+				});
+			}
+		}
+	}
+</script>
+<script type="text/javascript" src="../js/utils/errcode.js"></script>
+<script type="text/javascript" src="./validate.js"></script>
+<script type="text/javascript" src="../js/utils/validate.js"></script>
+</head>
+</html>
