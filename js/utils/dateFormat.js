@@ -72,10 +72,10 @@ define([
 						values.push(val);
 					};
 
-				replace(/E{4}/, locale.days[date.getDay()]); //Tuesday - new SimpleDateFormat("EEEE").format(new Date())
-				replace(/E{1,3}/, (locale.days[date.getDay()] || '').substring(0, 3)); //Tue - new SimpleDateFormat("EEE").format(new Date())
-				replace(/d{2}/, _.pad(date.getDate())); //02 - new SimpleDateFormat("dd").format(new Date())
-				replace('d', date.getDate()); //2 - new SimpleDateFormat("d").format(new Date())
+				replace(/E{4}/i, locale.days[date.getDay()]); //Tuesday - new SimpleDateFormat("EEEE").format(new Date())
+				replace(/E{1,3}/i, (locale.days[date.getDay()] || '').substring(0, 3)); //Tue - new SimpleDateFormat("EEE").format(new Date())
+				replace(/d{2}/i, _.pad(date.getDate())); //02 - new SimpleDateFormat("dd").format(new Date())
+				replace(/d/i, date.getDate()); //2 - new SimpleDateFormat("d").format(new Date())
 				replace(/M{4}/, locale.months[date.getMonth()]); //January - new SimpleDateFormat("MMMM").format(new Date())
 				replace(/M{3}/, locale.months_abr[date.getMonth()]); //Jan - new SimpleDateFormat("MMM").format(new Date());
 				replace(/M{2}/, _.pad(date.getMonth() + 1)); //01 - new SimpleDateFormat("MM").format(new Date())
@@ -91,9 +91,9 @@ define([
 				replace(/H/, date.getHours()); //2 - (02:00), 14 - (14:00) - new SimpleDateFormat("HH").format(new Date())
 				replace(/m{2}/, _.pad(date.getMinutes())); //08 - (02:08) - new SimpleDateFormat("mm").format(new Date())
 				replace('m', date.getMinutes()); //8 - (02:08) - new SimpleDateFormat("m").format(new Date())
-				replace(/s{2}/, _.pad(date.getSeconds())); //05 - (02:08:05) - new SimpleDateFormat("ss").format(new Date())
-				replace('s', date.getSeconds()); //5 - (02:08:05) - new SimpleDateFormat("ss").format(new Date())
-				replace('a', date.getHours() >= 12 ? locale.time_pm : locale.time_am); //new SimpleDateFormat("a").format(new Date())
+				replace(/s{2}/i, _.pad(date.getSeconds())); //05 - (02:08:05) - new SimpleDateFormat("ss").format(new Date())
+				replace(/s/i, date.getSeconds()); //5 - (02:08:05) - new SimpleDateFormat("ss").format(new Date())
+				replace(/a/i, date.getHours() >= 12 ? locale.time_pm : locale.time_am); //new SimpleDateFormat("a").format(new Date())
 
 				values.forEach(function(val, index) {
 					format = format.replace('{' + index + '}', val);

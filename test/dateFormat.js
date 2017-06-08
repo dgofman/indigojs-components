@@ -39,7 +39,7 @@ test(function(module, assert) {
 
 	d = new Date(date);
 	d.setHours(15, 16, 17);
-	assert(df.format(d, 'EEEE EEE dd d MMMM MMM MM M yyyy yyy YY Y hh h HH H mm m ss s a'), 'Sunday Sun 04 4 June Jun 06 6 2006 2006 06 2006 03 3 15 15 16 16 17 17 PM', 'custom date-format');
+	assert(df.format(d, 'EEEE eee DD d MMMM MMM MM M yyyy yyy YY Y hh h HH H mm m SS s A'), 'Sunday Sun 04 4 June Jun 06 6 2006 2006 06 2006 03 3 15 15 16 16 17 17 PM', 'custom date-format');
 
 	df.locale.days.length = 0;
 	assert(df.format(d, 'EEE'), '', 'empty locale days');
