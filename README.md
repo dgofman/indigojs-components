@@ -1,8 +1,8 @@
 # [Indigo JS](http://indigojs.com/) Components
 
-https://travis-ci.org/dgofman/indigojs-components.svg?branch=master
-
 [![NPM version](https://badge.fury.io/js/indigojs-components.svg)](http://badge.fury.io/js/indigojs-components) [![Build Status](https://travis-ci.org/dgofman/indigojs-components.svg?branch=master)](https://travis-ci.org/dgofman/indigojs-components) [![Coverage Status](https://coveralls.io/repos/github/dgofman/indigojs-components/badge.svg?branch=master)](https://coveralls.io/github/dgofman/indigojs-components?branch=master)
+
+[![NPM](https://nodei.co/npm/indigojs-components.png?downloads=true&downloadRank=true)](https://www.npmjs.com/package/indigojs-components)
 
 
 This client-side framework is based on [EJS templates](https://github.com/mde/ejs/releases/latest) and [JQuery](http://jquery.com/). The IndigoJS-components library allows for the creation of UI components on HTML pages at runtime.
