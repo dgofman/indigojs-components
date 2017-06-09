@@ -1,5 +1,10 @@
 # [Indigo JS](http://indigojs.com/) Components
 
+https://travis-ci.org/dgofman/indigojs-components.svg?branch=master
+
+[![NPM version](https://badge.fury.io/js/indigojs-components.svg)](http://badge.fury.io/js/indigojs-components) [![Build Status](https://travis-ci.org/dgofman/indigojs-components.svg?branch=master)](https://travis-ci.org/dgofman/indigojs-components) [![Coverage Status](https://coveralls.io/repos/dgofman/indigojs/badge.svg?branch=master)](https://coveralls.io/r/dgofman/indigojs?branch=master) [![Dependency Status](https://david-dm.org/dgofman/indigojs.svg)](https://david-dm.org/dgofman/indigojs) [![devDependency Status](https://david-dm.org/dgofman/indigojs/dev-status.svg)](https://david-dm.org/dgofman/indigojs#info=devDependencies)
+
+
 This client-side framework is based on [EJS templates](https://github.com/mde/ejs/releases/latest) and [JQuery](http://jquery.com/). The IndigoJS-components library allows for the creation of UI components on HTML pages at runtime.
 Javascript and EJS templates are created on the **browser** using ES5 standards, however [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) are also supported. To ensure [cross-platform compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Browser_compatibility), run the grunt command to compile EJS files.
 
