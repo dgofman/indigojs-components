@@ -9,22 +9,22 @@ define(['./validate'], function(Validator) {
 			this.super = function(api, args) {
 				args = [this.model[args[0]]].concat(Array.prototype.slice.call(args, 1), args[0]);
 				return proto[api].apply(this, args);
-			}
+			};
 		};
 	_.prototype = {
-		minmax: function(name, min, max) {
+		minmax: function() {
 			return this.super('minmax', arguments);
 		},
 
-		str_minmax: function(name, min, max) {
+		str_minmax: function() {
 			return this.super('str_minmax', arguments);
 		},
 
-		isset: function(name) {
+		isset: function() {
 			return this.super('isset', arguments);
 		},
 
-		empty: function(name) {
+		empty: function() {
 			return this.super('empty', arguments);
 		}
 	};

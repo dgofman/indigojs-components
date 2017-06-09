@@ -18,11 +18,11 @@ let passing = [],
 		require(path);
 	};
 
-const describe = (name, callback) => {
+function describe(name, callback) {
 	moduleName = name;
 	console.log('\n' + name);
 	callback();
-};
+}
 
 describe('Should test dateFormat', () => {
 	global.test = (test) => {
@@ -84,6 +84,16 @@ describe('Should test request', () => {
 		include('../js/utils/request.js');
 	};
 	include('./request.js');
+});
+
+describe('Should test helper', () => {
+	global.test = (test) => {
+		global.define = (rest, module) => {
+			test(module, assert, {contextPath: '/indigojs'});
+		};
+		include('../js/utils/helper.js');
+	};
+	include('./helper.js');
 });
 
 

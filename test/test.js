@@ -6,6 +6,6 @@ window.test = function(test) {
 			var b = actual === expected;
 			window.document.write('<h4><font color="' + (b ? 'green' : 'red') + '">' + (b ? 'OK' : 'ERROR') + ' - ' + 
 				message + (b ? '': '<br/>actual: ' + actual + '<br/>expected: ' + expected) + '</font><h4>');
-		});
+		}, window.indigoJS);
 	};
 };

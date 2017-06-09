@@ -1,4 +1,4 @@
-'ue strict';
+'use strict';
 
 define(['./errcode'], function(ErrCode) {
 
