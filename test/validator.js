@@ -58,6 +58,4 @@ test(function(module, ErrCode, assert) {
 	assert(valObj.empty('helloworld'), false, 'empty false');
 	assert(valObj.errors.length, 0, 'empty errors.length');
 	valObj.reset();
-
-	//assert(valObj.str_minmax('username', 2, 5), true, 'validate valid condition');
 });

@@ -1,11 +1,11 @@
-'use strict';
+'ue strict';
 
 define(['./errcode'], function(ErrCode) {
 
-	var _ = function() {
+	var proto, _ = function() {
 		this.errors = [];
 	};
-	_.prototype = {
+	_.prototype = proto = {
 		addError: function(value, code, name) {
 			this.errors.push(new ErrCode(value, code, name));
 			return false;
@@ -92,7 +92,7 @@ define(['./errcode'], function(ErrCode) {
 		 * @return {Boolean} Return true is valid otherwise false.
 		*/
 		empty: function(val, name) {
-			if (!this.isset(val, name) || !String(val).trim()) {
+			if (!proto.isset.call(this, val, name) || !String(val).trim()) {
 				return !this.addError(val, ErrCode.INVALID_VALUE, name);
 			}
 			return false;

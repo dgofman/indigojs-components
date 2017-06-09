@@ -18,7 +18,7 @@ let passing = [],
 		require(path);
 	};
 
-var describe = (name, callback) => {
+const describe = (name, callback) => {
 	moduleName = name;
 	console.log('\n' + name);
 	callback();
@@ -44,16 +44,34 @@ describe('Should test errCode', () => {
 	include('./errCode.js');
 });
 
-describe('Should test validate', () => {
+describe('Should test validator', () => {
 	global.define = (rest, module) => {
-		var ErrCode = module();
+		const ErrCode = module();
 		global.test = (test) => {
 			global.define = (rest, module) => {
 				test(module, ErrCode, assert);
 			};
-			include('../js/utils/validate.js');
+			include('../js/utils/validator.js');
 		};
-		include('./validate.js');
+		include('./validator.js');
+	};
+	include('../js/utils/errcode.js');
+});
+
+describe('Should test modelValidator', () => {
+	global.define = (rest, module) => {
+		const ErrCode = module();
+		global.define = (rest, module) => {
+			const Validator = module(ErrCode);
+			global.test = (test) => {
+				global.define = (rest, module) => {
+					test(module, ErrCode, Validator, assert);
+				};
+				include('../js/utils/modelValidator.js');
+			};
+			include('./modelValidator.js');
+		};
+		include('../js/utils/validator.js');
 	};
 	include('../js/utils/errcode.js');
 });
