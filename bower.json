@@ -1,27 +1,17 @@
 {
 	"name": "indigojs",
-	"version": "3.0.2",
+	"version": "3.1.0",
 	"authors": [
 		"David Gofman <dgofman@gmail.com>"
 	],
 	"description": "IndigoJS components",
-	"directory": "web/default/",
-	"main": "",
 	"license": "MIT",
 	"homepage": "http://www.inidgojs.com",
 	"ignore": [
-		"**/.*",
-		".git",
-		"build",
-		"ejs",
-		"node_modules",
-		"bower_components",
-		"static",
-		"test",
-		"tests",
-		"favicon.ico",
-		"index.html",
-		"README.md",
-		"server.js"
+		"*",
+		"!components/*",
+		"!js/*",
+		"!less/*",
+		"!Gruntfile.js"
 	]
 }
