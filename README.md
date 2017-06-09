@@ -13,7 +13,6 @@ For improved performance and CPU usage, use [IndigoJS NodeJs framework](https://
 
 <a target='_blank' href="https://indigojs-components.herokuapp.com/index?core">Demo</a>
 
-[Link](https://example.org/ "title" target="_blank")
 
 ### Getting Started
  
