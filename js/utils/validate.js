@@ -2,13 +2,12 @@
 
 define(['./errcode'], function(ErrCode) {
 
-	var _ = function(model) {
-		this.model = model;
+	var _ = function() {
 		this.errors = [];
 	};
 	_.prototype = {
-		addError: function(name, code, details) {
-			this.errors.push(new ErrCode(name, code, details));
+		addError: function(value, code, name) {
+			this.errors.push(new ErrCode(value, code, name));
 			return false;
 		},
 
@@ -30,24 +29,73 @@ define(['./errcode'], function(ErrCode) {
 		},
 
 		/**
-		 * @param {String} name The model property name.
+		 * Retrieve min and max length of number.
+		 * @param {Mixed} val The variable to be checked.
 		 * @param {Number} [min] Minimum length allowed for model value.
 		 * @param {Number} [max] Maximum length allowed for model value.
+		 * @param {String} [name] Name of the field or variable.
 		 * @return {Boolean} Return true is valid otherwise false.
 		*/
-		minmax: function(name, min, max) {
-			var val = this.model[name];
+		minmax: function(val, min, max, name) {
+			val = parseFloat(val);
+			if (isNaN(val)) {
+				return this.addError(val, ErrCode.INVALID_VALUE, name);
+			}
+			if (val < min) {
+				return this.addError(val, ErrCode.INVALID_MIN, name);
+			}
+			if (max && val > max) {
+				return this.addError(val, ErrCode.INVALID_MAX, name);
+			}
+			return true;
+		},
+
+		/**
+		 * Retrieve min and max length of string.
+		 * @param {Mixed} val The variable to be checked.
+		 * @param {Number} [min] Minimum length allowed for model value.
+		 * @param {Number} [max] Maximum length allowed for model value.
+		 * @param {String} [name] Name of the field or variable.
+		 * @return {Boolean} Return true is valid otherwise false.
+		*/
+		str_minmax: function(val, min, max, name) {
 			if (typeof val !== 'string') {
-				return this.addError(name, ErrCode.INVALID_TYPE);
+				return this.addError(val, ErrCode.INVALID_VALUE, name);
 			}
 			val = val.trim();
 			if (val.length < min) {
-				return this.addError(name, ErrCode.INVALID_MIN_LENGTH);
+				return this.addError(val, ErrCode.INVALID_MIN, name);
 			}
 			if (max && val.length > max) {
-				return this.addError(name, ErrCode.INVALID_MAX_LENGTH);
+				return this.addError(val, ErrCode.INVALID_MAX, name);
 			}
 			return true;
+		},
+
+		/**
+		 * Determine if a variable is set and is not NULL
+		 * @param {Mixed} val The variable to be checked.
+		 * @param {String} [name] Name of the field or variable.
+		 * @return {Boolean} Return true is valid otherwise false.
+		*/
+		isset: function(val, name) {
+			if (val === undefined || val === null) {
+				return this.addError(val, ErrCode.INVALID_VALUE, name);
+			}
+			return true;
+		},
+
+		/**
+		 * Determine whether a string is empty.
+		 * @param {Mixed} val The variable to be checked.
+		 * @param {String} [name] Name of the field or variable.
+		 * @return {Boolean} Return true is valid otherwise false.
+		*/
+		empty: function(val, name) {
+			if (!this.isset(val, name) || !String(val).trim()) {
+				return !this.addError(val, ErrCode.INVALID_VALUE, name);
+			}
+			return false;
 		}
 	};
 	return _;

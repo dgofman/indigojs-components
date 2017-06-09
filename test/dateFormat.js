@@ -57,5 +57,4 @@ test(function(module, assert) {
 	assert(df.locale.time_am, 'AM', 'custom locale time_am');
 	assert(df.locale.time_pm, 'PM', 'custom locale time_pm');
 	assert(df.format(date, 'dateTimeLongFormat'), 'Sunday, June 04, 2006 03:02 AM', 'custom locale dateTimeLongFormat');
-
 });
