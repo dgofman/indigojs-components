@@ -2,18 +2,32 @@
 
 (function(top) {
 	var ig = top.indigoJS = top.indigoJS || {},
+		staticPath = ig.staticPath || '/static',
 		console = window.console;
 	ig.rootScope = ig.rootScope || {};
 	ig.wins = ig.wins || [];
 	ig.cssPath = ig.cssPath || function(uri, type, pkg, cls) {
-		return uri + '/' + pkg + '/' + cls + '.css';
+		if (ig.DEBUG && pkg !== 'jui') {
+			return (uri || staticPath + '/css/components/') + pkg + '/' + cls + '/' + cls + '.css';
+		} else {
+			return (uri || staticPath + '/css/') + pkg + 'Components.css';
+		}
 	};
 	ig.jsPath = ig.jsPath || function(uri, type, pkg, cls) {
-		return uri + '/' + pkg + '/' + cls + '.js';
+		if (ig.DEBUG && pkg !== 'jui') {
+			return (uri || 'components/') + pkg + '/' + cls + '/' + cls + '.js';
+		} else {
+			return (uri || staticPath + '/js/') + pkg + 'Components.min.js';
+		}
 	};
-	ig.jqPath = ig.jqPath || function() {
-		return uri + '/jquery/jquery-3.1.1' + (ig.DEBUG ? '' : '.min') + '.js';
+	ig.jqPath = ig.jqPath || function(uri) {
+		if (ig.DEBUG) {
+			return (uri || 'js/jquery/') + 'jquery-3.1.1.js';
+		} else {
+			return (uri || staticPath + '/js/') + 'jquery-3.1.1.min.js';
+		}
 	};
+
 	ig.debug = function() {
 		if (ig.DEBUG && console) {
 			console.log.apply(console, arguments);
@@ -132,7 +146,7 @@
 		ig.wins.push(window);
 	}
 	if (mains.length) {
-		addAsset('script', {type: 'text/javascript', src: 'js/indigo.js'});
+		addAsset('script', {type: 'text/javascript', src: ig.DEBUG ? 'js/indigo.js' : staticPath + '/js/indigo.min.js'});
 	}
 	addAsset('script', {type: 'text/javascript', src: ig.jqPath(uri)}, null, function(url, type) {
 		ig.wins.forEach(function(win) {

@@ -5,7 +5,8 @@ const fs = require('fs'),
 	UglifyJS = require('uglify-js'),
 	babel = require('babel-core'),
 	babelPlugins = ['transform-es2015-template-literals'],
-	regExp = /\/\*{{IMPORT:(.*)?}}\*\//;
+	regExp = /\/\*{{IMPORT:(.*)?}}\*\//,
+	staticDir = './build/static';
 
 module.exports = function(grunt) {
 
@@ -19,13 +20,13 @@ module.exports = function(grunt) {
 					{
 						expand: true,
 						src: ['./components/**/*.less'],
-						dest: './build/css',
+						dest: `${staticDir}/css`,
 						ext: '.css'
 					},
 					{
 						expand: true,
 						src: './ejs/styles.ejs',
-						dest: './build/css',
+						dest: `${staticDir}/css`,
 						ext: '.css'
 					}
 				]
@@ -36,9 +37,9 @@ module.exports = function(grunt) {
 					compress: true
 				},
 				files: {
-					'./build/css/igoComponents.css': ['./components/igo/**/*.less'],
-					'./build/css/juiComponents.css': ['./components/jui/**/*.less'],
-					'./build/css/index.css': ['./less/common.less', './less/indigo.less', './less/index.less'],
+					'./build/static/css/igoComponents.css': ['./components/igo/**/*.less'],
+					'./build/static/css/juiComponents.css': ['./components/jui/**/*.less'],
+					'./build/static/css/index.css': ['./less/common.less', './less/indigo.less', './less/index.less'],
 				}
 			}
 		}
@@ -47,7 +48,10 @@ module.exports = function(grunt) {
 	grunt.registerTask('uglify', function () {
 		const options = {
 			sourceMap: true,
-			warnings: true
+			warnings: true,
+			output: {
+				quote_style: 3
+			}
 		};
 
 		['igo', 'jui'].forEach(function(pkg) {
@@ -67,17 +71,51 @@ module.exports = function(grunt) {
 			if (result.error) {
 				console.error(result.error);
 			} else {
-				grunt.file.mkdir('./build/js');
-				fs.writeFileSync(path.resolve(__dirname, `build/js/${pkg}Components.min.js`), result.code);
-				fs.writeFileSync(path.resolve(__dirname, `build/js/${pkg}Components.map`), result.map);
+				grunt.file.mkdir(`${staticDir}/js`);
+				fs.writeFileSync(path.resolve(__dirname, `${staticDir}/js/${pkg}Components.min.js`), result.code);
+				fs.writeFileSync(path.resolve(__dirname, `${staticDir}/js/${pkg}Components.map`), result.map);
 			}
 		});
+
+		//compile builder.js, loader.js, indigo.js
+		['builder', 'loader', 'indigo'].forEach(function(file) {
+			let content = fs.readFileSync(path.resolve(__dirname, `js/${file}.js`), 'utf8');
+			const result = UglifyJS.minify(content, options);
+			if (result.error) {
+				console.error(result.error);
+			} else {
+				fs.writeFileSync(path.resolve(__dirname, `${staticDir}/js/${file}.min.js`), result.code);
+				fs.writeFileSync(path.resolve(__dirname, `${staticDir}/js/${file}.map`), result.map);
+			}
+		});
+
+		//utils files
+		let contents = {};
+		['request', 'dateFormat', 'errcode', 'validator', 'modelValidator', 'helper'].forEach(function(file) {
+			let content = fs.readFileSync(path.resolve(__dirname, `js/utils/${file}.js`), 'utf8');
+			contents[file + '.js'] = content;
+		});
+		const result = UglifyJS.minify(contents, options);
+		if (result.error) {
+			console.error(result.error);
+		} else {
+			fs.writeFileSync(path.resolve(__dirname, `${staticDir}/js/utils.js`), result.code);
+			fs.writeFileSync(path.resolve(__dirname, `${staticDir}/js/utils.map`), result.map);
+		}
 	});
 
 	grunt.registerTask('copy', function () {
-		const destDir = path.resolve(__dirname,'./build/css/images');
+		const destDir = path.resolve(__dirname,`${staticDir}/css/images`);
 		grunt.file.recurse(path.resolve(__dirname, `node_modules/jquery-ui/themes/base/images`), function(abspath, rootdir, subdir, filename) {
 			grunt.file.copy(abspath, path.resolve(destDir, filename));
+		});
+
+		grunt.file.recurse(path.resolve(__dirname, `js/jquery`), function(abspath, rootdir, subdir, filename) {
+			grunt.file.copy(abspath, path.resolve(__dirname, `${staticDir}/js`, filename));
+		});
+
+		grunt.file.recurse(path.resolve(__dirname, `js/ejs`), function(abspath, rootdir, subdir, filename) {
+			grunt.file.copy(abspath, path.resolve(__dirname, `${staticDir}/js`, filename));
 		});
 	});
 

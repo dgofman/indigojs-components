@@ -128,9 +128,8 @@
 			parent.innerHTML = html;
 
 			var script = document.createElement('script');
-			script.src = 'js/loader.js';
+			script.src = ig.DEBUG ? 'js/loader.js' : staticPath + '/js/loader.min.js';
 			script.setAttribute('rel', 'igocore');
-			script.setAttribute('uri', 'build/css');
 			script.setAttribute('libs', libs.join(','));
 			parent.appendChild(script);
 

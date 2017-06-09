@@ -8,7 +8,7 @@
 </script>
 
 <%
-	var icon = baseStaticPath + '/images/indigo.png';
+	var icon = '/images/indigo.png';
 
 	var customDay = [1,2,3,4,5,6,7],
 		customMonth = ['J1','F2','M3','A4','M5', 'J6', 'J7', 'A8', 'S9', 'O10', 'N11', 'D12'];
@@ -63,7 +63,7 @@
 		<li><a href="/index?igo#textarea">TextArea</a></li>
 		<li><a href="/index?igo#togglebox">ToggleBox</a></li>
 		<li><a href="/index?igo#tooltip">Tooltip</a></li>
-		<br/><br/>
+		<br/><hr/>
 		<li><a href="/index?core">IndigoJS Core</a></li>
 	</ul>
 </div>
@@ -435,29 +435,29 @@
 			<b>Example:</b>
 			Setting image url
 		</p>
-		<%- code('igoImage', {url: `<i>'${baseStaticPath}/images/indigo.png'</i>`}) %>
-		<%- $('igoImage', {url: `${baseStaticPath}/images/indigo.png`}) %><hr/>
+		<%- code('igoImage', {url: `<i>'/images/indigo.png'</i>`}) %>
+		<%- $('igoImage', {url: `/images/indigo.png`}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Image sizing using pixels
 		</p>
-		<%- code('igoImage', {url: `'${baseStaticPath}/images/indigo.png'`, width: `<i>30</i>`, height: `<i>30</i>`}) %>
-		<%- $('igoImage', {url: `${baseStaticPath}/images/indigo.png`, width: 30, height: 30, title: 'indigo JS'}) %><hr/>
+		<%- code('igoImage', {url: `'/images/indigo.png'`, width: `<i>30</i>`, height: `<i>30</i>`}) %>
+		<%- $('igoImage', {url: '/images/indigo.png', width: 30, height: 30, title: 'indigo JS'}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Image sizing using em and title
 		</p>
-		<%- code('igoImage', {url: `'${baseStaticPath}/images/indigo.png'`, width: `<i>'2em'</i>`, height: `<i>'2em'</i>`, title: `<i>'indigo JS'</i>`}) %>
-		<%- $('igoImage', {url: `${baseStaticPath}/images/indigo.png`, width: '2em', height: '2em', title: 'indigo JS'}) %><hr/>
+		<%- code('igoImage', {url: `'/images/indigo.png'`, width: `<i>'2em'</i>`, height: `<i>'2em'</i>`, title: `<i>'indigo JS'</i>`}) %>
+		<%- $('igoImage', {url: '/images/indigo.png', width: '2em', height: '2em', title: 'indigo JS'}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Using IMG tag
 		</p>
-		<%- code('igoImage', {url: `'${baseStaticPath}/images/indigo.png'`, img: `<i>true</i>`}) %>
-		<%- $('igoImage', {url: `${baseStaticPath}/images/indigo.png`, img: true}) %><hr/>
+		<%- code('igoImage', {url: `'/images/indigo.png'`, img: `<i>true</i>`}) %>
+		<%- $('igoImage', {url: '/images/indigo.png', img: true}) %><hr/>
 	</div>
 
 	<h1 id="input">Input</h1>
@@ -515,7 +515,7 @@
 		<style>
 			.icon>p:before {
 				width: 16px;
-				background-image: url('<%- baseStaticPath %>/images/flags.png'); 
+				background-image: url('/images/flags.png'); 
 				background-repeat: no-repeat;
 				line-height: 1.1;
 			}

@@ -19,7 +19,7 @@ define(['window'], function(win) {
 				return str;
 			},
 
-			scrollView(comp) {
+			scrollView: function(comp) {
 				comp.$el[0].scrollIntoView(true);
 			}
 		};

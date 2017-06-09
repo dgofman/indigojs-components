@@ -8,7 +8,7 @@
 </script>
 
 <%
-	var icon = baseStaticPath + '/images/indigo.png';
+	var icon = '/images/indigo.png';
 
 	var customDay = [1,2,3,4,5,6,7],
 		customMonth = ['J1','F2','M3','A4','M5', 'J6', 'J7', 'A8', 'S9', 'O10', 'N11', 'D12'];
@@ -82,7 +82,7 @@
 		<li><a href="/index?jui#juispinner">Spinner</a></li>
 		<li><a href="/index?jui#juitabs">Tabs</a></li>
 		<li><a href="/index?jui#juitooltip">Tooltip</a></li>
-		<br/><br/>
+		<br/><hr/>
 		<li><a href="/index?core">IndigoJS Core</a></li>
 	</ul>
 </div>
@@ -359,11 +359,11 @@
 			Using customized <code>itemRenderer</code>
 		</p>
 		<%- code('juiDropdown', {menus: `[
-			{lf: 'Menu1', icon: 'ui-icon-script'}, {lf: 'Menu2', icon: '<i>ui-icon-image</i>', style: '<i>color: green !important; font-weight: bold</i>'}, {lf: 'Menu3', icon_style: '<i>background-image: url(/static/images/indigo.png); background-size: contain</i>', selected: true}]`, 
+			{lf: 'Menu1', icon: 'ui-icon-script'}, {lf: 'Menu2', icon: '<i>ui-icon-image</i>', style: '<i>color: green !important; font-weight: bold</i>'}, {lf: 'Menu3', icon_style: '<i>background-image: url(/images/indigo.png); background-size: contain</i>', selected: true}]`, 
 			labelField: 'lf', itemRenderer: `<i>customItemRenderer</i>`}) %>
 
 		<%- $('juiDropdown', {menus: [
-			{lf: 'Menu1', icon: 'ui-icon-script'}, {lf: 'Menu2', icon: 'ui-icon-image', style: 'color: green !important; font-weight: bold'}, {lf: 'Menu3', icon_style: 'background-image: url(/static/images/indigo.png); background-size: contain', selected: true}], 
+			{lf: 'Menu1', icon: 'ui-icon-script'}, {lf: 'Menu2', icon: 'ui-icon-image', style: 'color: green !important; font-weight: bold'}, {lf: 'Menu3', icon_style: 'background-image: url(/images/indigo.png); background-size: contain', selected: true}], 
 			labelField: 'lf', itemRenderer: customItemRenderer}) %><hr/>
 
 		<p>
