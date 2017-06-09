@@ -2,7 +2,7 @@
 
 https://travis-ci.org/dgofman/indigojs-components.svg?branch=master
 
-[![NPM version](https://badge.fury.io/js/indigojs-components.svg)](http://badge.fury.io/js/indigojs-components) [![Build Status](https://travis-ci.org/dgofman/indigojs-components.svg?branch=master)](https://travis-ci.org/dgofman/indigojs-components) [![Coverage Status](https://coveralls.io/repos/dgofman/indigojs/badge.svg?branch=master)](https://coveralls.io/r/dgofman/indigojs?branch=master) [![Dependency Status](https://david-dm.org/dgofman/indigojs.svg)](https://david-dm.org/dgofman/indigojs) [![devDependency Status](https://david-dm.org/dgofman/indigojs/dev-status.svg)](https://david-dm.org/dgofman/indigojs#info=devDependencies)
+[![NPM version](https://badge.fury.io/js/indigojs-components.svg)](http://badge.fury.io/js/indigojs-components) [![Build Status](https://travis-ci.org/dgofman/indigojs-components.svg?branch=master)](https://travis-ci.org/dgofman/indigojs-components) [![Coverage Status](https://coveralls.io/repos/github/dgofman/indigojs-components/badge.svg?branch=master)](https://coveralls.io/github/dgofman/indigojs-components?branch=master)
 
 
 This client-side framework is based on [EJS templates](https://github.com/mde/ejs/releases/latest) and [JQuery](http://jquery.com/). The IndigoJS-components library allows for the creation of UI components on HTML pages at runtime.
