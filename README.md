@@ -11,6 +11,9 @@ Javascript and EJS templates are created on the **browser** using ES5 standards,
 For improved performance and CPU usage, use [IndigoJS NodeJs framework](https://github.com/dgofman/indigojs) to render EJS templates and compile LESS/CSS  on the **server side** .
 
 
+Demo: https://indigojs-components.herokuapp.com/index?core
+
+
 ### Getting Started
  
  
