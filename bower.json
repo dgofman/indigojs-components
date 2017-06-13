@@ -1,6 +1,6 @@
 {
 	"name": "components",
-	"version": "3.1.0",
+	"version": "3.5.0",
 	"authors": [
 		"David Gofman <dgofman@gmail.com>"
 	],
@@ -13,6 +13,7 @@
 		"!jui/**/*",
 		"!js/**/*",
 		"!less/**/*",
-		"!Gruntfile.js"
+		"!Gruntfile.js",
+		"!package.json"
 	]
 }
