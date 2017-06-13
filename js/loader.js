@@ -22,7 +22,7 @@
 	};
 	ig.jqPath = ig.jqPath || function(uri) {
 		if (ig.DEBUG) {
-			return (uri || 'js/jquery/') + 'jquery-3.1.1.js';
+			return (uri || '') + 'js/jquery/jquery-3.1.1.js';
 		} else {
 			return (uri || staticPath + '/js/') + 'jquery-3.1.1.min.js';
 		}
