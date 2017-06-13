@@ -1,9 +1,9 @@
 {
 	"name": "indigojs-components",
-	"version": "v3.2.1",
+	"version": "v3.5.1",
 	"config": {
-		"old_tag": "v3.2.2",
-		"new_tag": "v3.2.3"
+		"old_tag": "v3.2.3",
+		"new_tag": "v3.5.1"
 	},
 	"scripts": {
 		"start": "node server.js",
@@ -14,6 +14,7 @@
 		"win_remove_tag": "git push --delete origin %npm_package_config_old_tag% && git tag --delete %npm_package_config_old_tag%",
 		"win_create_tag": "git tag %npm_package_config_new_tag% && git push origin --tags",
 		"bower_register": "bower register indigojs-components https://github.com/dgofman/indigojs-components.git",
+		"bower_unregister": "bower unregister indigojs-components && bower cache clean",
 		"postinstall": "grunt"
 	},
 	"dependencies": {

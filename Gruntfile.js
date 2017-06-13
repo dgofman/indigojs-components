@@ -161,6 +161,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 
 	grunt.registerTask('default', ['less', 'uglify', 'ejs', 'copy']);
+	grunt.registerTask('static', ['less', 'uglify']);
 };
 
 function babelCode(src) {
