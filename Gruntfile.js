@@ -6,7 +6,8 @@ const fs = require('fs'),
 	babel = require('babel-core'),
 	babelPlugins = ['transform-es2015-template-literals'],
 	regExp = /\/\*{{IMPORT:(.*)?}}\*\//,
-	staticDir = './build/static';
+	staticDir = './build/static',
+	components = ['igo', 'jui'];
 
 module.exports = function(grunt) {
 
@@ -19,7 +20,7 @@ module.exports = function(grunt) {
 				files: [
 					{
 						expand: true,
-						src: ['./components/**/*.less'],
+						src: ['./igo/**/*.less', './jui/**/*.less'],
 						dest: `${staticDir}/css`,
 						ext: '.css'
 					},
@@ -37,8 +38,8 @@ module.exports = function(grunt) {
 					compress: true
 				},
 				files: {
-					'./build/static/css/igoComponents.css': ['./components/igo/**/*.less'],
-					'./build/static/css/juiComponents.css': ['./components/jui/**/*.less'],
+					'./build/static/css/igoComponents.css': ['./igo/**/*.less'],
+					'./build/static/css/juiComponents.css': ['./jui/**/*.less'],
 					'./build/static/css/index.css': ['./less/common.less', './less/indigo.less', './less/index.less'],
 				}
 			}
@@ -54,9 +55,9 @@ module.exports = function(grunt) {
 			}
 		};
 
-		['igo', 'jui'].forEach(function(pkg) {
+		components.forEach(function(pkg) {
 			let contents = [];
-			grunt.file.recurse(path.resolve(__dirname, `components/${pkg}`), function(abspath, rootdir, subdir, filename) {
+			grunt.file.recurse(path.resolve(__dirname, pkg), function(abspath, rootdir, subdir, filename) {
 				if (filename.split('.').pop() === 'js') {
 					let content = fs.readFileSync(abspath, 'utf8');
 					content = content.replace(new RegExp(regExp, 'g'), function(comment) {
@@ -121,10 +122,9 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('ejs', function () {
 		console.log('Compiling components...');
-		let compDir = path.resolve(__dirname, 'components');
-		fs.readdirSync(compDir).forEach(function(pkg) { //class package
+		components.forEach(function(pkg) {
 			let contents = [],
-				dir = path.resolve(compDir, pkg);
+				dir = path.resolve(__dirname, pkg);
 			fs.readdirSync(dir).forEach(function(file) {
 				let cls = pkg + file.charAt(0).toUpperCase() + file.substring(1),
 					absPath = path.resolve(dir, file, file + '.ejs');

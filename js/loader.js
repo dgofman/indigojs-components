@@ -8,14 +8,14 @@
 	ig.wins = ig.wins || [];
 	ig.cssPath = ig.cssPath || function(uri, type, pkg, cls) {
 		if (ig.DEBUG && pkg !== 'jui') {
-			return (uri || staticPath + '/css/components/') + pkg + '/' + cls + '/' + cls + '.css';
+			return (uri || staticPath + '/css/') + pkg + '/' + cls + '/' + cls + '.css';
 		} else {
 			return (uri || staticPath + '/css/') + pkg + 'Components.css';
 		}
 	};
 	ig.jsPath = ig.jsPath || function(uri, type, pkg, cls) {
 		if (ig.DEBUG && pkg !== 'jui') {
-			return (uri || 'components/') + pkg + '/' + cls + '/' + cls + '.js';
+			return (uri || '') + pkg + '/' + cls + '/' + cls + '.js';
 		} else {
 			return (uri || staticPath + '/js/') + pkg + 'Components.min.js';
 		}

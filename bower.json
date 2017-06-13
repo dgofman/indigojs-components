@@ -9,8 +9,8 @@
 	"homepage": "http://www.inidgojs.com",
 	"ignore": [
 		"*",
-		"!**/igo/**/*",
-		"!**/jui/**/*",
+		"!igo/**/*",
+		"!jui/**/*",
 		"!js/**/*",
 		"!less/**/*",
 		"!Gruntfile.js"
