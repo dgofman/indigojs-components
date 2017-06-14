@@ -18,10 +18,16 @@ const requestHandler = (req, res) => {
 		});
 		return res.end();
 	}
-	const filePath = req.url.indexOf('/index') === 0 ? 'index.html' : req.url.substring(1);
+	let filePath = req.url.indexOf('/index') === 0 ? 'index.html' : req.url.substring(1),
+		arr = filePath.split('.'),
+		ext = arr.pop();
+
+	if (ext === 'less') {
+		filePath = 'build/css/' + arr.join('.') + '.css';
+	}
+
 	fs.exists(filePath, exists => {
 		if (exists) {
-			const ext = filePath.split('.').pop();
 			if (mimeTypes[ext]) {
 				res.writeHead(200, {
 					'Content-Type': mimeTypes[ext]

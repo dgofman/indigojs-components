@@ -7,24 +7,25 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta name="author" content="David Gofman">
 
-<link rel="stylesheet" type="text/css" href="build/static/css/index.css">
+<link rel="stylesheet" type="text/css" href="build/css/index.css">
 
-<script type="text/javascript" src="build/static/js/ejs.min.js"></script>
+<script type="text/javascript" src="build/js/ejs.min.js"></script>
 
 <!-- juiSpinner Localization -->
 <script type="text/javascript" src="https://jqueryui.com/resources/demos/external/globalize/globalize.js"></script>
 <script type="text/javascript" src="https://jqueryui.com/resources/demos/external/globalize/globalize.culture.ja-JP.js"></script>
 
 <!-- Source Code styling -->
-<link rel="stylesheet" type="text/css" href="build/static/css/ejs/styles.css">
+<link rel="stylesheet" type="text/css" href="build/css/ejs/styles.css">
 
 <script type="text/javascript">
 	var indigoJS = {
-		DEBUG: false,
+		DEBUG: true,
 		INFO: false,
-		contextPath: '',
-		staticPath: 'build/static',
-		componentPath: '/components',
+		contextPath: '', //application URI
+		buildPath: 'build', //URI to grunt target files
+		staticPath: '/static', //URI to static files (images, fonts, PDF, vendor files etc.) 
+		componentPath: '/components' //URI to components source files
 	};
 
 	function printSource(id) {
@@ -46,7 +47,7 @@
 	<section class="igo-content jui"></section>
 	<section class="igo-content core"></section>
 
-	<script type="text/javascript" src="build/static/js/builder.min.js" id="builder"></script>
+	<script type="text/javascript" src="build/js/builder.min.js" id="builder"></script>
 
 	<script type="text/javascript">
 		var contents = document.querySelectorAll('.igo-content'),
