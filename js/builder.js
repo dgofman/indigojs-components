@@ -2,7 +2,7 @@
 
 (function(ig) {
 	var staticPath = ig.staticPath || '/static',
-		buildPath = ig.buildPath || '/build',
+		contextPath = ig.contextPath || './build',
 		targets = document.querySelectorAll('[indigo-builder]'),
 		componentIndex = 0,
 		packages = {},
@@ -30,8 +30,8 @@
 		},
 		createModel = function(model, opts) {
 			model = model || {};
+			model.contextPath = contextPath,
 			model.baseStaticPath = staticPath,
-			model.baseBuildPath = buildPath,
 			model.opts = opts || {},
 			model.$ = function(type, opts) {
 				var begin, html = '';
@@ -130,9 +130,9 @@
 			parent.innerHTML = html;
 
 			var script = document.createElement('script');
-			script.src = ig.DEBUG ? 'js/loader.js' : buildPath + '/js/loader.min.js';
+			script.src = ig.DEBUG ? 'js/loader.js' : contextPath + '/static/js/loader.min.js';
 			if (ig.DEBUG === false) {
-				script.setAttribute('uri', 'build/');
+				script.setAttribute('uri', contextPath);
 			}
 			script.setAttribute('rel', 'igocore');
 			script.setAttribute('libs', libs.join(','));

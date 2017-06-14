@@ -23,7 +23,7 @@ const requestHandler = (req, res) => {
 		ext = arr.pop();
 
 	if (ext === 'less') {
-		filePath = 'build/css/' + arr.join('.') + '.css';
+		filePath = 'build/static/css/' + arr.join('.') + '.css';
 	}
 
 	fs.exists(filePath, exists => {

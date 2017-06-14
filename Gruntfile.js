@@ -10,9 +10,10 @@ const fs = require('fs'),
 
 module.exports = (grunt) => {
 
-	const buildPath = grunt.option('buildPath') || './build';
+	const buildPath = grunt.option('buildPath') || './build',
+		buildStaticPath = `${buildPath}/static`;
 
-	console.log('buildPath: ' + buildPath);
+	console.log('buildPath: ' + buildPath + '\n' + path.resolve(__dirname, buildPath) + '\n');
 
 	grunt.initConfig({
 		less: {
@@ -24,13 +25,13 @@ module.exports = (grunt) => {
 					{
 						expand: true,
 						src: ['./igo/**/*.less', './jui/**/*.less'],
-						dest: `${buildPath}/css`,
+						dest: `${buildStaticPath}/css`,
 						ext: '.css'
 					},
 					{
 						expand: true,
 						src: './ejs/styles.ejs',
-						dest: `${buildPath}/css`,
+						dest: `${buildStaticPath}/css`,
 						ext: '.css'
 					}
 				]
@@ -43,19 +44,19 @@ module.exports = (grunt) => {
 				files: [
 					{
 						src: ['./igo/**/*.less'],
-						dest: `${buildPath}/css/igoComponents.css`
+						dest: `${buildStaticPath}/css/igoComponents.css`
 					},
 					{
 						src: ['./jui/**/*.less'],
-						dest: `${buildPath}/css/juiComponents.css`
+						dest: `${buildStaticPath}/css/juiComponents.css`
 					},
 					{
 						src: ['./less/index.less'],
-						dest: `${buildPath}/css/index.css`
+						dest: `${buildStaticPath}/css/index.css`
 					},
 					{
 						src: ['./less/indigo.less'],
-						dest: `${buildPath}/css/indigo.css`
+						dest: `${buildStaticPath}/css/indigo.css`
 					}
 				]
 			}
@@ -63,7 +64,7 @@ module.exports = (grunt) => {
 	});
 
 	grunt.registerTask('uglify', () => {
-		const destDir = path.resolve(__dirname,`${buildPath}/js`);
+		const destDir = path.resolve(__dirname,`${buildStaticPath}/js`);
 		if (!fs.existsSync(destDir)) {
 			fs.mkdirSync(destDir);
 		}
@@ -79,14 +80,14 @@ module.exports = (grunt) => {
 					contents[`/${pkg}/${subdir}/${filename}`] = content;
 				}
 			});
-			uglify(contents, `${pkg}Components`, buildPath);
+			uglify(contents, `${pkg}Components`, buildStaticPath);
 		});
 
 		//compile builder.js, loader.js, indigo.js
 		['builder', 'loader', 'indigo'].forEach(file => {
 			const contents = {};
 			contents[`/js/${file}.js`] = fs.readFileSync(path.resolve(__dirname, `js/${file}.js`), 'utf8');
-			uglify(contents, `${file}`, buildPath);
+			uglify(contents, `${file}`, buildStaticPath);
 		});
 
 		//utils files
@@ -95,21 +96,21 @@ module.exports = (grunt) => {
 			let content = fs.readFileSync(path.resolve(__dirname, `js/utils/${file}.js`), 'utf8');
 			contents[`/js/utils/${file}.js`] = content;
 		});
-		uglify(contents, 'utils', buildPath);
+		uglify(contents, 'utils', buildStaticPath);
 	});
 
 	grunt.registerTask('copy', () => {
-		const destDir = path.resolve(__dirname,`${buildPath}/css/images`);
+		const destDir = path.resolve(__dirname,`${buildStaticPath}/css/images`);
 		grunt.file.recurse(path.resolve(__dirname, `node_modules/jquery-ui/themes/base/images`), (abspath, rootdir, subdir, filename) => {
 			grunt.file.copy(abspath, path.resolve(destDir, filename));
 		});
 
 		grunt.file.recurse(path.resolve(__dirname, `js/jquery`), (abspath, rootdir, subdir, filename) => {
-			grunt.file.copy(abspath, path.resolve(__dirname, `${buildPath}/js`, filename));
+			grunt.file.copy(abspath, path.resolve(__dirname, `${buildStaticPath}/js`, filename));
 		});
 
 		grunt.file.recurse(path.resolve(__dirname, `js/ejs`), (abspath, rootdir, subdir, filename) => {
-			grunt.file.copy(abspath, path.resolve(__dirname, `${buildPath}/js`, filename));
+			grunt.file.copy(abspath, path.resolve(__dirname, `${buildStaticPath}/js`, filename));
 		});
 	});
 
@@ -134,7 +135,7 @@ module.exports = (grunt) => {
 					contents.push('');
 				}
 			});
-			fs.writeFileSync(path.resolve(__dirname, `build/${pkg}Components.html`), contents.join('\n'));
+			fs.writeFileSync(path.resolve(__dirname, `${buildPath}/${pkg}Components.html`), contents.join('\n'));
 		});
 
 		console.log('Compiling ejs contents...');
@@ -166,7 +167,7 @@ const babelCode = (src) => {
 	});
 };
 
-const uglify = (contents, file, buildPath) => {
+const uglify = (contents, file, buildStaticPath) => {
 	let options = {
 		warnings: true,
 		output: {
@@ -182,7 +183,7 @@ const uglify = (contents, file, buildPath) => {
 	if (result.error) {
 		console.error(result.error);
 	} else {
-		fs.writeFileSync(path.resolve(__dirname, `${buildPath}/js/${options.sourceMap.filename}`), result.code);
-		fs.writeFileSync(path.resolve(__dirname, `${buildPath}/js/${options.sourceMap.url}`), result.map);
+		fs.writeFileSync(path.resolve(__dirname, `${buildStaticPath}/js/${options.sourceMap.filename}`), result.code);
+		fs.writeFileSync(path.resolve(__dirname, `${buildStaticPath}/js/${options.sourceMap.url}`), result.map);
 	}
 };

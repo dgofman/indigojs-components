@@ -1,9 +1,9 @@
 {
 	"name": "indigojs-components",
-	"version": "v3.5.3",
+	"version": "v3.5.5",
 	"config": {
-		"old_tag": "v3.5.2",
-		"new_tag": "v3.5.3"
+		"old_tag": "v3.5.4",
+		"new_tag": "v3.5.5"
 	},
 	"scripts": {
 		"start": "node server.js",
