@@ -1,6 +1,6 @@
 # [Indigo JS](http://indigojs.com/) Components
 
-[![NPM version](https://badge.fury.io/js/indigojs-components.svg)](http://badge.fury.io/js/indigojs-components) [![Build Status](https://travis-ci.org/dgofman/indigojs-components.svg?branch=master)](https://travis-ci.org/dgofman/indigojs-components) [![Coverage Status](https://coveralls.io/repos/github/dgofman/indigojs-components/badge.svg?branch=master)](https://coveralls.io/github/dgofman/indigojs-components?branch=master)
+[![NPM version](https://badge.fury.io/js/indigojs-components.svg)](http://badge.fury.io/js/indigojs-components) [![Build Status](https://travis-ci.org/dgofman/indigojs-components.svg?branch=master)](https://travis-ci.org/dgofman/indigojs-components) [![Coverage Status](https://coveralls.io/repos/github/dgofman/indigojs-components/badge.svg?branch=master)](https://coveralls.io/github/dgofman/indigojs-components?branch=master) [![Dependency Status](https://david-dm.org/dgofman/indigojs-components.svg)](https://david-dm.org/dgofman/indigojs-components) [![devDependency Status](https://david-dm.org/dgofman/indigojs-components/dev-status.svg)](https://david-dm.org/dgofman/indigojs-components#info=devDependencies)
 
 [![NPM](https://nodei.co/npm/indigojs-components.png?downloads=true&downloadRank=true)](https://www.npmjs.com/package/indigojs-components)
 

@@ -47,6 +47,10 @@ module.exports = (grunt) => {
 	});
 
 	grunt.registerTask('uglify', () => {
+		const destDir = path.resolve(__dirname,`${staticDir}/js`);
+		if (!fs.existsSync(destDir)) {
+			fs.mkdirSync(destDir);
+		}
 		packages.forEach(pkg => {
 			let contents = {};
 			grunt.file.recurse(path.resolve(__dirname, pkg), (abspath, rootdir, subdir, filename) => {
