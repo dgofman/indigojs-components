@@ -129,6 +129,9 @@
 
 			var script = document.createElement('script');
 			script.src = ig.DEBUG ? 'js/loader.js' : staticPath + '/js/loader.min.js';
+			if (ig.DEBUG === false) {
+				script.setAttribute('uri', 'build/');
+			}
 			script.setAttribute('rel', 'igocore');
 			script.setAttribute('libs', libs.join(','));
 			parent.appendChild(script);

@@ -2,29 +2,35 @@
 
 (function(top) {
 	var ig = top.indigoJS = top.indigoJS || {},
-		staticPath = ig.staticPath || '/static',
 		console = window.console;
 	ig.rootScope = ig.rootScope || {};
 	ig.wins = ig.wins || [];
 	ig.cssPath = ig.cssPath || function(uri, type, pkg, cls) {
 		if (ig.DEBUG && pkg !== 'jui') {
-			return (uri || staticPath + '/css/') + pkg + '/' + cls + '/' + cls + '.css';
+			return (uri || '') + pkg + '/' + cls + '/' + cls + '.css';
 		} else {
-			return (uri || staticPath + '/css/') + pkg + 'Components.css';
+			return uri + 'static/css/' + pkg + 'Components.css';
 		}
 	};
 	ig.jsPath = ig.jsPath || function(uri, type, pkg, cls) {
 		if (ig.DEBUG && pkg !== 'jui') {
 			return (uri || '') + pkg + '/' + cls + '/' + cls + '.js';
 		} else {
-			return (uri || staticPath + '/js/') + pkg + 'Components.min.js';
+			return uri + 'static/js/' + pkg + 'Components.min.js';
 		}
 	};
 	ig.jqPath = ig.jqPath || function(uri) {
 		if (ig.DEBUG) {
 			return (uri || '') + 'js/jquery/jquery-3.1.1.js';
 		} else {
-			return (uri || staticPath + '/js/') + 'jquery-3.1.1.min.js';
+			return uri + 'static/js/jquery-3.1.1.min.js';
+		}
+	};
+	ig.corePath = ig.corePath || function(uri) {
+		if (ig.DEBUG) {
+			return (uri || '') + 'js/indigo.js';
+		} else {
+			return uri + 'static/js/indigo.min.js';
 		}
 	};
 
@@ -61,9 +67,9 @@
 		loadedCss = ig.loadedCss = ig.loadedCss || {},
 		loadedJs = ig.loadedJs = ig.loadedJs || {},
 		addAsset = function(tag, attrs, type, onload) {
-			var el, url = tag + (tag === 'link' ? '[href="' + attrs.href + '"]' : '[src="' + attrs.src + '"]');
+			var url = tag + (tag === 'link' ? '[href="' + attrs.href + '"]' : '[src="' + attrs.src + '"]');
 			if (!head.querySelector(url)) {
-				el = document.createElement(tag);
+				var el = document.createElement(tag);
 				for (var key in attrs) {
 					el[key] = attrs[key];
 				}
@@ -72,7 +78,6 @@
 				};
 				head.appendChild(el);
 			}
-			return el;
 		},
 		loadHandler = function(url, ctype) {
 			if (!top._jQueryFactory) {
@@ -146,7 +151,7 @@
 		ig.wins.push(window);
 	}
 	if (mains.length) {
-		addAsset('script', {type: 'text/javascript', src: ig.DEBUG ? 'js/indigo.js' : staticPath + '/js/indigo.min.js'});
+		addAsset('script', {type: 'text/javascript', src: ig.corePath(uri)});
 	}
 	addAsset('script', {type: 'text/javascript', src: ig.jqPath(uri)}, null, function(url, type) {
 		ig.wins.forEach(function(win) {
