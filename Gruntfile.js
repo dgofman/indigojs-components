@@ -53,10 +53,6 @@ module.exports = (grunt) => {
 					{
 						src: ['./less/index.less'],
 						dest: `${buildStaticPath}/css/index.css`
-					},
-					{
-						src: ['./less/indigo.less'],
-						dest: `${buildStaticPath}/css/indigo.css`
 					}
 				]
 			}

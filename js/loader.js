@@ -2,7 +2,12 @@
 
 (function(top) {
 	var ig = top.indigoJS = top.indigoJS || {},
-		console = window.console;
+		win = window, console = win.console;
+
+	win.indigoMain = function(callback) {
+		callback(win.$, win.indigoJS, win.indigoLocales);
+	};
+
 	ig.rootScope = ig.rootScope || {};
 	ig.wins = ig.wins || [];
 	ig.cssPath = ig.cssPath || function(uri, type, pkg, cls) {
@@ -74,7 +79,7 @@
 					el[key] = attrs[key];
 				}
 				el.onload = function() {
-					(onload || loadHandler)(url, type);
+					(onload || loadHandler)(url, type, el);
 				};
 				head.appendChild(el);
 			}
@@ -142,16 +147,20 @@
 					});
 				}
 				for (var j = 0; j < mains.length; j++) {
-					addAsset('script', {type: 'text/javascript', src: mains[j].value});
+					addAsset('script', {type: 'text/javascript', src: mains[j].value}, null, function(url, type, el) {
+						document.head.removeChild(el);
+					});
 				}
 			}
 		};
 
-	if (ig.wins.indexOf(window) === -1) {
-		ig.wins.push(window);
+	if (ig.wins.indexOf(win) === -1) {
+		ig.wins.push(win);
 	}
 	if (mains.length) {
-		addAsset('script', {type: 'text/javascript', src: ig.corePath(uri)});
+		addAsset('script', {type: 'text/javascript', src: ig.corePath(uri)}, null, function(url, type, el) {
+			document.head.removeChild(el);
+		});
 	}
 	addAsset('script', {type: 'text/javascript', src: ig.jqPath(uri)}, null, function(url, type) {
 		ig.wins.forEach(function(win) {
@@ -166,27 +175,29 @@
 		});
 		loadHandler(url, type);
 		if (ig.jqueryReady) {
-			ig.jqueryReady(window.$);
+			ig.jqueryReady(win.$);
 		}
 	});
 
 	libs.forEach(function(lib) {
-		var type = lib.replace('!', ''),
-			pair = type.split(/(?=[A-Z])/);
-			var pkg = pair[0],
-			cls = pair[1].toLowerCase();
-		if (loadedJs[type] === undefined) {
-			if (lib.charAt(0) !== '!') { //exclude script
-				loadedJs[type] = 0;
-				addAsset('script', {type: 'text/javascript', src: ig.jsPath(uri, type, pkg, cls)}, type);
+		if (lib.length) {
+			var type = lib.replace('!', ''),
+				pair = type.split(/(?=[A-Z])/);
+				var pkg = pair[0],
+				cls = pair[1].toLowerCase();
+			if (loadedJs[type] === undefined) {
+				if (lib.charAt(0) !== '!') { //exclude script
+					loadedJs[type] = 0;
+					addAsset('script', {type: 'text/javascript', src: ig.jsPath(uri, type, pkg, cls)}, type);
+				}
 			}
-		}
-		if (loadedCss[type] === undefined) {
-			if (lib.charAt(lib.length - 1) !== '!') { //exclude link
-				loadedCss[type] = 0;
-				addAsset('link', {rel: 'stylesheet', type: 'text/css', href: ig.cssPath(uri, type, pkg, cls)}, type);
-			} else {
-				loadedCss[type] = 1;
+			if (loadedCss[type] === undefined) {
+				if (lib.charAt(lib.length - 1) !== '!') { //exclude link
+					loadedCss[type] = 0;
+					addAsset('link', {rel: 'stylesheet', type: 'text/css', href: ig.cssPath(uri, type, pkg, cls)}, type);
+				} else {
+					loadedCss[type] = 1;
+				}
 			}
 		}
 	});

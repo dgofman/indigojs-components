@@ -4,7 +4,7 @@ function igoRadiogroup($) {
 
 	return {
 		preinit: function(el) {
-			this.getRadios(el).filter('[value=' + el.text() + ']').prop('checked', true);
+			this.getRadios(el).filter('[value="' + el.text() + '"]').prop('checked', true);
 		},
 
 		init: function(el, self) {
@@ -35,7 +35,7 @@ function igoRadiogroup($) {
 		},
 
 		getRadios: function(el) {
-			return $('[cid=radio]>label>input[name="' + el.attr('id') + '"]');
+			return $('[_=igoRadio]>label>input[name="' + el.attr('id') + '"]');
 		},
 
 		class: function(name, isAdd) {
