@@ -154,7 +154,7 @@
 				}
 			};
 		if (parent.length !== 1) {
-			console.log('WARN: namespace expected only one matching selector: ' + parent.length);
+			top.console.log('WARN: namespace expected only one matching selector: ' + parent.length);
 		}
 		if (callbak) { callbak(ns); }
 		return ns;

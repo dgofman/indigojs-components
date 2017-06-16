@@ -146,7 +146,7 @@
 					if ((script.type || '').indexOf('template') === -1) {
 						eval(script.innerHTML);
 					}
-				} catch (e) {console.error(e, script.innerHTML);}
+				} catch (e) { window.console.error(e, script.innerHTML);}
 			}
 			parent.dispatchEvent(new window.Event('CONTENT_LOADED'));
 		});

@@ -91,10 +91,10 @@
 			if (loadedCss[ctype] === 2 || loadedJs[ctype]) {
 				return;
 			}
-			var preinitialize = true;
+			var type, selector, preinitialize = true;
 			for (var i = 0; i < libs.length; i++) {
-				var type = libs[i].replace('!', ''),
-					selector = '[_=' + type + ']';
+				type = libs[i].replace('!', '');
+				selector = '[_=' + type + ']';
 
 				if (loadedJs[type] === 0) {
 					if (top[type]) {
@@ -150,6 +150,7 @@
 					addAsset('script', {type: 'text/javascript', src: mains[j].value}, null, function(url, type, el) {
 						document.head.removeChild(el);
 					});
+					mains[j].remove();
 				}
 			}
 		};
