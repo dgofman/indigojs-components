@@ -1,8 +1,10 @@
 'use strict';
 
-define(['window'], function(win) {
+define([], function(win_top) {
 
-	var defOps = {
+	/* istanbul ignore next */ 
+	var top = win_top || window.top,
+		defOps = {
 		contentType: 'application/json',
 		overlay: function() {},
 		alert: function() {}
@@ -18,10 +20,10 @@ define(['window'], function(win) {
 			}
 		}
 
-		var request = function(callback, path, data, type, contentType) {
-			options.overlay(_.OVERLAY_SHOW);
+		var request = function(callback, path, data, type, skipOverlay, contentType) {
+			options.overlay(_.OVERLAY_SHOW, skipOverlay);
 
-			return win.top.$.ajax({
+			return top.$.ajax({
 				type: type || 'GET',
 				url: options.contextPath + path,
 				data: data ? JSON.stringify(data) : null,
@@ -30,13 +32,13 @@ define(['window'], function(win) {
 				cache: false,
 				processData: false,
 				success: function(data, status, jqXHR) {
-					options.overlay(_.OVERLAY_HIDE);
+					options.overlay(_.OVERLAY_HIDE, skipOverlay);
 					callback(null, data, status, jqXHR);
 				},
 				error: function(jqXHR) {
-					options.overlay(_.OVERLAY_HIDE);
+					options.overlay(_.OVERLAY_HIDE, skipOverlay);
 					if (jqXHR.status === 302) {
-						win.top.location.reload(true);
+						top.location.reload(true);
 					} else if (jqXHR.status === 0 || jqXHR.status === 404) { //abort
 						options.alert(jqXHR.responseJSON || jqXHR.responseText);
 					} else {
@@ -51,28 +53,28 @@ define(['window'], function(win) {
 
 			request: request,
 
-			get: function(callback, url) {
-				return request(callback, url, null, 'GET');
+			get: function(callback, url, skipOverlay) {
+				return request(callback, url, null, 'GET', skipOverlay);
 			},
 
-			post: function(callback, url, data) {
-				return request(callback, url, data, 'POST');
+			post: function(callback, url, data, skipOverlay) {
+				return request(callback, url, data, 'POST', skipOverlay);
 			},
 
-			put: function(callback, url, data) {
-				return request(callback, url, data, 'PUT');
+			put: function(callback, url, data, skipOverlay) {
+				return request(callback, url, data, 'PUT', skipOverlay);
 			},
 
-			patch: function(callback, url, data) {
-				return request(callback, url, data, 'PATCH');
+			patch: function(callback, url, data, skipOverlay) {
+				return request(callback, url, data, 'PATCH', skipOverlay);
 			},
 
-			delete: function(callback, url, data) {
-				return request(callback, url, data, 'DELETE');
+			delete: function(callback, url, data, skipOverlay) {
+				return request(callback, url, data, 'DELETE', skipOverlay);
 			},
 
-			file: function(callback, url, data) {
-				return request(callback, url, data, 'POST', false);
+			file: function(callback, url, data, skipOverlay) {
+				return request(callback, url, data, 'POST', skipOverlay, false);
 			}
 		};
 	};

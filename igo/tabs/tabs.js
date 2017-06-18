@@ -1,6 +1,6 @@
 'use strict';
 
-function igoTabs($) {
+function igoTabs($, selector, ig) {
 
 	return {
 		preinit: function(el) {
@@ -12,11 +12,8 @@ function igoTabs($) {
 					divs.eq(index).show();
 				});
 			for (var i = 0; i < divs.length; i++) {
-				var div = divs.eq(i),
-					template = div.attr('template');
-				if (template) {
-					div.html($('script' + template).html() || '');
-				}
+				var div = divs.eq(i);
+				ig.template(div, div.attr('template'));
 			}
 			inputs.trigger('change.tabs');
 		}

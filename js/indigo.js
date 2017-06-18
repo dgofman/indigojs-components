@@ -166,6 +166,7 @@
 			}
 		};
 		return {
+			watch: watch,
 			bind: function(prop, chain, host, $watch) {
 				if ($watch) {
 					return ig.bind(model, prop, [{chain: chain, host: host, $watch: $watch}], host, watch);

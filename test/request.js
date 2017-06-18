@@ -3,16 +3,14 @@
 test(function(module, assert) {
 	var rest, ajax,
 		basedURI = '/indigojs',
-		win = {},
-		Request = module(win);
-
-	win.top = {
-		$: {
-			ajax: function(opts) {
-				return opts;
+		win_top = {
+			$: {
+				ajax: function(opts) {
+					return opts;
+				}
 			}
-		}
-	};
+		},
+		Request = module(win_top);
 
 	assert(Request.OVERLAY_HIDE, 0, 'OVERLAY_HIDE');
 	assert(Request.OVERLAY_SHOW, 1, 'OVERLAY_SHOW');
@@ -42,7 +40,7 @@ test(function(module, assert) {
 	ajax.success('DATA', 'SUCCESS', 'jqXHR');
 
 	ajax = rest.post(function() {}, '/ex2', {key: 'value'});
-	win.top.location = {
+	win_top.location = {
 		reload: function(b) {
 			assert(b, true, 'ex2 - window.location.reload(true)');
 		}

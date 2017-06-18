@@ -63,6 +63,16 @@
 			}
 		}
 	};
+	ig.template = function(target, template) {
+		if (template) {
+			var $ = win.$;
+			target.html($('script' + template).html() || '');
+			$('[_]', target).each(function(i, dom) {
+				var el = $(dom).removeClass('init');
+				ig.preinit($, el.attr('_'), el);
+			});
+		}
+	};
 
 	var core = document.querySelector('script[rel=igocore]'),
 		mains = document.querySelectorAll('input[igo-main]'),

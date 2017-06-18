@@ -6,24 +6,13 @@ function igoDialog($, selector, ig) {
 		preinit: function(el) {
 			var ref = this.initForms(el, {});
 
-			if (ref.$header.attr('uid')) {
-				ref.$header.html($(ref.$header.attr('uid')).html());
-			}
-			if (ref.$section.attr('uid')) {
-				ref.$section.html($(ref.$section.attr('uid')).html());
-			}
-			if (ref.$footer.attr('uid')) {
-				ref.$footer.html($(ref.$footer.attr('uid')).html());
-			}
+			ig.template(ref.$header, ref.$header.attr('uid'));
+			ig.template(ref.$section, ref.$section.attr('uid'));
+			ig.template(ref.$footer, ref.$footer.attr('uid'));
 
 			el.find('.close').event('click.hide', function() {
 				el.hide();
 				el.trigger('close');
-			});
-
-			$('[_]', el).each(function(i, dom) {
-				var el = $(dom);
-				ig.preinit($, el.attr('_'), el);
 			});
 
 			$('*[dialog_id="' + el.attr('id') + '"]').event('click.show', function() {
