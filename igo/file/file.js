@@ -4,7 +4,7 @@ function igoFile($) {
 
 	return {
 		fieldName: 'file',
-		fileName: null,
+		fileData: null,
 
 		init: function(el, self) {
 			self.$input = $('>input', el).event('change.file', function() {
@@ -16,8 +16,8 @@ function igoFile($) {
 					ext = file.name.split('.').pop().toLowerCase();
 				this.value = null;
 				formData.append(self.fieldName || 'file', file);
-				self.load(function(fileName) {
-					self.file = fileName;
+				self.load(function(data) {
+					self.file = data;
 				}, formData, ext, file);
 			});
 		},
@@ -33,10 +33,10 @@ function igoFile($) {
 
 		file: {
 			get: function() {
-				return this.fileName;
+				return this.fileData;
 			},
 			set: function(value) {
-				this.fileName = value;
+				this.fileData = value;
 			}
 		},
 

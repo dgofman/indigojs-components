@@ -759,20 +759,20 @@
 			<b>Example:</b>
 			Defining Template
 		</p>
-		<%- code('igoTogglebox', {label: `'Hello World 2'</i>`, template: `<i>'#templ'</i>`}, templ) %>
-		<%- $('igoTogglebox', {label: `Hello World - 2`, template: '#templ'}) %><hr/>
+		<%- code('igoTogglebox', {label: `'Hello World 2'</i>`, header: `<i>'&lt;img src="/images/indigo.png"&gt;'</i>`, template: `<i>'#templ'</i>`}, templ) %>
+		<%- $('igoTogglebox', {label: `Hello World - 2`, header: '<img src="/images/indigo.png" style="padding: 3px 10px">', template: '#templ'}) %><hr/>
 
 		<p>
 			<b>Example:</b>
 			Defining multiple toggle contents
 		</p>
 		<%- code('igoTogglebox', {label: `'US Population'</i>`, content: `'<i>Header 1&lt;p class="toggle-content">Content 1&lt;/p&gt;Header 2&lt;p class="toggle-content">Content 2&lt;/p&gt;'</i>`}) %>
-		<%- $('igoTogglebox', {label: `US Population`, content: `<b>Americans</b>: <p class="toggle-content">308,745,538 - 100.0 %</p>
+		<%- $('igoTogglebox', {label: `US Population`, content: `<div style="padding: 10px" <b>Americans</b>: <p class="toggle-content">308,745,538 - 100.0 %</p>
 			<b>White</b>: <p class="toggle-content">196,817,552 - 63.7 %</p>
 			<b>Black</b>: <p class="toggle-content">37,685,848 - 12.2 %</p>
 			<b>Asian</b>: <p class="toggle-content">14,465,124 - 4.7 %</p>
 			<b>American Indian or Alaska Native</b>: <p class="toggle-content">2,247,098 - 0.7 %</p>
-			<b>Hispanic or Latino</b>: <p class="toggle-content">: 50,477,594 - 16.3 %</p>
+			<b>Hispanic or Latino</b>: <p class="toggle-content">: 50,477,594 - 16.3 %</p></div>
 		`}) %><hr/>
 	</div>
 

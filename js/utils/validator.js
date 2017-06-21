@@ -1,14 +1,32 @@
 'use strict';
 
-define(['./errcode'], function(ErrCode) {
+define(['./errcode.js'], function(ErrCode) {
 
 	var proto, _ = function() {
 		this.errors = [];
 	};
 	_.prototype = proto = {
-		addError: function(value, code, name) {
-			this.errors.push(new ErrCode(value, code, name));
+		addError: function(val, code, name) {
+			this.errors.push(new ErrCode(val, code, name));
 			return false;
+		},
+
+		validate: function(val, name, asserts) {
+			for (var i = 0; i < asserts.length; i += 2) {
+				var code = asserts[i], assert = asserts[i + 1],
+					errors = this.errors;
+				errors.some(function(error, index) {
+					if (error.code === code && error.name === name) {
+						errors.splice(index, 1);
+						return false;
+					}
+				});
+
+				if (typeof assert === 'function' ? assert() : assert) {
+					return this.addError(val, code, name);
+				}
+			}
+			return true;
 		},
 
 		isValid: function() {
@@ -38,16 +56,10 @@ define(['./errcode'], function(ErrCode) {
 		*/
 		minmax: function(val, min, max, name) {
 			val = parseFloat(val);
-			if (isNaN(val)) {
-				return this.addError(val, ErrCode.INVALID_VALUE, name);
-			}
-			if (val < min) {
-				return this.addError(val, ErrCode.INVALID_MIN, name);
-			}
-			if (max && val > max) {
-				return this.addError(val, ErrCode.INVALID_MAX, name);
-			}
-			return true;
+			return this.validate(val, name, [
+				ErrCode.INVALID_VALUE, isNaN(val),
+				ErrCode.INVALID_MIN, val < min,
+				ErrCode.INVALID_MAX, max && val > max]);
 		},
 
 		/**
@@ -59,17 +71,10 @@ define(['./errcode'], function(ErrCode) {
 		 * @return {Boolean} Return true is valid otherwise false.
 		*/
 		str_minmax: function(val, min, max, name) {
-			if (typeof val !== 'string') {
-				return this.addError(val, ErrCode.INVALID_VALUE, name);
-			}
-			val = val.trim();
-			if (val.length < min) {
-				return this.addError(val, ErrCode.INVALID_MIN, name);
-			}
-			if (max && val.length > max) {
-				return this.addError(val, ErrCode.INVALID_MAX, name);
-			}
-			return true;
+			return this.validate(val, name, [
+				ErrCode.INVALID_VALUE, typeof val !== 'string',
+				ErrCode.INVALID_MIN, function() { return val.trim().length < min },
+				ErrCode.INVALID_MAX, function() { return val.length > max }]);
 		},
 
 		/**
@@ -79,10 +84,8 @@ define(['./errcode'], function(ErrCode) {
 		 * @return {Boolean} Return true is valid otherwise false.
 		*/
 		isset: function(val, name) {
-			if (val === undefined || val === null) {
-				return this.addError(val, ErrCode.INVALID_VALUE, name);
-			}
-			return true;
+			return this.validate(val, name, [
+				ErrCode.INVALID_VALUE, val === undefined || val === null]);
 		},
 
 		/**
@@ -92,10 +95,10 @@ define(['./errcode'], function(ErrCode) {
 		 * @return {Boolean} Return true is valid otherwise false.
 		*/
 		empty: function(val, name) {
-			if (!proto.isset.call(this, val, name) || !String(val).trim()) {
-				return !this.addError(val, ErrCode.INVALID_VALUE, name);
-			}
-			return false;
+			return this.validate(val, name, [
+				ErrCode.INVALID_VALUE, val === undefined || val === null,
+				ErrCode.INVALID_TYPE, function() { return typeof val !== 'string'; },
+				ErrCode.INVALID_VALUE, function() { return val.trim().length === 0 }]);
 		}
 	};
 	return _;

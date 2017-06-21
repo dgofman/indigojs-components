@@ -1,25 +1,40 @@
 @import 'less/constant.less';
 
+@header_height: 36px;
+
 [_=igoTogglebox] {
 	width: 100%;
 	border: 1px solid #999;
 	border-radius: 5px;
-	padding: 15px;
 	outline: none;
 
-	label {
-		font-size: 20px;
+	&>label, &>header {
+		height: @header_height;
+	}
+
+	header {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	&>label {
+		width:100%;
+		padding: 10px;
+		background: #5b87ac;
+		color: #fff;
 		.noselect();
 		.cursor();
 
 		&:before {
+			color: #000;
 			content: '\25BA';
 			width: 20px;
 			display: inline-block;
 		}
 	}
 
-	&>[type=checkbox] {
+	&>input {
 		display:none;
 
 		&:after {

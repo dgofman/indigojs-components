@@ -1,31 +1,31 @@
 'use strict';
 
-define(['./validate'], function(Validator) {
+define(['./validator.js'], function(Validator) {
 
 	var proto = Validator.prototype,
 		_ = function(model) {
 			Validator.call(this);
 			this.model = model;
-			this.super = function(api, args) {
-				args = [this.model[args[0]]].concat(Array.prototype.slice.call(args, 1), args[0]);
+			this.super = function(api, name) {
+				var args = [this.model[name]].concat(Array.prototype.slice.call(arguments, 2), name);
 				return proto[api].apply(this, args);
 			};
 		};
 	_.prototype = {
-		minmax: function() {
-			return this.super('minmax', arguments);
+		minmax: function(name, min, max) {
+			return this.super('minmax', name, min, max);
 		},
 
-		str_minmax: function() {
-			return this.super('str_minmax', arguments);
+		str_minmax: function(name, min, max) {
+			return this.super('str_minmax', name, min, max);
 		},
 
-		isset: function() {
-			return this.super('isset', arguments);
+		isset: function(name) {
+			return this.super('isset', name);
 		},
 
-		empty: function() {
-			return this.super('empty', arguments);
+		empty: function(name) {
+			return this.super('empty', name);
 		}
 	};
 	for (var name in proto) {

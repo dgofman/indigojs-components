@@ -56,8 +56,8 @@
 		return isAdd ? el.addClass(name) : el.removeClass(name);
 	},
 	ig.preinit = function($, type, el) {
-		var apis = loadedJs[type]($, type, ig);
-		if (apis) {
+		var apis;
+		if (loadedJs[type] && (apis = loadedJs[type]($, type, ig))) {
 			if (apis.preinit) {
 				apis.preinit(el);
 			}
@@ -124,16 +124,18 @@
 				if (preinitialize && loadedCss[type] === 0) {
 					var css = top.document.styleSheets;
 					loop1:
-					for (var k = 0; k < css.length; k++) {
-						var rules = css[k].cssRules || css[k].rules;
-						for (var l = 0; l < rules.length; l++) {
-							var text = rules[l].selectorText || '';
-							if (text.indexOf(type) !== -1) {
-								loadedCss[type] = 1;
-								break loop1;
+					try {
+						for (var k = 0; k < css.length; k++) {
+							var rules = css[k].cssRules || css[k].rules;
+							for (var l = 0; l < rules.length; l++) {
+								var text = rules[l].selectorText || '';
+								if (text.indexOf(type) !== -1) {
+									loadedCss[type] = 1;
+									break loop1;
+								}
 							}
 						}
-					}
+					} catch (e) { }
 				}
 
 				if (loadedCss[type] === 1 && loadedJs[type] !== 0) {
@@ -157,10 +159,13 @@
 					});
 				}
 				for (var j = 0; j < mains.length; j++) {
+					var node = mains[j].parentNode;
 					addAsset('script', {type: 'text/javascript', src: mains[j].value}, null, function(url, type, el) {
 						document.head.removeChild(el);
 					});
-					mains[j].remove();
+					if (node) {
+						node.removeChild(mains[j]);
+					}
 				}
 			}
 		};

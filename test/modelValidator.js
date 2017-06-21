@@ -52,11 +52,19 @@ test(function(module, ErrCode, Validator, assert) {
 	assert(valObj.errors.length, 0, 'isset errors.length');
 	valObj.reset();
 
-	assert(valObj.empty('val8'), true, 'empty true');
-	assert(valObj.errors[0].code, ErrCode.INVALID_VALUE, 'invalid empty code');
+	assert(valObj.empty('val8'), false, 'empty false');
+	assert(valObj.errors[0].code, ErrCode.INVALID_VALUE, 'empty string INVALID_VALUE');
 	valObj.reset();
 
-	assert(valObj.empty('val1'), false, 'empty false');
+	assert(valObj.empty('val5'), false, 'empty as null');
+	assert(valObj.errors[0].code, ErrCode.INVALID_VALUE, 'empty INVALID_VALUE');
+	valObj.reset();
+
+	assert(valObj.empty('val2'), false, 'empty invalid type');
+	assert(valObj.errors[0].code, ErrCode.INVALID_TYPE, 'empty INVALID_TYPE');
+	valObj.reset();
+
+	assert(valObj.empty('val1'), true, 'value helloworld');
 	assert(valObj.errors.length, 0, 'empty errors.length');
 	valObj.reset();
 });

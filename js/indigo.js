@@ -148,6 +148,7 @@
 	ig.namespace = function(selector, callbak) {
 		var parent = window.$(selector),
 			ns = {
+				$el: parent,
 				$: function(sel) { return parent.find(sel); },
 				create: function(type, idxOrSelector) {
 					return ig.create.call(ig, type, idxOrSelector, parent);
@@ -189,6 +190,7 @@
 			chains[0] = {chain: chain, host: host, $watch: watch};
 		}
 		if (prop) {
+			var val;
 			chains.forEach(function(o, index) {
 				if (!o.chain || !o.host) {
 					for (var key in o) {//transform {chain: host, $watch: $watch} - > {chain: chain, host: host, $watch: $watch}
@@ -202,10 +204,15 @@
 				o.host.$el.on(o.chain, function(e, value) {
 					model[prop] = value;
 				});
-				if (model[prop] !== undefined && model[prop]  !== o.host[o.chain]) {
-					o.host[o.chain] = model[prop];
-					if(o.$watch !== watch) {
-						o.$watch.call(o.host, prop, model[prop], model, {type: 'bind-' + index});
+				val = o.host[o.chain];
+				if (model[prop] !== val) {
+					if (model[prop] !== undefined) {
+						val = model[prop];
+						if(o.$watch !== watch) {
+							o.$watch.call(o.host, prop, model[prop], model, {type: 'bind-' + index});
+						}
+					} else if (val !== undefined && val !== '') {
+						model[prop] = val;
 					}
 				}
 			});
@@ -213,7 +220,7 @@
 				watch.call(host, prop, model[prop], model, {type: 'bind'});
 			}
 
-			var val = model[prop];
+			val = model[prop];
 			Object.defineProperty(model, prop, {
 				get: function() {
 					return val;
@@ -241,6 +248,7 @@
 		}
 
 		return promise = {
+			watch: watch,
 			bind: function($prop, chain, host, $watch) {
 				if ($prop === prop) {
 					chains.push({chain: chain, host: host, $watch: $watch || watch});
