@@ -123,8 +123,8 @@
 
 				if (preinitialize && loadedCss[type] === 0) {
 					var css = top.document.styleSheets;
-					loop1:
 					try {
+						loop1:
 						for (var k = 0; k < css.length; k++) {
 							var rules = css[k].cssRules || css[k].rules;
 							for (var l = 0; l < rules.length; l++) {

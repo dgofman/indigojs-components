@@ -73,8 +73,8 @@ define(['./errcode.js'], function(ErrCode) {
 		str_minmax: function(val, min, max, name) {
 			return this.validate(val, name, [
 				ErrCode.INVALID_VALUE, typeof val !== 'string',
-				ErrCode.INVALID_MIN, function() { return val.trim().length < min },
-				ErrCode.INVALID_MAX, function() { return val.length > max }]);
+				ErrCode.INVALID_MIN, function() { return val.trim().length < min; },
+				ErrCode.INVALID_MAX, function() { return val.length > max; }]);
 		},
 
 		/**
@@ -98,7 +98,7 @@ define(['./errcode.js'], function(ErrCode) {
 			return this.validate(val, name, [
 				ErrCode.INVALID_VALUE, val === undefined || val === null,
 				ErrCode.INVALID_TYPE, function() { return typeof val !== 'string'; },
-				ErrCode.INVALID_VALUE, function() { return val.trim().length === 0 }]);
+				ErrCode.INVALID_VALUE, function() { return val.trim().length === 0; }]);
 		}
 	};
 	return _;
